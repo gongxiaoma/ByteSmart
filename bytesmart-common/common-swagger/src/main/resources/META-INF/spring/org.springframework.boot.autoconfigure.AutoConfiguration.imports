@@ -1,0 +1,3 @@
+# com.bytesmart.common.swagger.config.SwaggerAutoConfiguration
+# com.bytesmart.common.swagger.config.SwaggerWebConfiguration
+# com.bytesmart.common.swagger.config.SwaggerBeanPostProcessor

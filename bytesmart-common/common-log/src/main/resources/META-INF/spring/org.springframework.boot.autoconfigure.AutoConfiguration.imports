@@ -1,0 +1,2 @@
+com.bytesmart.common.log.service.AsyncLogService
+com.bytesmart.common.log.aspect.LogAspect
