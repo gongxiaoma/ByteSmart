@@ -72,7 +72,7 @@ public class SysDeptController extends BaseController
     /**
      * 新增部门
      */
-    @RequiresPermissions("system:dept:add")
+//    @RequiresPermissions("system:dept:add")
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDept dept)
@@ -88,7 +88,7 @@ public class SysDeptController extends BaseController
     /**
      * 修改部门
      */
-    @RequiresPermissions("system:dept:edit")
+//    @RequiresPermissions("system:dept:edit")
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDept dept)
@@ -114,7 +114,7 @@ public class SysDeptController extends BaseController
     /**
      * 删除部门
      */
-    @RequiresPermissions("system:dept:remove")
+//    @RequiresPermissions("system:dept:remove")
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{deptId}")
     public AjaxResult remove(@PathVariable Long deptId)

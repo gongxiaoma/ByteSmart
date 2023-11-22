@@ -8,10 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bytesmart-system-center</artifactId>
+    <artifactId>bytesmart-admin-center</artifactId>
 
     <description>
-        bytesmart-system-center系统模块
+        bytesmart-admin-center系统模块
     </description>
 
     <dependencies>
@@ -60,25 +60,25 @@
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
-        <!-- Bytesmart Common DataSource -->
+        <!--  Common DataSource -->
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>common-datasource</artifactId>
         </dependency>
 
-        <!-- Bytesmart Common DataScope -->
+        <!--  Common DataScope -->
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>common-datascope</artifactId>
         </dependency>
 
-        <!-- Bytesmart Common Log -->
+        <!--  Common Log -->
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>common-log</artifactId>
         </dependency>
 
-        <!-- Bytesmart Common Swagger -->
+        <!--  Common Swagger -->
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>common-swagger</artifactId>

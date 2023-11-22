@@ -106,6 +106,25 @@ export const dynamicRoutes = [
       }
     ]
   },
+
+  // {
+  //   path: '/admin/posts',
+  //   component: Layout,
+  //   hidden: true,
+  //   permissions: ['admin:posts:list'],
+  //   children: [
+  //     {
+  //       path: 'index/:posts(\\d+)',
+  //       component: () => import('@/views/admin/posts'),
+  //       name: 'Posts',
+  //       meta: { title: '岗位', activeMenu: '/admin/posts' }
+  //     }
+  //   ]
+  // },
+
+
+
+
   {
     path: '/system/role-auth',
     component: Layout,
