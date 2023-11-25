@@ -1,5 +1,7 @@
 package com.bytesmart.admincenter.service.impl;
 
+import com.bytesmart.admincenter.domain.BytesmartEmployeeRole;
+import com.bytesmart.admincenter.mapper.BytesmartEmployeeRoleMapper;
 import com.bytesmart.admincenter.mapper.BytesmartRoleMapper;
 import com.bytesmart.admincenter.service.IBytesmartRoleService;
 import com.bytesmart.apisystem.domain.BytesmartRole;
@@ -13,6 +15,9 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
 
     @Autowired
     private BytesmartRoleMapper bytesmartRoleMapper;
+
+//    @Autowired
+//    private BytesmartEmployeeRoleMapper bytesmartEmployeeRoleMapper;
 
     @Override
     public List<BytesmartRole> selectRoleList(BytesmartRole role){
@@ -37,5 +42,12 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
     public int deleteRoleByIds(Long[] roleIds){
         return bytesmartRoleMapper.deleteRoleByIds(roleIds);
     }
+
+    @Override
+    public BytesmartRole selectRoleAll(){
+        return bytesmartRoleMapper.selectRoleAll();
+    }
+
+
 
 }

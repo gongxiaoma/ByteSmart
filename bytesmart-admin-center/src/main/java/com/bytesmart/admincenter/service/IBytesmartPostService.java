@@ -19,4 +19,11 @@ public interface IBytesmartPostService {
 
     //删除
     public int deletePostByIds(Long[] postIds);
+
+    public List<BytesmartPost> selectPostAll();
+
+    //通过用户id获取岗位选择框列表
+    public List<Integer> selectPostListByEmployeeId(Integer employeeId);
+
+
 }

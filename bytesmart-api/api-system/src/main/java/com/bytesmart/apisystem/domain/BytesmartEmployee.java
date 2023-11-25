@@ -39,7 +39,7 @@ public class BytesmartEmployee extends BaseEntity {
     private String userName;
 
     /** 密码 */
-    private String Password;
+    private String password;
 
     /** 用户名*/
     @Excel(name = "用户名")
@@ -96,16 +96,13 @@ public class BytesmartEmployee extends BaseEntity {
     private Date loginDate;
 
     /** 出生年月 */
-    @Excel(name = "出生年月", type = Type.EXPORT)
+    @Excel(name = "出生年月", width = 30, dateFormat = "yyyy-MM-dd", type = Type.EXPORT)
     private Date employeeBirthdate ;
 
     /** 入职时间 */
-    @Excel(name = "入职时间", type = Type.EXPORT)
+    @Excel(name = "入职时间", width = 30, dateFormat = "yyyy-MM-dd", type = Type.EXPORT)
     private Date employmentDate ;
 
-    /** 籍贯 */
-    @Excel(name = "籍贯", type = Type.EXPORT)
-    private String nativePlace;
 
     /** 部门对象 */
     @Excels({
@@ -118,13 +115,16 @@ public class BytesmartEmployee extends BaseEntity {
     private List<BytesmartRole> roles;
 
     /** 角色组 */
-    private Long[] roleIds;
+    private Integer[] roleIds;
 
     /** 岗位组 */
-    private Long[] postIds;
+    private Integer[] postIds;
 
     /** 角色ID */
-    private Long roleId;
+    private Integer roleId;
+    /** 岗位 */
+    private Integer postId;
+
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -175,11 +175,11 @@ public class BytesmartEmployee extends BaseEntity {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getEmployeeName() {
@@ -310,14 +310,6 @@ public class BytesmartEmployee extends BaseEntity {
         this.employmentDate = employmentDate;
     }
 
-    public String getNativePlace() {
-        return nativePlace;
-    }
-
-    public void setNativePlace(String nativePlace) {
-        this.nativePlace = nativePlace;
-    }
-
     public BytesmartDept getDept() {
         return dept;
     }
@@ -334,28 +326,37 @@ public class BytesmartEmployee extends BaseEntity {
         this.roles = roles;
     }
 
-    public Long[] getRoleIds() {
+
+    public Integer[] getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(Long[] roleIds) {
+    public void setRoleIds(Integer[] roleIds) {
         this.roleIds = roleIds;
     }
 
-    public Long[] getPostIds() {
+    public Integer[] getPostIds() {
         return postIds;
     }
 
-    public void setPostIds(Long[] postIds) {
+    public void setPostIds(Integer[] postIds) {
         this.postIds = postIds;
     }
 
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
     @Override
@@ -365,6 +366,7 @@ public class BytesmartEmployee extends BaseEntity {
                 .append("deptId", getDeptId())
                 .append("userName", getUserName())
                 .append("employeeName", getEmployeeName())
+                .append("password",getPassword())
                 .append("employeeEmail", getEmployeeEmail())
                 .append("employeeMobile", getEmployeeMobile())
                 .append("officePhone", getOfficePhone())
@@ -380,7 +382,6 @@ public class BytesmartEmployee extends BaseEntity {
                 .append("employmentDate", getEmploymentDate())
                 .append("employeeBirthdate", getEmployeeBirthdate())
                 .append("employeeStatus", getEmployeeStatus())
-                .append("Password", getPassword())
                 .append("employeeAvatar", getEmployeeAvatar())
                 .append("delFlag", getDelFlag())
                 .append("loginIp", getLoginIp())
@@ -391,7 +392,6 @@ public class BytesmartEmployee extends BaseEntity {
                 .append("updateTime", getUpdateTime())
                 .append("remark", getRemark())
                 .append("dept", getDept())
-                .append("nativePlace", getNativePlace())
                 .toString();
     }
 }

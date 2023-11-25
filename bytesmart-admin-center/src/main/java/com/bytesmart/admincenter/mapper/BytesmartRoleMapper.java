@@ -20,5 +20,7 @@ public interface BytesmartRoleMapper {
     //删除
     public int deleteRoleByIds(Long[] roleIds);
 
+    public BytesmartRole selectRoleAll();
+
 
 }

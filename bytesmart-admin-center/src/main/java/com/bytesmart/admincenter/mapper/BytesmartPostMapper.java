@@ -21,5 +21,15 @@ public interface BytesmartPostMapper {
     //删除
     public int deletePostByIds(Long[] postIds);
 
+    public List<BytesmartPost> selectPostAll();
+
+    //通过用户id获取岗位选择框列表
+    public List<Integer> selectPostListByEmployeeId(Integer employeeId);
+
+    //通过用户名查所属岗位
+    public List<BytesmartPost> selectPostListByUserName(String username);
+
+
+
 
 }

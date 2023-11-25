@@ -21,6 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select post_id, post_name, post_weight, post_type, post_status, create_by, create_time, remark
 		from bytesmart_post
     </sql>
+
+
+	<select id="selectPostAll" resultMap="BytesmartPostResult">
+		<include refid="selectPostBo"/>
+	</select>
 	
 	<select id="selectPostList" parameterType="BytesmartPost" resultMap="BytesmartPostResult">
 	    <include refid="selectPostBo"/>
@@ -85,6 +90,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{postId}
 		</foreach>
 	</delete>
+
+
+	<select id="selectPostListByEmployeeId" parameterType="integer" resultType="integer">
+		select p.post_id
+        from bytesmart_post p
+	        left join bytesmart_employee_post ep on ep.post_id = p.post_id
+	        left join bytesmart_employee e on e.employee_id = ep.employee_id
+	    where e.employee_id = #{employeeId}
+	</select>
+
+	<select id="selectPostListByUserName" parameterType="String" resultMap="BytesmartPostResult">
+		select p.post_id, p.post_name, p.post_type
+		from bytesmart_post p
+			 left join bytesmart_employee_post ep on ep.post_id = p.post_id
+			 left join bytesmart_employee e on e.employee_id = ep.employee_id
+		where e.username = #{userName}
+	</select>
+
+
 
 
 

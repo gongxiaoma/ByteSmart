@@ -49,4 +49,13 @@ public class BytesmartPostController extends BaseController {
     }
 
 
+     //获取岗位选择框列表
+    @GetMapping("/optionselect")
+    public AjaxResult optionselect()
+    {
+        List<BytesmartPost> posts = postService.selectPostAll();
+        return success(posts);
+    }
+
+
 }

@@ -1,11 +1,10 @@
-package com.bytesmart.admincenter.mapper;
+package com.bytesmart.admincenter.service;
 
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import com.bytesmart.apisystem.domain.SysUser;
 
 import java.util.List;
 
-public interface BytesmartEmployeeMapper {
+public interface IBytesmartEmployeeService {
     //查询所有
     public List<BytesmartEmployee> selectEmployeeList(BytesmartEmployee employee);
 
@@ -17,6 +16,8 @@ public interface BytesmartEmployeeMapper {
 
     //修改
     public int updateEmployee(BytesmartEmployee employee);
+
+
 
 
 }

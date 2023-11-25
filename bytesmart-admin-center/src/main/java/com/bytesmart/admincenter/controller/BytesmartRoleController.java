@@ -1,6 +1,5 @@
 package com.bytesmart.admincenter.controller;
 
-
 import com.bytesmart.admincenter.service.IBytesmartRoleService;
 import com.bytesmart.apisystem.domain.BytesmartRole;
 import com.bytesmart.common.core.web.controller.BaseController;
@@ -46,6 +45,13 @@ public class BytesmartRoleController extends BaseController {
     @DeleteMapping("/{roleIds}")
     public AjaxResult remove(@PathVariable Long[] roleIds){
         return toAjax(bytesmartRoleService.deleteRoleByIds(roleIds));
+    }
+
+    //获取角色选择列表
+    @GetMapping("/optionselect")
+    public AjaxResult optionselect()
+    {
+        return success(bytesmartRoleService.selectRoleAll());
     }
 
 }
