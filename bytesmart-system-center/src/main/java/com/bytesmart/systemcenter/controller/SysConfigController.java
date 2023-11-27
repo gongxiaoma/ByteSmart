@@ -32,7 +32,7 @@ public class SysConfigController extends BaseController
     /**
      * 获取参数配置列表
      */
-    @RequiresPermissions("system:config:list")
+//    @RequiresPermissions("system:config:list")
     @GetMapping("/list")
     public TableDataInfo list(SysConfig config)
     {
@@ -42,7 +42,7 @@ public class SysConfigController extends BaseController
     }
 
     @Log(title = "参数管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:config:export")
+//    @RequiresPermissions("system:config:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysConfig config)
     {
@@ -72,7 +72,7 @@ public class SysConfigController extends BaseController
     /**
      * 新增参数配置
      */
-    @RequiresPermissions("system:config:add")
+//    @RequiresPermissions("system:config:add")
     @Log(title = "参数管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysConfig config)
@@ -88,7 +88,7 @@ public class SysConfigController extends BaseController
     /**
      * 修改参数配置
      */
-    @RequiresPermissions("system:config:edit")
+//    @RequiresPermissions("system:config:edit")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysConfig config)
@@ -104,7 +104,7 @@ public class SysConfigController extends BaseController
     /**
      * 删除参数配置
      */
-    @RequiresPermissions("system:config:remove")
+//    @RequiresPermissions("system:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{configIds}")
     public AjaxResult remove(@PathVariable Long[] configIds)
@@ -116,7 +116,7 @@ public class SysConfigController extends BaseController
     /**
      * 刷新参数缓存
      */
-    @RequiresPermissions("system:config:remove")
+//    @RequiresPermissions("system:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.CLEAN)
     @DeleteMapping("/refreshCache")
     public AjaxResult refreshCache()

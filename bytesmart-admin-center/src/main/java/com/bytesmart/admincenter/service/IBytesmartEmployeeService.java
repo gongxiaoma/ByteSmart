@@ -17,6 +17,9 @@ public interface IBytesmartEmployeeService {
     //修改
     public int updateEmployee(BytesmartEmployee employee);
 
+    //删除
+    public int deleteEmployeeByIds(Integer[] employeeIds);
+
 
 
 

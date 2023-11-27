@@ -8,11 +8,11 @@ import java.util.List;
 public interface BytesmartEmployeeRoleMapper {
 
     //通过用户ID删除用户和角色关联
-    public int deleteEmployeeRoleByEmployeeId(Integer EmployeeId);
+    public int deleteEmployeeRoleByEmployeeId(Integer employeeId);
 
 
     //批量删除用户和角色关联
-    public int deleteEmployeeRole(Integer[] ids);
+    public int deleteEmployeeRole(Integer[] employeeIds);
 
 
     //通过角色ID查询角色使用数量
@@ -20,11 +20,11 @@ public interface BytesmartEmployeeRoleMapper {
 
 
     //批量新增用户角色信息
-    public int batchEmployeeRole(List<BytesmartEmployeeRole> EmployeeRoleList);
+    public int batchEmployeeRole(List<BytesmartEmployeeRole> employeeRoleList);
 
 
     //删除用户和角色关联信息
-    public int deleteEmployeeRoleListInfo(BytesmartEmployeeRole EmployeeRole);
+    public int deleteEmployeeRoleListInfo(BytesmartEmployeeRole employeeRole);
 
     /**
      * 批量取消授权用户角色

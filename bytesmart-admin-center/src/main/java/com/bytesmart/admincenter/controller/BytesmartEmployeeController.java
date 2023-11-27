@@ -13,6 +13,9 @@ import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.core.web.controller.BaseController;
 import com.bytesmart.common.core.web.domain.AjaxResult;
 import com.bytesmart.common.core.web.page.TableDataInfo;
+import com.bytesmart.common.log.annotation.Log;
+import com.bytesmart.common.log.enums.BusinessType;
+import com.bytesmart.common.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -59,6 +62,13 @@ public class BytesmartEmployeeController extends BaseController {
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody BytesmartEmployee employee){
         return toAjax(bytesmartEmployeeService.updateEmployee(employee));
+    }
+
+    @Log(title = "用户管理", businessType = BusinessType.DELETE)
+    @DeleteMapping("/{employeeIds}")
+    public AjaxResult remove(@PathVariable Integer[] employeeIds)
+    {
+        return toAjax(bytesmartEmployeeService.deleteEmployeeByIds(employeeIds));
     }
 
 }

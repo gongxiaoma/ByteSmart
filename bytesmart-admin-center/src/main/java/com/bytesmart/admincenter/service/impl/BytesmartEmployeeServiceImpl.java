@@ -5,7 +5,6 @@ import com.bytesmart.admincenter.domain.BytesmartEmployeeRole;
 import com.bytesmart.admincenter.mapper.*;
 import com.bytesmart.admincenter.service.IBytesmartEmployeeService;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import com.bytesmart.apisystem.domain.SysUser;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.core.web.domain.AjaxResult;
 import com.bytesmart.common.datascope.annotation.DataScope;
@@ -31,11 +30,11 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     @Autowired
     private BytesmartEmployeeMapper employeeMapper;
 
-    @Autowired
-    private BytesmartRoleMapper roleMapper;
+//    @Autowired
+//    private BytesmartRoleMapper roleMapper;
 
-    @Autowired
-    private BytesmartPostMapper postMapper;
+//    @Autowired
+//    private BytesmartPostMapper postMapper;
 
     @Autowired
     private BytesmartEmployeeRoleMapper employeeRoleMapper;
@@ -67,6 +66,7 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
        insertEmployeePost(employee);
        // 新增用户与角色管理
        insertEmployeeRole(employee);
+       //返回类型为int,需要和方法体的返回类型一样
        return rows;
    }
 
@@ -128,6 +128,17 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
         //新增用户和岗位关联
         insertEmployeeRole(employee);
         return employeeMapper.updateEmployee(employee);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteEmployeeByIds(Integer[] employeeIds){
+        //删除用户和角色关联
+        employeeRoleMapper.deleteEmployeeRole(employeeIds);
+        //删除用户和角色关联
+        employeePostMapper.deleteEmployeePost(employeeIds);
+        return employeeMapper.deleteEmployeeByIds(employeeIds);
+
     }
 
 

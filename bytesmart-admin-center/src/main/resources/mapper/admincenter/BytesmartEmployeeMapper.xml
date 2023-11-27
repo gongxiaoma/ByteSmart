@@ -189,26 +189,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="demployeeWeight != null and demployeeWeight != ''">employee_weight = #{demployeeWeight},</if>
 			<if test="employeeGender != null and employeeGender != ''">employee_gender = #{employeeGender},</if>
 			<if test="employeeIsmarital != null and employeeIsmarital != ''">employee_ismarital = #{employeeIsmarital},</if>
-			<if test="demployeeNo != null and demployeeNo != ''">employee_no = #{demployeeNo},</if>
-			<if test="demployeeAge != null and demployeeAge != ''">employee_age = #{demployeeAge},</if>
 			<if test="employeeType != null and employeeType != ''">employee_type = #{employeeType},</if>
 			<if test="employeeMobile != null and employeeMobile != ''">employee_mobile = #{employeeMobile},</if>
 			<if test="officePhone != null and officePhone != ''">office_phone = #{officePhone},</if>
 			<if test="employeeAddress != null and employeeAddress != ''">employee_address = #{employeeAddress},</if>
-			<if test="email != null ">email = #{email},</if>
-			<if test="phonenumber != null ">phonenumber = #{phonenumber},</if>
-			<if test="sex != null and sex != ''">sex = #{sex},</if>
-			<if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+			<if test="employeeEmail != null ">employee_email = #{employeeEmail},</if>
+			<if test="employeeBirthdate != null">employee_birthdate = #{employeeBirthdate},</if>
+			<if test="employmentDate != null">employment_date = #{employmentDate},</if>
+			<if test="demployeeNo != null">employee_no = #{demployeeNo},</if>
+			<if test="demployeeAge != null">employee_age = #{demployeeAge},</if>
+			<if test="employmentDate != null">employment_date = #{employmentDate},</if>
+			<if test="employeeAvatar != null and employeeAvatar != ''">employee_avatar = #{employeeAvatar},</if>
 			<if test="password != null and password != ''">password = #{password},</if>
-			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="employeeStatus != null and employeeStatus != ''">employee_status = #{employeeStatus},</if>
 			<if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
 			<if test="loginDate != null">login_date = #{loginDate},</if>
 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
-			<if test="remark != null">remark = #{remark},</if>
+			<if test="remark != null and remark != ''">remark = #{remark},</if>
+
 			update_time = sysdate()
 		</set>
 		where employee_id = #{employeeId}
 	</update>
+
+	<delete id="deleteEmployeeByIds" parameterType="Long">
+		update bytesmart_employee set del_flag = '2' where employee_id in
+		<foreach collection="array" item="employeeId" open="(" separator="," close=")">
+			#{employeeId}
+		</foreach>
+	</delete>
+
+<!--	<delete id="deleteUserByIds" parameterType="Long">-->
+<!--		update sys_user set del_flag = '2' where user_id in-->
+<!--		<foreach collection="array" item="userId" open="(" separator="," close=")">-->
+<!--			#{userId}-->
+<!--		</foreach>-->
+<!--	</delete>-->
 
 
 

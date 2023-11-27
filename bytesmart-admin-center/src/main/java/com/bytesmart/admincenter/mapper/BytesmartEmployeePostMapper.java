@@ -16,7 +16,7 @@ public interface BytesmartEmployeePostMapper {
 
 
     //批量删除用户和岗位关联
-    public int deleteEmployeePost(Long[] ids);
+    public int deleteEmployeePost(Integer[] employeeIds);
 
 
     //批量新增用户岗位信息

@@ -12,6 +12,7 @@ public class BytesmartPost extends BaseEntity {
     /** 岗位序号 */
     @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
     private Integer postId;
+
     private String postName;
 
     /** 岗位权重 */

@@ -18,5 +18,7 @@ public interface BytesmartEmployeeMapper {
     //修改
     public int updateEmployee(BytesmartEmployee employee);
 
+    //删除
+    public int deleteEmployeeByIds(Integer[] employeeIds);
 
 }
