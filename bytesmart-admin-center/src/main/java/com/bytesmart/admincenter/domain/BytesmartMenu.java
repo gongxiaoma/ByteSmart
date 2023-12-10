@@ -29,7 +29,7 @@ public class BytesmartMenu extends BaseEntity
     private Long parentId;
 
     /** 显示顺序权重 */
-    private Integer menuWeight      ;
+    private Long menuWeight      ;
 
     /** 路由地址 */
     private String routeAddress;
@@ -88,11 +88,11 @@ public class BytesmartMenu extends BaseEntity
         this.parentId = parentId;
     }
 
-    public Integer getMenuWeight() {
+    public Long getMenuWeight() {
         return menuWeight;
     }
 
-    public void setMenuWeight(Integer menuWeight) {
+    public void setMenuWeight(Long menuWeight) {
         this.menuWeight = menuWeight;
     }
 

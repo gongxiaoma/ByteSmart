@@ -11,10 +11,10 @@ public class BytesmartDept extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 部门ID */
-    private Integer deptId;
+    private Long deptId;
 
     /** 父部门ID */
-    private Integer parentId;
+    private Long parentId;
 
     /** 祖级列表 */
     private String ancestors;
@@ -23,7 +23,7 @@ public class BytesmartDept extends BaseEntity {
     private String deptName;
 
     /** 显示顺序 */
-    private Integer deptWeight;
+    private Long deptWeight;
 
     /** 负责人 */
     private String deptLeader;
@@ -47,19 +47,19 @@ public class BytesmartDept extends BaseEntity {
     /** 子部门 */
     private List<BytesmartDept> children = new ArrayList<BytesmartDept>();
 
-    public Integer getDeptId() {
+    public Long getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Integer deptId) {
+    public void setDeptId(Long deptId) {
         this.deptId = deptId;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -79,11 +79,11 @@ public class BytesmartDept extends BaseEntity {
         this.deptName = deptName;
     }
 
-    public Integer getDeptWeight() {
+    public Long getDeptWeight() {
         return deptWeight;
     }
 
-    public void setDeptWeight(Integer deptWeight) {
+    public void setDeptWeight(Long deptWeight) {
         this.deptWeight = deptWeight;
     }
 

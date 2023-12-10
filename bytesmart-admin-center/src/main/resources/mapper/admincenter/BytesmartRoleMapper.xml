@@ -23,14 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<sql id="selectRoleVo">
 	    select distinct r.role_id, r.role_name, r.role_key, r.role_weight, r.data_scope, r.menu_check_strictly, r.dept_check_strictly,
-            r.role_status, r.del_flag, r.create_time, r.remark
+             r.role_status, r.del_flag, r.create_time, r.remark
         from bytesmart_role r
 	        left join bytesmart_employee_role er on er.role_id = r.role_id
 	        left join bytesmart_employee e on e.employee_id = er.employee_id
 	        left join bytesmart_dept d on e.dept_id = d.dept_id
     </sql>
 
-    <select id="selectRoleList" parameterType="com.bytesmart.apisystem.domain.SysRole" resultMap="BytesmartRoleResult">
+	<select id="selectRoleList" parameterType="com.bytesmart.apisystem.domain.BytesmartRole" resultMap="BytesmartRoleResult">
 		<include refid="selectRoleVo"/>
 		where r.del_flag = '0'
 		<if test="roleId != null and roleId != 0">
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND r.role_name like concat('%', #{roleName}, '%')
 		</if>
 		<if test="roleStatus != null and roleStatus != ''">
-			AND r.role_status = #{status}
+			AND r.role_status = #{roleStatus}
 		</if>
 		<if test="roleKey != null and roleKey != ''">
 			AND r.role_key like concat('%', #{roleKey}, '%')
@@ -56,27 +56,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by r.role_weight
 	</select>
 
-	<select id="selectRoleById" parameterType="integer" resultMap="BytesmartRoleResult">
+	<select id="selectRoleById" parameterType="long" resultMap="BytesmartRoleResult">
 		<include refid="selectRoleVo"/>
 		where r.role_id = #{roleId}
 	</select>
-
-	<update id="updateRole" parameterType="com.bytesmart.apisystem.domain.BytesmartRole">
-		update bytesmart_role
-		<set>
-			<if test="roleName != null and roleName != ''">role_name = #{roleName},</if>
-			<if test="roleKey != null and roleKey != ''">role_key = #{roleKey},</if>
-			<if test="roleWeight != null">role_weight = #{roleWeight},</if>
-			<if test="dataScope != null and dataScope != ''">data_scope = #{dataScope},</if>
-			<if test="menuCheckStrictly != null">menu_check_strictly = #{menuCheckStrictly},</if>
-			<if test="deptCheckStrictly != null">dept_check_strictly = #{deptCheckStrictly},</if>
-			<if test="roleStatus != null and roleStatus != ''">role_status = #{roleStatus},</if>
-			<if test="remark != null">remark = #{remark},</if>
-			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
-			update_time = sysdate()
-		</set>
-		where role_id = #{roleId}
-	</update>
 
 	<insert id="insertRole" parameterType="com.bytesmart.apisystem.domain.BytesmartRole" useGeneratedKeys="true" keyProperty="roleId">
 		insert into bytesmart_role(
@@ -106,16 +89,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<delete id="deleteRoleByIds" parameterType="integer">
+	<update id="updateRole" parameterType="com.bytesmart.apisystem.domain.BytesmartRole">
+		update bytesmart_role
+		<set>
+			<if test="roleName != null and roleName != ''">role_name = #{roleName},</if>
+			<if test="roleKey != null and roleKey != ''">role_key = #{roleKey},</if>
+			<if test="roleWeight != null">role_weight = #{roleWeight},</if>
+			<if test="dataScope != null and dataScope != ''">data_scope = #{dataScope},</if>
+			<if test="menuCheckStrictly != null">menu_check_strictly = #{menuCheckStrictly},</if>
+			<if test="deptCheckStrictly != null">dept_check_strictly = #{deptCheckStrictly},</if>
+			<if test="roleStatus != null and roleStatus != ''">role_status = #{roleStatus},</if>
+			<if test="remark != null">remark = #{remark},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			update_time = sysdate()
+		</set>
+		where role_id = #{roleId}
+	</update>
+
+	<delete id="deleteRoleByIds" parameterType="Long">
 		update bytesmart_role set del_flag = '2' where role_id in
 		<foreach collection="array" item="roleId" open="(" separator="," close=")">
 			#{roleId}
 		</foreach>
 	</delete>
 
+		<delete id="deleteRoleById" parameterType="Long">
+	 		update bytesmart_role set del_flag = '2' where role_id = #{roleId}
+	 	</delete>
+
 	<select id="selectRoleAll" resultMap="BytesmartRoleResult">
 		<include refid="selectRoleVo"/>
 	</select>
+
+		<select id="selectRolePermissionByEmployeeId" parameterType="Long" resultMap="BytesmartRoleResult">
+			<include refid="selectRoleVo"/>
+			WHERE r.del_flag = '0' and er.employee_id = #{employeeId}
+		</select>
+
+		<select id="selectRoleListByEmployeeId" parameterType="Long" resultType="Long">
+			select r.role_id
+	        from bytesmart_role r
+		        left join bytesmart_employee_role er on er.role_id = r.role_id
+		        left join bytesmart_employee e on e.employee_id = er.employee_id
+		    where e.employee_id = #{employeeId}
+		</select>
+
+		<select id="selectRolesByUserName" parameterType="String" resultMap="BytesmartRoleResult">
+			<include refid="selectRoleVo"/>
+			WHERE r.del_flag = '0' and u.username = #{userName}
+		</select>
+
+		<select id="checkRoleNameUnique" parameterType="String" resultMap="BytesmartRoleResult">
+			<include refid="selectRoleVo"/>
+			where r.role_name=#{roleName} and r.del_flag = '0' limit 1
+		</select>
+
+		<select id="checkRoleKeyUnique" parameterType="String" resultMap="BytesmartRoleResult">
+			<include refid="selectRoleVo"/>
+			where r.role_key=#{roleKey} and r.del_flag = '0' limit 1
+		</select>
+
 
 
 </mapper> 

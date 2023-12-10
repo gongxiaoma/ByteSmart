@@ -9,19 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="roleId"     column="role_id"      />
 	</resultMap>
 
-	<delete id="deleteEmployeeRoleByEmployeeId" parameterType="integer">
+	<delete id="deleteEmployeeRoleByEmployeeId" parameterType="Long">
 		delete from bytesmart_employee_role where employee_id=#{employeeId}
 	</delete>
 	
 
-	<delete id="deleteEmployeeRole" parameterType="integer">
+	<delete id="deleteEmployeeRole" parameterType="Long">
  		delete from bytesmart_employee_role where employee_id in
  		<foreach collection="array" item="employeeId" open="(" separator="," close=")">
  			#{employeeId}
         </foreach> 
  	</delete>
 
-	<select id="countEmployeeRoleByRoleId" resultType="Integer">
+	<select id="countEmployeeRoleByRoleId" resultType="Long">
 	    select count(1) from bytesmart_employee_role where role_id=#{roleId}
 	</select>
 

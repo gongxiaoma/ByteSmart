@@ -5,24 +5,24 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class BytesmartEmployeePost {
     /** 用户ID */
-    private Integer employeeId;
+    private Long employeeId;
 
     /** 岗位ID */
-    private Integer postId;
+    private Long postId;
 
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Integer getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(Integer postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 

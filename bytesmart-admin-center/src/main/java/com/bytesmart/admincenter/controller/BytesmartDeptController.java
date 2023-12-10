@@ -27,7 +27,7 @@ public class BytesmartDeptController extends BaseController {
     }
 
     @GetMapping(value = "/{deptId}")
-    public AjaxResult getInfo(@PathVariable Integer deptId)
+    public AjaxResult getInfo(@PathVariable Long deptId)
     {
         return success(bytesmartDeptService.selectDeptById(deptId));
     }
@@ -43,7 +43,7 @@ public class BytesmartDeptController extends BaseController {
     }
 
     @DeleteMapping("/{deptIds}")
-    public AjaxResult remove(@PathVariable Integer[] deptIds){
+    public AjaxResult remove(@PathVariable Long[] deptIds){
         return toAjax(bytesmartDeptService.deleteDeptByIds(deptIds));
     }
 

@@ -8,15 +8,15 @@ import java.util.List;
 public interface BytesmartEmployeeRoleMapper {
 
     //通过用户ID删除用户和角色关联
-    public int deleteEmployeeRoleByEmployeeId(Integer employeeId);
+    public int deleteEmployeeRoleByEmployeeId(Long employeeId);
 
 
     //批量删除用户和角色关联
-    public int deleteEmployeeRole(Integer[] employeeIds);
+    public int deleteEmployeeRole(Long[] employeeIds);
 
 
     //通过角色ID查询角色使用数量
-    public int countEmployeeRoleByRoleId(Integer roleId);
+    public int countEmployeeRoleByRoleId(Long roleId);
 
 
     //批量新增用户角色信息
@@ -33,7 +33,7 @@ public interface BytesmartEmployeeRoleMapper {
      * @param employeeIds 需要删除的用户数据ID
      * @return 结果
      */
-    public int deleteEmployeeRoleInfos(@Param("roleId") Integer roleId, @Param("employeeIds") Integer[] employeeIds);
+    public int deleteEmployeeRoleInfos(@Param("roleId") Long roleId, @Param("employeeIds") Long[] employeeIds);
 
 
 }

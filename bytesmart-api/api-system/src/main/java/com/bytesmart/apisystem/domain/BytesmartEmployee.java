@@ -16,23 +16,23 @@ public class BytesmartEmployee extends BaseEntity {
 
     /** 用户ID */
     @Excel(name = "用户序号", cellType = ColumnType.NUMERIC, prompt = "用户编号")
-    private Integer employeeId ;
+    private Long employeeId ;
 
     /** 部门ID */
     @Excel(name = "部门编号", type = Type.IMPORT)
-    private Integer deptId;
+    private Long deptId;
 
     /** 用户权重 */
     @Excel(name = "用户权重", type = Type.IMPORT)
-    private Integer demployeeWeight;
+    private Long demployeeWeight;
 
     /** 用户工号 */
     @Excel(name = "用户工号", type = Type.IMPORT)
-    private Integer demployeeNo;
+    private Long demployeeNo;
 
     /** 用户年龄 */
     @Excel(name = "用户年龄", type = Type.IMPORT)
-    private Integer demployeeAge;
+    private Long demployeeAge;
 
     /** 用户账号 */
     @Excel(name = "登录名称")
@@ -115,54 +115,65 @@ public class BytesmartEmployee extends BaseEntity {
     private List<BytesmartRole> roles;
 
     /** 角色组 */
-    private Integer[] roleIds;
+    private Long[] roleIds;
 
     /** 岗位组 */
-    private Integer[] postIds;
+    private Long[] postIds;
 
     /** 角色ID */
-    private Integer roleId;
+    private Long roleId;
     /** 岗位 */
-    private Integer postId;
+    private Long postId;
 
 
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Integer getDeptId() {
+
+    public boolean isAdmin()
+    {
+        return isAdmin(this.employeeId);
+    }
+
+    public static boolean isAdmin(Long employeeId)
+    {
+        return employeeId != null && 1 == employeeId;
+    }
+
+    public Long getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Integer deptId) {
+    public void setDeptId(Long deptId) {
         this.deptId = deptId;
     }
 
-    public Integer getDemployeeWeight() {
+    public Long getDemployeeWeight() {
         return demployeeWeight;
     }
 
-    public void setDemployeeWeight(Integer demployeeWeight) {
+    public void setDemployeeWeight(Long demployeeWeight) {
         this.demployeeWeight = demployeeWeight;
     }
 
-    public Integer getDemployeeNo() {
+    public Long getDemployeeNo() {
         return demployeeNo;
     }
 
-    public void setDemployeeNo(Integer demployeeNo) {
+    public void setDemployeeNo(Long demployeeNo) {
         this.demployeeNo = demployeeNo;
     }
 
-    public Integer getDemployeeAge() {
+    public Long getDemployeeAge() {
         return demployeeAge;
     }
 
-    public void setDemployeeAge(Integer demployeeAge) {
+    public void setDemployeeAge(Long demployeeAge) {
         this.demployeeAge = demployeeAge;
     }
 
@@ -327,35 +338,35 @@ public class BytesmartEmployee extends BaseEntity {
     }
 
 
-    public Integer[] getRoleIds() {
+    public Long[] getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(Integer[] roleIds) {
+    public void setRoleIds(Long[] roleIds) {
         this.roleIds = roleIds;
     }
 
-    public Integer[] getPostIds() {
+    public Long[] getPostIds() {
         return postIds;
     }
 
-    public void setPostIds(Integer[] postIds) {
+    public void setPostIds(Long[] postIds) {
         this.postIds = postIds;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public Integer getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(Integer postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 

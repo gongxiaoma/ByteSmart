@@ -13,7 +13,7 @@ public class BytesmartRole extends BaseEntity {
 
     /** 角色ID */
     @Excel(name = "角色序号", cellType = ColumnType.NUMERIC)
-    private Integer roleId;
+    private Long roleId;
 
     /** 角色名称,例如管理员,普通用户 */
     @Excel(name = "角色名称,例如管理员，普通用户")
@@ -56,13 +56,30 @@ public class BytesmartRole extends BaseEntity {
     /** 角色菜单权限 */
     private Set<String> permissions;
 
-    public Integer getRoleId() {
+    public BytesmartRole(){}
+
+    public BytesmartRole(Long roleId){}
+
+
+
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
+    public boolean isAdmin()
+    {
+        return isAdmin(this.roleId);
+    }
+
+    public static boolean isAdmin(Long roleId)
+    {
+        return roleId != null && 1L == roleId;
+    }
+
 
     public String getRoleName() {
         return roleName;
@@ -160,6 +177,14 @@ public class BytesmartRole extends BaseEntity {
     public void setPermissions(Set<String> permissions) {
         this.permissions = permissions;
     }
+
+
+
+
+
+
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)

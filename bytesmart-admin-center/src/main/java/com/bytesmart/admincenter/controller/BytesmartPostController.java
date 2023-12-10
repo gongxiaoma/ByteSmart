@@ -27,7 +27,7 @@ public class BytesmartPostController extends BaseController {
     }
 
     @GetMapping(value = "/{postId}")
-    public AjaxResult getInfo(@PathVariable Integer postId)
+    public AjaxResult getInfo(@PathVariable Long postId)
     {
         return success(postService.selectPostById(postId));
     }

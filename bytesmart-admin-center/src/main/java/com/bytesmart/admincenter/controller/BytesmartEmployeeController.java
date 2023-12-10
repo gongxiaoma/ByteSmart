@@ -39,6 +39,12 @@ public class BytesmartEmployeeController extends BaseController {
     @Autowired
     private IBytesmartDeptService bytesmartDeptService;
 
+    @GetMapping("/hello")
+    public String hello()
+    {
+        return "hello world";
+    }
+
     @GetMapping("/list")
     public TableDataInfo list(BytesmartEmployee employee)
     {
@@ -48,7 +54,7 @@ public class BytesmartEmployeeController extends BaseController {
     }
 
     @GetMapping(value = { "/", "/{employeeId}" })
-    public AjaxResult getInfo(@PathVariable(value = "employeeId", required = false) Integer employeeId)
+    public AjaxResult getInfo(@PathVariable(value = "employeeId", required = false) Long employeeId)
     {
             return success(bytesmartEmployeeService.selectEmployeeById(employeeId));
     }
@@ -66,7 +72,7 @@ public class BytesmartEmployeeController extends BaseController {
 
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{employeeIds}")
-    public AjaxResult remove(@PathVariable Integer[] employeeIds)
+    public AjaxResult remove(@PathVariable Long[] employeeIds)
     {
         return toAjax(bytesmartEmployeeService.deleteEmployeeByIds(employeeIds));
     }

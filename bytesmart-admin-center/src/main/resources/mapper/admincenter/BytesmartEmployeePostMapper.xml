@@ -9,15 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="postId"     column="post_id"      />
 	</resultMap>
 
-	<delete id="deleteEmployeePostByemployeeId" parameterType="integer">
+	<delete id="deleteEmployeePostByemployeeId" parameterType="Long">
 		delete from bytesmart_employee_post where employee_id=#{employeeId}
 	</delete>
 	
-	<select id="countEmployeePostByemployeeId" resultType="Integer">
+	<select id="countEmployeePostById" resultType="Long">
 	    select count(1) from bytesmart_employee_post where post_id=#{postId}
 	</select>
 
-	<delete id="deleteEmployeePost" parameterType="integer">
+	<delete id="deleteEmployeePost" parameterType="Long">
  		delete from bytesmart_employee_post where employee_id in
  		<foreach collection="array" item="employeeId" open="(" separator="," close=")">
  			#{employeeId}

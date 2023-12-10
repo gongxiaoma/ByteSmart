@@ -5,6 +5,10 @@ import com.bytesmart.admincenter.domain.BytesmartEmployeeRole;
 import com.bytesmart.admincenter.mapper.*;
 import com.bytesmart.admincenter.service.IBytesmartEmployeeService;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
+import com.bytesmart.apisystem.domain.BytesmartRole;
+import com.bytesmart.apisystem.domain.SysRole;
+import com.bytesmart.apisystem.domain.SysUser;
+import com.bytesmart.common.core.utils.SpringUtils;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.core.web.domain.AjaxResult;
 import com.bytesmart.common.datascope.annotation.DataScope;
@@ -30,11 +34,11 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     @Autowired
     private BytesmartEmployeeMapper employeeMapper;
 
-//    @Autowired
-//    private BytesmartRoleMapper roleMapper;
+    @Autowired
+    private BytesmartRoleMapper roleMapper;
 
-//    @Autowired
-//    private BytesmartPostMapper postMapper;
+    @Autowired
+    private BytesmartPostMapper postMapper;
 
     @Autowired
     private BytesmartEmployeeRoleMapper employeeRoleMapper;
@@ -51,10 +55,14 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     }
 
     @Override
-    public BytesmartEmployee selectEmployeeById(Integer emloyeeId ){
+    public BytesmartEmployee selectEmployeeById(Long emloyeeId){
         return employeeMapper.selectEmployeeById(emloyeeId);
     }
 
+    @Override
+    public BytesmartEmployee selectEmployeeByUsername(String username){
+        return employeeMapper.selectEmployeeByUsername(username);
+    }
 
    @Override
    @Transactional(rollbackFor = Exception.class)
@@ -74,17 +82,17 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     public void insertEmployeePost(BytesmartEmployee employee)
     {
         // 取前端传来PostIds值(调用employee对象的getPostIds方法，并将返回的结果赋值给posts数组)
-        Integer[] posts = employee.getPostIds();
+        Long[] posts = employee.getPostIds();
         if (StringUtils.isNotEmpty(posts))
         {
            // 初始化一个ArrayList集合,使用new关键字创建了一个新的ArrayList<BytesmartEmployeePost>对象，并将其分配给list变量,它的类型是List<BytesmartEmployeePost>即是包含BytesmartEmployeePost对象的列表
             List<BytesmartEmployeePost> list = new ArrayList<BytesmartEmployeePost>();
             //增强型for循环(一个for-each循环)来遍历posts集合,对于posts集合中的每一个元素（这里命名为postId），执行一次循环体内的代码。
-            for (Integer postId : posts)
+            for (Long postId : posts)
             {
                 BytesmartEmployeePost bp = new BytesmartEmployeePost();
 
-                Integer emloyeeId = employee.getEmployeeId();
+                Long emloyeeId = employee.getEmployeeId();
                 bp.setEmployeeId(employee.getEmployeeId());
                 bp.setPostId(postId);
                 list.add(bp);
@@ -96,13 +104,13 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     public void insertEmployeeRole(BytesmartEmployee employee){
 
         //取前端传来RoleIds值,调用employee对象的getRoleIds方法，并将返回的结果赋值给roles数组
-        Integer[] roles = employee.getRoleIds();
+        Long[] roles = employee.getRoleIds();
         if (StringUtils.isNotEmpty(roles)){
             List<BytesmartEmployeeRole> list = new ArrayList<>();
-            for (Integer roleId : roles){
+            for (Long roleId : roles){
                 BytesmartEmployeeRole br = new BytesmartEmployeeRole();
 
-                Integer emloyeeId = employee.getEmployeeId();
+                Long emloyeeId = employee.getEmployeeId();
                 br.setEmployeeId(emloyeeId);
                 br.setRoleId(roleId);
                 list.add(br);
@@ -116,7 +124,7 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     @Transactional(rollbackFor = Exception.class)
     public int updateEmployee(BytesmartEmployee employee){
         //取个用户id值
-        Integer emloyeeId = employee.getEmployeeId();
+        Long emloyeeId = employee.getEmployeeId();
 
         //删除用户和岗位关联
         employeePostMapper.deleteEmployeePostByemployeeId(emloyeeId);
@@ -132,25 +140,60 @@ public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int deleteEmployeeByIds(Integer[] employeeIds){
+    public int deleteEmployeeByIds(Long[] employeeIds){
         //删除用户和角色关联
         employeeRoleMapper.deleteEmployeeRole(employeeIds);
         //删除用户和角色关联
         employeePostMapper.deleteEmployeePost(employeeIds);
         return employeeMapper.deleteEmployeeByIds(employeeIds);
-
     }
 
+    /**
+     * 根据条件分页查询已分配用户角色列表
+     *
+     * @param employee 用户信息
+     * @return 用户信息集合信息
+     */
+    @Override
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<BytesmartEmployee> selectAllocatedList(BytesmartEmployee employee)
+    {
+        return employeeMapper.selectAllocatedList(employee);
+    }
 
+    /**
+     * 根据条件分页查询未分配用户角色列表
+     *
+     * @param employee 用户信息
+     * @return 用户信息集合信息
+     */
+    public List<BytesmartEmployee> selectUnallocatedList(BytesmartEmployee employee){
+        return employeeMapper.selectUnallocatedList(employee);
+    }
 
+    /**
+     * 查询所有角色
+     *
+     * @return 角色列表
+     */
+//    @Override
+//    public List<BytesmartRole> selectRoleAll()
+//    {
+//        return SpringUtils.getAopProxy(this).selectRoleList(new BytesmartRole());
+//    }
 
-
-
-
-
-
-
-
+    /**
+     * 根据条件分页查询角色数据
+     *
+     * @param role 角色信息
+     * @return 角色数据集合信息
+     */
+//    @Override
+//    @DataScope(deptAlias = "d")
+//    public List<BytesmartRole> selectRoleList(BytesmartRole role)
+//    {
+//        return roleMapper.selectRoleList(role);
+//    }
 
 
 

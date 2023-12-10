@@ -9,7 +9,7 @@ public interface IBytesmartPostService {
     public List<BytesmartPost> selectPostList(BytesmartPost post);
 
     //根据id查询
-    public BytesmartPost selectPostById(Integer postId);
+    public BytesmartPost selectPostById(Long postId);
 
     //修改
     public int updatePost(BytesmartPost post);
@@ -23,7 +23,9 @@ public interface IBytesmartPostService {
     public List<BytesmartPost> selectPostAll();
 
     //通过用户id获取岗位选择框列表
-    public List<Integer> selectPostListByEmployeeId(Integer employeeId);
+//    public List<Long> selectPostListByEmployeeId(Long employeeId);
+
+
 
 
 }

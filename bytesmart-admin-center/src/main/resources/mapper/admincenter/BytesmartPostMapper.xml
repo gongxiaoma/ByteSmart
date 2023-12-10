@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectPostBo"/>
 	</select>
 	
-	<select id="selectPostList" parameterType="BytesmartPost" resultMap="BytesmartPostResult">
+	<select id="selectPostList" parameterType="long" resultMap="BytesmartPostResult">
 	    <include refid="selectPostBo"/>
 		<where>
 			<if test="postName != null and postName != ''">
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<select id="selectPostById" parameterType="integer" resultMap="BytesmartPostResult">
+	<select id="selectPostById" parameterType="long" resultMap="BytesmartPostResult">
 		<include refid="selectPostBo"/>
 		where post_id = #{postId}
 	</select>
@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<delete id="deletePostByIds" parameterType="integer">
+	<delete id="deletePostByIds" parameterType="Long">
 		delete from bytesmart_post where post_id in
 		<foreach collection="array" item="postId" open="(" separator="," close=")">
 			#{postId}
@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 
-	<select id="selectPostListByEmployeeId" parameterType="integer" resultType="integer">
+	<select id="selectPostListByEmployeeId" parameterType="Long" resultType="Long">
 		select p.post_id
         from bytesmart_post p
 	        left join bytesmart_employee_post ep on ep.post_id = p.post_id

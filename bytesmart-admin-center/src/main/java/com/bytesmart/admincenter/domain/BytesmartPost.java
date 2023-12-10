@@ -11,13 +11,13 @@ public class BytesmartPost extends BaseEntity {
 
     /** 岗位序号 */
     @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
-    private Integer postId;
+    private Long postId;
 
     private String postName;
 
     /** 岗位权重 */
     @Excel(name = "岗位权重")
-    private Integer postWeight;
+    private Long postWeight;
 
     /** 岗位类型 全职，兼职等 */
     @Excel(name = "岗位类型")
@@ -28,11 +28,11 @@ public class BytesmartPost extends BaseEntity {
     private String postStatus;
 
 
-    public Integer getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(Integer postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 
@@ -44,11 +44,11 @@ public class BytesmartPost extends BaseEntity {
         this.postName = postName;
     }
 
-    public Integer getPostWeight() {
+    public Long getPostWeight() {
         return postWeight;
     }
 
-    public void setPostWeight(Integer postWeight) {
+    public void setPostWeight(Long postWeight) {
         this.postWeight = postWeight;
     }
 

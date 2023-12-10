@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bytesmart.systemcenter.mapper.SysConfigMapper">
+<mapper namespace="com.bytesmart.admincenter.mapper.BytesmartConfigMapper">
     
-    <resultMap type="SysConfig" id="SysConfigResult">
+    <resultMap type="BytesmartConfig" id="BytesmartConfigResult">
     	<id     property="configId"      column="config_id"      />
         <result property="configName"    column="config_name"    />
         <result property="configKey"     column="config_key"     />
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <sql id="selectConfigVo">
         select config_id, config_name, config_key, config_value, config_type, create_by, create_time, update_by, update_time, remark 
-		from sys_config
+		from bytesmart_config
     </sql>
     
     <!-- 查询条件 -->
@@ -33,12 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
     
-    <select id="selectConfig" parameterType="SysConfig" resultMap="SysConfigResult">
+    <select id="selectConfig" parameterType="BytesmartConfig" resultMap="BytesmartConfigResult">
         <include refid="selectConfigVo"/>
         <include refid="sqlwhereSearch"/>
     </select>
     
-    <select id="selectConfigList" parameterType="SysConfig" resultMap="SysConfigResult">
+    <select id="selectConfigList" parameterType="BytesmartConfig" resultMap="BytesmartConfigResult">
         <include refid="selectConfigVo"/>
         <where>
 			<if test="configName != null and configName != ''">
@@ -59,17 +59,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
     </select>
     
-    <select id="selectConfigById" parameterType="Long" resultMap="SysConfigResult">
+    <select id="selectConfigById" parameterType="Long" resultMap="BytesmartConfigResult">
         <include refid="selectConfigVo"/>
         where config_id = #{configId}
     </select>
     
-    <select id="checkConfigKeyUnique" parameterType="String" resultMap="SysConfigResult">
+    <select id="checkConfigKeyUnique" parameterType="String" resultMap="BytesmartConfigResult">
         <include refid="selectConfigVo"/>
         where config_key = #{configKey} limit 1
     </select>
     
-    <insert id="insertConfig" parameterType="SysConfig">
+    <insert id="insertConfig" parameterType="BytesmartConfig">
         insert into sys_config (
 			<if test="configName != null and configName != '' ">config_name,</if>
 			<if test="configKey != null and configKey != '' ">config_key,</if>
@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
     </insert>
 	 
-    <update id="updateConfig" parameterType="SysConfig">
+    <update id="updateConfig" parameterType="BytesmartConfig">
         update sys_config 
         <set>
             <if test="configName != null and configName != ''">config_name = #{configName},</if>

@@ -124,9 +124,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${params.dataScope}
 	</select>
 
-	<select id="selectEmployeeById" parameterType="integer" resultMap="BytesmartEmployeeResult">
+	<select id="selectEmployeeById" parameterType="long" resultMap="BytesmartEmployeeResult">
 		<include refid="selectEmployeeVo"/>
 		where e.employee_id = #{employeeId}
+	</select>
+
+	<select id="selectEmployeeByUsername" parameterType="string" resultMap="BytesmartEmployeeResult">
+		<include refid="selectEmployeeVo"/>
+		where e.username = #{username}
 	</select>
 
 	<insert id="insertEmployee" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee" useGeneratedKeys="true" keyProperty="employeeId">
@@ -219,14 +224,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</delete>
 
-<!--	<delete id="deleteUserByIds" parameterType="Long">-->
-<!--		update sys_user set del_flag = '2' where user_id in-->
-<!--		<foreach collection="array" item="userId" open="(" separator="," close=")">-->
-<!--			#{userId}-->
-<!--		</foreach>-->
-<!--	</delete>-->
+	<select id="selectAllocatedList" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee" resultMap="BytesmartEmployeeResult">
+		select distinct e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_mobile, e.employee_no, e.employee_age, e.employee_type, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time,
+		from bytesmart_employee e
+		left join bytesmart_dept d on e.dept_id = d.dept_id
+		left join bytesmart_employee_role er on e.employee_id = er.employee_id
+		left join bytesmart_role r on r.role_id = er.role_id
+		where e.del_flag = '0' and r.role_id = #{roleId}
+		<if test="userName != null and userName != ''">
+			AND e.username like concat('%', #{userName}, '%')
+		</if>
+		<if test="phonenumber != null and phonenumber != ''">
+			AND e.employee_mobile like concat('%', #{e.employeeMobile}, '%')
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+	</select>
 
-
+	<select id="selectUnallocatedList" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee" resultMap="BytesmartEmployeeResult">
+		select distinct e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_mobile, e.employee_no, e.employee_age, e.employee_type, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time,
+		from bytesmart_employee e
+		left join bytesmart_dept d on e.dept_id = d.dept_id
+		left join bytesmart_employee_role er on e.employee_id = er.employee_id
+		left join bytesmart_role r on r.role_id = er.role_id
+		where e.del_flag = '0' and (r.role_id != #{roleId} or r.role_id IS NULL)
+		and e.employee_id not in (select e.employee_id from bytesmart_employee e inner join bytesmart_employee_role er on e.employee_id = er.employee_id and er.role_id = #{roleId})
+		<if test="userName != null and userName != ''">
+			AND e.username like concat('%', #{userName}, '%')
+		</if>
+		<if test="phonenumber != null and phonenumber != ''">
+			AND e.employee_mobile like concat('%', #{employeeMobile}, '%')
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+	</select>
 
 
 
