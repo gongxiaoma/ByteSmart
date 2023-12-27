@@ -3,17 +3,23 @@ package com.bytesmart.admincenter.domain;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.annotation.sql.DataSourceDefinition;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 登录用户身份权限
  *
  * @author ruoyi
  */
-public class LoginUser implements UserDetails
+
+
+public class WebLoginUser implements UserDetails
 {
     private static final long serialVersionUID = 1L;
 
@@ -23,19 +29,9 @@ public class LoginUser implements UserDetails
     private BytesmartEmployee employee;
 
     /**
-     * 用户ID
-     */
-    private Long userId;
-
-    /**
-     * 部门ID
-     */
-    private Long deptId;
-
-    /**
      * 用户唯一标识
      */
-    private String token;
+    private String userkey;
 
     /**
      * 登录时间
@@ -70,58 +66,95 @@ public class LoginUser implements UserDetails
     /**
      * 权限列表
      */
-    private Set<String> permissions;
 
-    public LoginUser()
-    {
-    }
+    //12.30注释
+//    private Set<String> permissions;
 
-    public LoginUser(BytesmartEmployee employee, Set<String> permissions)
-    {
+    //12.30新增
+    private List<String> permissions;
+
+    //12.30新增
+    public WebLoginUser(BytesmartEmployee employee, List<String> permissions) {
         this.employee = employee;
         this.permissions = permissions;
     }
 
-    public LoginUser(Long userId, Long deptId, BytesmartEmployee employee, Set<String> permissions)
-    {
-        this.userId = userId;
-        this.deptId = deptId;
-        this.employee = employee;
+    //不被序列化(存储所需要的权限信息集合)
+    @JSONField(serialize = false)
+    private List<SimpleGrantedAuthority> authorities;
+
+    //12.30新增
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        if(authorities!=null){
+            return authorities;
+        }
+        //把permissions中string类型的权限信息封装成SimpleGrantedAuthority对象
+        authorities = permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return authorities;
+    }
+
+    //12.30注释
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities()
+//    {
+//        return null;
+//    }
+
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
         this.permissions = permissions;
-    }
-
-    public Long getUserId()
-    {
-        return userId;
-    }
-
-    public void setUserId(Long userId)
-    {
-        this.userId = userId;
-    }
-
-    public Long getDeptId()
-    {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId)
-    {
-        this.deptId = deptId;
-    }
-
-    public String getToken()
-    {
-        return token;
-    }
-
-    public void setToken(String token)
-    {
-        this.token = token;
     }
 
     /**
-     * 返回自己用户模型的密码
+     * 无参构造
+     */
+    public WebLoginUser()
+    {
+    }
+
+    /**
+     * 有参构造
+     */
+    //12.30注释
+//    public WebLoginUser(BytesmartEmployee employee, Set<String> permissions)
+//    {
+//        this.employee = employee;
+//        this.permissions = permissions;
+//    }
+
+    /**
+     * 获取自己用户模型的用户id
+     */
+    public Long getUserId()
+    {
+        return employee.getEmployeeId();
+    }
+
+    /**
+     * 获取自己用户模型的部门id
+     */
+    public Long getDeptId()
+    {
+        return employee.getDeptId();
+    }
+
+    public String getUserkey()
+    {
+        return userkey;
+    }
+
+    public void setUserkey(String userkey)
+    {
+        this.userkey = userkey;
+    }
+
+    /**
+     * 框架会调用WebLoginUser里面的getPassword方法获取密码，所以需要返回自己用户模型的密码
      */
     @JSONField(serialize = false)
     @Override
@@ -131,13 +164,14 @@ public class LoginUser implements UserDetails
     }
 
     /**
-     * 返回自己用户模型的用户
+     * 框架会调用WebLoginUser里面的getUsername方法获取用户，所以需要返回自己用户模型的用户
      */
     @Override
     public String getUsername()
     {
         return employee.getUserName();
     }
+
 
     /**
      * 账户是否未过期,过期无法验证
@@ -245,15 +279,15 @@ public class LoginUser implements UserDetails
         this.expireTime = expireTime;
     }
 
-    public Set<String> getPermissions()
-    {
-        return permissions;
-    }
-
-    public void setPermissions(Set<String> permissions)
-    {
-        this.permissions = permissions;
-    }
+//    public Set<String> getPermissions()
+//    {
+//        return permissions;
+//    }
+//
+//    public void setPermissions(Set<String> permissions)
+//    {
+//        this.permissions = permissions;
+//    }
 
     public BytesmartEmployee getUser()
     {
@@ -265,9 +299,5 @@ public class LoginUser implements UserDetails
         this.employee = employee;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        return null;
-    }
+
 }

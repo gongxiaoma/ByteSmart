@@ -99,8 +99,13 @@ public class RedisService
      * @param key 缓存键值
      * @return 缓存键值对应的数据
      */
+
+
+
     public <T> T getCacheObject(final String key)
     {
+
+        //调用opsForValue方法，返回数据赋值给operation；调用opsForValue方法，redis缓存对比测试，返回调用对象的operation的get方法，即类型为v（value）即 存储的key值类型。
         ValueOperations<String, T> operation = redisTemplate.opsForValue();
         return operation.get(key);
     }

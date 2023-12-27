@@ -39,11 +39,6 @@ public class BytesmartEmployeeController extends BaseController {
     @Autowired
     private IBytesmartDeptService bytesmartDeptService;
 
-    @GetMapping("/hello")
-    public String hello()
-    {
-        return "hello world";
-    }
 
     @GetMapping("/list")
     public TableDataInfo list(BytesmartEmployee employee)

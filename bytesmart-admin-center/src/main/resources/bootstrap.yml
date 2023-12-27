@@ -24,6 +24,9 @@ spring:
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
 
+
+
+
 #management:
 #  health:
 #    redis:

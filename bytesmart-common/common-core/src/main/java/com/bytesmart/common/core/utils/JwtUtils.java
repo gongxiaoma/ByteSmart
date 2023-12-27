@@ -6,6 +6,7 @@ import com.bytesmart.common.core.text.Convert;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import java.util.Map;
  *
  * @author hd
  */
+@Component
 public class JwtUtils
 {
     public static String secret = TokenConstants.SECRET;
@@ -29,6 +31,7 @@ public class JwtUtils
         String token = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact();
         return token;
     }
+
 
     /**
      * 从令牌中获取数据声明

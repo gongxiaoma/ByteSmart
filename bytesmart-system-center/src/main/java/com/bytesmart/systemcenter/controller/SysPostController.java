@@ -42,7 +42,7 @@ public class SysPostController extends BaseController
     }
 
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:post:export")
+//    @RequiresPermissions("system:post:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysPost post)
     {
@@ -55,6 +55,11 @@ public class SysPostController extends BaseController
      * 根据岗位编号获取详细信息
      */
 //    @RequiresPermissions("system:post:query")
+    @GetMapping(value = "/{postId}")
+    public AjaxResult getInfo(@PathVariable Long postId)
+    {
+        return success(postService.selectPostById(postId));
+    }
 
 
     /**

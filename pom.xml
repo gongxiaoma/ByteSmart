@@ -221,6 +221,7 @@
         <module>bytesmart-api</module>
         <module>bytesmart-common</module>
         <module>bytesmart-admin-center</module>
+        <module>bytesmart-web-admin</module>
 
 
     </modules>

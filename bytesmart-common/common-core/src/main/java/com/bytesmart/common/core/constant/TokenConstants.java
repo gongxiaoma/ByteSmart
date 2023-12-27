@@ -22,4 +22,10 @@ public class TokenConstants
      */
     public final static String SECRET = "abcdefghijklmnopqrstuvwxyz";
 
+    /**
+     * 令牌秘钥
+     */
+    public final static String WEBSECRET = "dfdfdhhjtggttpfdgggeeretgttty";
+
+
 }

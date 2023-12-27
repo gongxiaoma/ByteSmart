@@ -3,6 +3,7 @@ package com.bytesmart.admincenter.domain;
 import com.bytesmart.common.core.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import sun.awt.SunHints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +13,15 @@ import java.util.List;
  * 
  * @author hd
  */
+
+//@TableName(value="bytesmart_menu")
 public class BytesmartMenu extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+
     /** 菜单ID */
+//    @TableId
     private Long menuId;
 
     /** 菜单名称 */

@@ -132,4 +132,27 @@ public class Constants
      */
     public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
             "org.springframework", "org.apache", "com.bytesmart.common.core.utils.file" };
+
+
+    /**
+     * 令牌前缀
+     */
+    public static final String LOGIN_USER_KEY = "login_user_key";
+
+
+    /**
+     * 令牌前缀
+     */
+    public static final String WEB_LOGIN_USER_KEY = "web_login_user_key";
+
+    /**
+     * 令牌
+     */
+    public static final String TOKEN = "token";
+
+    /**
+     * 令牌前缀
+     */
+    public static final String TOKEN_PREFIX = "Bearer ";
+
 }

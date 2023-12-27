@@ -7,10 +7,7 @@ import com.bytesmart.common.core.context.SecurityContextHolder;
 import com.bytesmart.common.core.utils.ServletUtils;
 import com.bytesmart.common.core.utils.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import javax.servlet.http.HttpServletRequest;
-
-//import com.bytesmart.system.api.model.LoginUser;
 
 /**
  * 权限获取工具类
