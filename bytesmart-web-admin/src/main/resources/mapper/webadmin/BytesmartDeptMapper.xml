@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by d.parent_id, d.dept_weight
 	</select>
 
-	<select id="selectDeptById" parameterType="integer" resultMap="BytesmartDeptResult">
+	<select id="selectDeptById" parameterType="Long" resultMap="BytesmartDeptResult">
 		<include refid="selectDeptVo"/>
 		where dept_id = #{deptId}
 	</select>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="deptLeader != null">dept_leader = #{deptLeader},</if>
 			<if test="deptMobile != null">dept_mobile = #{deptMobile},</if>
 			<if test="deptEmail != null">dept_email = #{deptEmail},</if>
-			<if test="deptStatus != null and status != ''">dept_status = #{deptStatus},</if>
+			<if test="deptStatus != null and deptStatus != ''">dept_status = #{deptStatus},</if>
 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
 			update_time = sysdate()
 		</set>
@@ -130,7 +130,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<update id="updateDeptStatusNormal" parameterType="Long">
-		update bytesmart_dept set dept_status = '0' where dept_id in
+		update bytesmart_dept set dept_status = '0'where dept_id in
 		<foreach collection="array" item="deptId" open="(" separator="," close=")">
 			#{deptId}
 		</foreach>

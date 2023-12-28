@@ -102,12 +102,6 @@ public interface IBytesmartDeptService {
      */
     public int selectNormalChildrenDeptById(Long deptId);
 
-    /**
-     * 修改所在部门正常状态
-     *
-     * @param deptIds 部门ID组
-     */
-    public void updateDeptStatusNormal(Long[] deptIds);
 
 
 }

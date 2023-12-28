@@ -119,7 +119,6 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
     }
 
 
-
     /**
      * 根据角色ID查询部门树信息
      *
