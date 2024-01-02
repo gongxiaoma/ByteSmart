@@ -57,7 +57,7 @@
         select distinct m.menu_id, m.parent_id, m.menu_name, m.route_address, m.component_path, m.route_parameter, m.menu_display, m.menu_status, ifnull(m.menu_perms,'') as perms, m.is_frame, m.is_cache, m.menu_type, m.menu_icon, m.menu_weight, m.create_time
         from bytesmart_menu m
         left join bytesmart_role_menu rm on m.menu_id = rm.menu_id
-        left join bytesmart_employee_role er on r.role_id = er.role_id
+        left join bytesmart_employee_role er on rm.role_id = er.role_id
         left join bytesmart_role r on er.role_id = r.role_id
         where er.employee_id = #{params.employeeId}
         <if test="menuName != null and menuName != ''">
@@ -91,7 +91,7 @@
         <if test="menuCheckStrictly">
             and m.menu_id not in (select m.parent_id from bytesmart_menu m inner join bytesmart_role_menu rm on m.menu_id = rm.menu_id and rm.role_id = #{roleId})
         </if>
-        order by m.parent_id, m.order_num
+        order by m.parent_id, m.menu_weight
     </select>
 
     <select id="selectMenuPerms" resultType="String">
@@ -129,7 +129,7 @@
     </select>
 
 
-    <select id="hasChildByMenuId" resultType="Long">
+    <select id="hasChildByMenuId" resultType="integer">
 	    select count(1) from bytesmart_menu where parent_id = #{menuId}
 	</select>
 
@@ -144,7 +144,7 @@
             <if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
             <if test="parentId != null">parent_id = #{parentId},</if>
             <if test="menuWeight != null">menu_weight = #{menuWeight},</if>
-            <if test="routeAddress != null and path != ''">route_address = #{routeAddress},</if>
+            <if test="routeAddress != null and routeAddress != ''">route_address = #{routeAddress},</if>
             <if test="componentPath != null">component_path = #{componentPath},</if>
             <if test="routeParameter != null">route_parameter = #{routeParameter},</if>
             <if test="isFrame != null and isFrame != ''">is_frame = #{isFrame},</if>
@@ -153,7 +153,7 @@
             <if test="menuDisplay != null">menu_display = #{menuDisplay},</if>
             <if test="menuStatus != null">menu_status = #{menuStatus},</if>
             <if test="menuPerms !=null">menu_perms = #{menuPerms},</if>
-            <if test="menuIcon !=null and icon != ''">menu_icon = #{menuIcon},</if>
+            <if test="menuIcon !=null and menuIcon != ''">menu_icon = #{menuIcon},</if>
             <if test="remark != null and remark != ''">remark = #{remark},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
             update_time = sysdate()

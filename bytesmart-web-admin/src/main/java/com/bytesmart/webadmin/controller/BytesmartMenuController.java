@@ -1,5 +1,6 @@
 package com.bytesmart.webadmin.controller;
 
+import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.domain.BytesmartMenu;
 import com.bytesmart.webadmin.service.IBytesmartMenuService;
 import com.bytesmart.common.core.constant.UserConstants;
@@ -26,8 +27,8 @@ public class BytesmartMenuController extends BaseController {
     @GetMapping("/list")
     public AjaxResult list(BytesmartMenu menu)
     {
-        Long employeeId = 1L;
-//        Long employeeId = SecurityUtils.getemployeeId();
+//        Long employeeId = 1L;
+        Long employeeId = WebSecurityUtils.getEmployeeId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuList(menu, employeeId);
         return success(menus);
     }
@@ -47,8 +48,8 @@ public class BytesmartMenuController extends BaseController {
     @GetMapping("/treeselect")
     public AjaxResult treeselect(BytesmartMenu menu)
     {
-        Long employeeId = 1L;
-//        Long employeeId = SecurityUtils.getEmployeeId();
+//        Long employeeId = 1L;
+        Long employeeId = WebSecurityUtils.getEmployeeId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuList(menu, employeeId);
         return success(bytesmartMenuService.buildMenuTreeSelect(menus));
     }
@@ -60,8 +61,8 @@ public class BytesmartMenuController extends BaseController {
     @GetMapping(value = "/roleMenuTreeselect/{roleId}")
     public AjaxResult roleMenuTreeselect(@PathVariable("roleId") Long roleId)
     {
-        Long employeeId = 1L;
-//        Long employeeId = SecurityUtils.getemployeeId();
+//        Long employeeId = 1L;
+        Long employeeId = WebSecurityUtils.getEmployeeId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuList(employeeId);
         AjaxResult ajax = AjaxResult.success();
         ajax.put("checkedKeys", bytesmartMenuService.selectMenuListByRoleId(roleId));
@@ -84,7 +85,7 @@ public class BytesmartMenuController extends BaseController {
         {
             return error("新增菜单'" + menu.getMenuName() + "'失败，地址必须以http(s)://开头");
         }
-        menu.setCreateBy(SecurityUtils.getUsername());
+        menu.setCreateBy(WebSecurityUtils.getUsername());
         return toAjax(bytesmartMenuService.insertMenu(menu));
     }
 
@@ -107,7 +108,7 @@ public class BytesmartMenuController extends BaseController {
         {
             return error("修改菜单'" + menu.getMenuName() + "'失败，上级菜单不能选择自己");
         }
-        menu.setUpdateBy(SecurityUtils.getUsername());
+        menu.setUpdateBy(WebSecurityUtils.getUsername());
         return toAjax(bytesmartMenuService.updateMenu(menu));
     }
 
@@ -137,8 +138,8 @@ public class BytesmartMenuController extends BaseController {
     @GetMapping("getRouters")
     public AjaxResult getRouters()
     {
-        Long employeeId = 1L;
-//        Long employeeId = SecurityUtils.getEmployeeId();
+//        Long employeeId = 1L;
+        Long employeeId = WebSecurityUtils.getEmployeeId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuTreeByEmployeeId(employeeId);
         return success(bytesmartMenuService.buildMenus(menus));
     }

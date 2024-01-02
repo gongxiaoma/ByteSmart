@@ -20,20 +20,19 @@ public class BytesmartMenu extends BaseEntity
 
 
     /** 菜单ID */
-//    @TableId
     private Long menuId;
 
     /** 菜单名称 */
     private String menuName;
 
     /** 父菜单名称 */
-//    private String parentName;
+    private String parentName;
 
     /** 父菜单ID */
     private Long parentId;
 
     /** 显示顺序权重 */
-    private Long menuWeight      ;
+    private Integer menuWeight      ;
 
     /** 路由地址 */
     private String routeAddress;
@@ -92,11 +91,19 @@ public class BytesmartMenu extends BaseEntity
         this.parentId = parentId;
     }
 
-    public Long getMenuWeight() {
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public Integer getMenuWeight() {
         return menuWeight;
     }
 
-    public void setMenuWeight(Long menuWeight) {
+    public void setMenuWeight(Integer menuWeight) {
         this.menuWeight = menuWeight;
     }
 

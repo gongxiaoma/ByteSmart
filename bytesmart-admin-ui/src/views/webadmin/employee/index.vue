@@ -1,25 +1,33 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="岗位名称" prop="postName">
+      <el-form-item label="用户登录名" prop="userName">
         <el-input
-          v-model="queryParams.postName"
-          placeholder="请输入岗位名称"
+          v-model="queryParams.userName"
+          placeholder="请输入用户登录名"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="岗位类型" prop="postType">
+      <el-form-item label="用户姓名" prop="employeeName">
         <el-input
-          v-model="queryParams.postType"
-          placeholder="请输入岗位类型"
+          v-model="queryParams.employeeName"
+          placeholder="请输入用户姓名"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="用户电话" prop="employeeMobile">
+        <el-input
+          v-model="queryParams.employeeMobile"
+          placeholder="请输入用户电话"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
 
-      <el-form-item label="状态" prop="postStatus">
-        <el-select v-model="queryParams.postStatus" placeholder="岗位状态" clearable>
+      <el-form-item label="状态" prop="employeeStatus">
+        <el-select v-model="queryParams.employeeStatus" placeholder="用户状态" clearable>
           <el-option
             v-for="dict in dict.type.sys_normal_disable"
             :key="dict.value"
@@ -42,7 +50,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['webadmin:post:add']"
+          v-hasPermi="['webadmin:employee:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -53,7 +61,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['webadmin:post:edit']"
+          v-hasPermi="['webadmin:employee:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -64,7 +72,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['webadmin:post:remove']"
+          v-hasPermi="['webadmin:employee:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -74,19 +82,25 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['webadmin:post:export']"
+          v-hasPermi="['webadmin:employee:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="postList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="employeeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="岗位Id" align="center" prop="postId" />
-      <el-table-column label="岗位名称" align="center" prop="postName" />
-      <el-table-column label="岗位类型" align="center" prop="postType" />
-      <el-table-column label="岗位权重" align="center" prop="postWeight" />
-      <el-table-column label="岗位状态" align="center" prop="postStatus">
+      <el-table-column label="用户Id" align="center" prop="employeeId" />
+      <el-table-column label="用户登录名称" align="center" prop="userName" />
+      <el-table-column label="用户姓名" align="center" prop="employeeName" />
+      <el-table-column label="用户英文名" align="center" prop="employeeenglishName" />
+      <el-table-column label="用户性别" align="center" prop="employeeGender" />
+      <el-table-column label="用户电话" align="center" prop="employeeMobile" />
+      <el-table-column label="用户邮箱" align="center" prop="employeeEmail" />
+      <el-table-column label="用户年龄" align="center" prop="employeeType" />
+      <el-table-column label="用户领导" align="center" prop="employeeType" />
+      <el-table-column label="岗位权重" align="center" prop="employeeWeight" />
+      <el-table-column label="岗位状态" align="center" prop="employeeStatus">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
         </template>
@@ -103,14 +117,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['webadmin:post:edit']"
+            v-hasPermi="['webadmin:employee:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['webadmin:post:remove']"
+            v-hasPermi="['webadmin:employee:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -127,17 +141,32 @@
     <!-- 添加或修改岗位对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="岗位名称" prop="postName">
-          <el-input v-model="form.postName" placeholder="请输入岗位名称" />
+        <el-form-item label="用户登录名" prop="userName">
+          <el-input v-model="form.userName" placeholder="请输入用户登录名" />
         </el-form-item>
-        <el-form-item label="岗位类型" prop="postType">
-          <el-input v-model="form.postType" placeholder="请输入岗位类型" />
+        <el-form-item label="用户姓名" prop="employeeName">
+          <el-input v-model="form.employeeName" placeholder="请输入用户姓名" />
         </el-form-item>
-        <el-form-item label="岗位权重" prop="postWeight">
-          <el-input-number v-model="form.postWeight" controls-position="right" :min="0" />
+        <el-form-item label="用户邮箱" prop="employeeEmail">
+          <el-input v-model="form.employeeEmail" placeholder="请输入岗位类型" />
         </el-form-item>
-        <el-form-item label="岗位状态" prop="postStatus">
-          <el-radio-group v-model="form.postStatus">
+        <el-form-item label="用户手机" prop="employeeMobile">
+          <el-input v-model="form.employeeMobile" placeholder="请输入岗位类型" />
+        </el-form-item>
+        <el-form-item label="用户性别" prop="employeeGender">
+          <el-input v-model="form.employeeGender" placeholder="请输入岗位类型" />
+        </el-form-item>
+        <el-form-item label="办公电话" prop="officePhone">
+          <el-input v-model="form.officePhone" placeholder="请输入岗位类型" />
+        </el-form-item>       
+        <el-form-item label="用户年龄" prop="demployeeAge">
+          <el-input v-model="form.demployeeAge" placeholder="请输入岗位类型" />
+        </el-form-item>    
+        <el-form-item label="用户权重" prop="employeeWeight">
+          <el-input-number v-model="form.employeeWeight" controls-position="right" :min="0" />
+        </el-form-item>
+        <el-form-item label="岗位状态" prop="employeeStatus">
+          <el-radio-group v-model="form.employeeStatus">
             <el-radio
               v-for="dict in dict.type.sys_normal_disable"
               :key="dict.value"
@@ -158,10 +187,10 @@
 </template>
 
 <script>
-import { listPost, getPost, delPost, addPost, updatePost } from "@/api/webadmin/post";
+import { listemployee, getemployee, delemployee, addemployee, updateemployee } from "@/api/webadmin/employee";
 
 export default {
-  name: "Post",
+  name: "employee",
   dicts: ['sys_normal_disable'],
   data() {
     return {
@@ -178,7 +207,7 @@ export default {
       // 总条数
       total: 0,
       // 岗位表格数据
-      postList: [],
+      employeeList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -187,22 +216,22 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        postType: undefined,
-        postName: undefined,
-        postWeight: undefined,
-        postStatus: undefined
+        employeeType: undefined,
+        employeeName: undefined,
+        employeeWeight: undefined,
+        employeeStatus: undefined
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-        postName: [
+        employeeName: [
           { required: true, message: "岗位名称不能为空", trigger: "blur" }
         ],
-        postCode: [
+        employeeCode: [
           { required: true, message: "岗位编码不能为空", trigger: "blur" }
         ],
-        postSort: [
+        employeeSort: [
           { required: true, message: "岗位顺序不能为空", trigger: "blur" }
         ]
       }
@@ -215,8 +244,8 @@ export default {
     /** 查询岗位列表 */
     getList() {
       this.loading = true;
-      listPost(this.queryParams).then(response => {
-        this.postList = response.rows;
+      listemployee(this.queryParams).then(response => {
+        this.employeeList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -229,11 +258,11 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        postId: undefined,
-        postType: undefined,
-        postName: undefined,
-        postWeight: 0,
-        postStatus: "0",
+        employeeId: undefined,
+        employeeType: undefined,
+        employeeName: undefined,
+        employeeWeight: 0,
+        employeeStatus: "0",
         remark: undefined
       };
       this.resetForm("form");
@@ -250,7 +279,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.postId)
+      this.ids = selection.map(item => item.employeeId)
       this.single = selection.length!=1
       this.multiple = !selection.length
     },
@@ -263,8 +292,8 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const postId = row.postId || this.ids
-      getPost(postId).then(response => {
+      const employeeId = row.employeeId || this.ids
+      getemployee(employeeId).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改岗位";
@@ -274,14 +303,14 @@ export default {
     submitForm: function() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.postId != undefined) {
-            updatePost(this.form).then(response => {
+          if (this.form.employeeId != undefined) {
+            updateemployee(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addPost(this.form).then(response => {
+            addemployee(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -292,9 +321,9 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const postIds = row.postId || this.ids;
-      this.$modal.confirm('是否确认删除岗位编号为"' + postIds + '"的数据项？').then(function() {
-        return delPost(postIds);
+      const employeeIds = row.employeeId || this.ids;
+      this.$modal.confirm('是否确认删除岗位编号为"' + employeeIds + '"的数据项？').then(function() {
+        return delemployee(employeeIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
@@ -302,9 +331,9 @@ export default {
     },
     /** 导出按钮操作 */
     handleExport() {
-      this.download('webadmin/post/export', {
+      this.download('webadmin/employee/export', {
         ...this.queryParams
-      }, `post_${new Date().getTime()}.xlsx`)
+      }, `employee_${new Date().getTime()}.xlsx`)
     }
   }
 };
