@@ -92,14 +92,6 @@ public class WebLoginUser implements UserDetails
         return authorities;
     }
 
-    //12.30注释
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities()
-//    {
-//        return null;
-//    }
-
-
     public List<String> getPermissions() {
         return permissions;
     }
@@ -128,7 +120,7 @@ public class WebLoginUser implements UserDetails
     /**
      * 获取自己用户模型的用户id
      */
-    public Long getUserId()
+    public Long EmployeeId()
     {
         return employee.getEmployeeId();
     }
@@ -287,12 +279,12 @@ public class WebLoginUser implements UserDetails
 //        this.permissions = permissions;
 //    }
 
-    public BytesmartEmployee getUser()
+    public BytesmartEmployee getEmployee()
     {
         return employee;
     }
 
-    public void setUser(BytesmartEmployee employee)
+    public void setEmployee(BytesmartEmployee employee)
     {
         this.employee = employee;
     }

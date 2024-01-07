@@ -1,10 +1,11 @@
 package com.bytesmart.webauth.service.impl;
 
+
+import com.bytesmart.common.core.enums.EmployeeStatus;
 import com.bytesmart.webauth.domain.WebLoginUser;
 import com.bytesmart.webadmin.mapper.BytesmartEmployeeMapper;
 import com.bytesmart.webadmin.mapper.BytesmartMenuMapper;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import com.bytesmart.common.core.enums.UserStatus;
 import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.utils.StringUtils;
 import org.slf4j.Logger;
@@ -23,7 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     @Autowired
-//    private IBytesmartEmployeeService employeeService;
     private BytesmartEmployeeMapper employeeMapper;
 
     @Autowired
@@ -40,12 +40,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             log.info("登录用户：{} 不存在.", username);
             throw new ServiceException("登录用户不存在.");
         }
-        else if (UserStatus.DELETED.getCode().equals(employee.getDelFlag()))
+        else if (EmployeeStatus.DELETED.getCode().equals(employee.getDelFlag()))
         {
             log.info("登录用户：{} 已被删除.", username);
             throw new ServiceException("登录用户已被删除");
         }
-        else if (UserStatus.DISABLE.getCode().equals(employee.getEmployeeStatus()))
+        else if (EmployeeStatus.DISABLE.getCode().equals(employee.getEmployeeStatus()))
         {
             log.info("登录用户：{} 已被停用.", username);
             throw new ServiceException("登录用户已被停用");

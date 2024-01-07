@@ -146,8 +146,8 @@ public class SysMenuController extends BaseController
     @GetMapping("getRouters")
     public AjaxResult getRouters()
     {
-//        Long userId = 1L;
-        Long userId = SecurityUtils.getUserId();
+        Long userId = 1L;
+//        Long userId = SecurityUtils.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return success(menuService.buildMenus(menus));
     }
