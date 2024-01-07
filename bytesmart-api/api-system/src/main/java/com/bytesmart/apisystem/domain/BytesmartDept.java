@@ -42,7 +42,7 @@ public class BytesmartDept extends BaseEntity {
 
 
     /** 父部门名称 */
-//    private String parentName;
+    private String parentName;
 
     /** 子部门 */
     private List<BytesmartDept> children = new ArrayList<BytesmartDept>();

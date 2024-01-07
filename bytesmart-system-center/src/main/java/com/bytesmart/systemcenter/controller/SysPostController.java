@@ -42,7 +42,7 @@ public class SysPostController extends BaseController
     }
 
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
-//    @RequiresPermissions("system:post:export")
+    //@RequiresPermissions("system:post:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysPost post)
     {

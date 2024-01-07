@@ -20,7 +20,6 @@ public interface BytesmartDeptMapper {
     public int insertDept(BytesmartDept dept);
 
     //删除
-//    public int deleteDeptByIds(Long[] deptIds);
     public int deleteDeptById(Long deptId);
 
     /**
@@ -88,6 +87,9 @@ public interface BytesmartDeptMapper {
      * @return 结果
      */
     public int updateDeptChildren(@Param("depts") List<BytesmartDept> depts);
+
+
+
 
 
 

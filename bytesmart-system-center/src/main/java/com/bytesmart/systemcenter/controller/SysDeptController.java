@@ -127,7 +127,9 @@ public class SysDeptController extends BaseController
         {
             return warn("部门存在用户,不允许删除");
         }
+
         deptService.checkDeptDataScope(deptId);
         return toAjax(deptService.deleteDeptById(deptId));
+
     }
 }

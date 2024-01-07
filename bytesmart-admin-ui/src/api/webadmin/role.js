@@ -45,10 +45,10 @@ export function dataScope(data) {
 }
 
 // 角色状态修改
-export function changeRoleStatus(roleId, status) {
+export function changeRoleStatus(roleId, roleStatus) {
   const data = {
     roleId,
-    status
+    roleStatus
   }
   return request({
     url: '/webadmin/role/changeStatus',

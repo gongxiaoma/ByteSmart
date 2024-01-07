@@ -35,6 +35,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="parentId != null and parentId != 0">
 			AND parent_id = #{parentId}
 		</if>
+		<if test="deptName != null and deptName != ''">
+			AND dept_name like concat('%', #{deptName}, '%')
+		</if>
 
 		<if test="deptStatus != null and deptStatus != ''">
 			AND dept_status = #{deptStatus}

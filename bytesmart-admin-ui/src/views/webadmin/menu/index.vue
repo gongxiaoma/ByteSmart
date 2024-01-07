@@ -67,7 +67,7 @@
       <el-table-column prop="componentPath" label="组件路径" :show-overflow-tooltip="true"></el-table-column>
       <el-table-column prop="menuStatus" label="状态" width="80">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.menuStatus"/>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime">

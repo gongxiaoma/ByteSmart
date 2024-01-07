@@ -19,6 +19,7 @@ public interface BytesmartPostMapper {
     public int insertPost(BytesmartPost post);
 
     //删除
+    public int deletePostById(Long postId);
     public int deletePostByIds(Long[] postIds);
 
     public List<BytesmartPost> selectPostAll();
@@ -28,6 +29,24 @@ public interface BytesmartPostMapper {
 
     //通过用户名查所属岗位
     public List<BytesmartPost> selectPostListByUserName(String username);
+
+    /**
+     * 校验岗位名称
+     *
+     * @param postName 岗位名称
+     * @return 结果
+     */
+    public BytesmartPost checkPostNameUnique(String postName);
+
+    /**
+     * 校验岗位类型
+     *
+     * @param postCode 岗位类型
+     * @return 结果
+     */
+    public BytesmartPost checkPostCodeUnique(String postCode);
+
+
 
 
 

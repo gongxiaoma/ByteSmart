@@ -1,5 +1,6 @@
 package com.bytesmart.webadmin.controller;
 
+import com.bytesmart.common.security.annotation.RequiresPermissions;
 import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.domain.BytesmartMenu;
 import com.bytesmart.webadmin.service.IBytesmartMenuService;
@@ -24,6 +25,7 @@ public class BytesmartMenuController extends BaseController {
     private IBytesmartMenuService bytesmartMenuService;
 
     //获取菜单列表
+//    @RequiresPermissions("webadmin:menu:list ")
     @GetMapping("/list")
     public AjaxResult list(BytesmartMenu menu)
     {
@@ -138,8 +140,8 @@ public class BytesmartMenuController extends BaseController {
     @GetMapping("getRouters")
     public AjaxResult getRouters()
     {
-//        Long employeeId = 1L;
-        Long employeeId = WebSecurityUtils.getEmployeeId();
+        Long employeeId = 1L;
+//        Long employeeId = WebSecurityUtils.getEmployeeId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuTreeByEmployeeId(employeeId);
         return success(bytesmartMenuService.buildMenus(menus));
     }

@@ -1,5 +1,7 @@
 package com.bytesmart.webadmin.controller;
 
+import com.bytesmart.common.security.annotation.RequiresPermissions;
+import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.service.IBytesmartDeptService;
 import com.bytesmart.webadmin.service.IBytesmartEmployeeService;
 import com.bytesmart.webadmin.service.IBytesmartRoleService;
@@ -34,7 +36,7 @@ public class BytesmartRoleController extends BaseController {
     private IBytesmartDeptService bytesmartDeptService;
 
 
-
+//    @RequiresPermissions("webadmin:role:list ")
     @GetMapping("/list")
     public TableDataInfo list( BytesmartRole role)
     {
@@ -103,9 +105,9 @@ public class BytesmartRoleController extends BaseController {
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody BytesmartRole role)
     {
-//        bytesmartRoleService.checkRoleAllowed(role);
-//        bytesmartRoleService.checkRoleDataScope(role.getRoleId());
-        role.setUpdateBy(SecurityUtils.getUsername());
+        bytesmartRoleService.checkRoleAllowed(role);
+        bytesmartRoleService.checkRoleDataScope(role.getRoleId());
+        role.setUpdateBy(WebSecurityUtils.getUsername());
         return toAjax(bytesmartRoleService.updateRoleStatus(role));
     }
 

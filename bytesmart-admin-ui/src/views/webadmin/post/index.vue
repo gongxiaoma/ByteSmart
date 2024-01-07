@@ -88,7 +88,7 @@
       <el-table-column label="岗位权重" align="center" prop="postWeight" />
       <el-table-column label="岗位状态" align="center" prop="postStatus">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.postStatus"/>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">

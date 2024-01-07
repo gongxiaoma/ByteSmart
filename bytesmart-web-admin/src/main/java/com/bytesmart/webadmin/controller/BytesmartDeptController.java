@@ -2,15 +2,19 @@ package com.bytesmart.webadmin.controller;
 
 
 
+
 import com.bytesmart.common.core.constant.UserConstants;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.log.annotation.Log;
 import com.bytesmart.common.log.enums.BusinessType;
+import com.bytesmart.common.security.annotation.RequiresPermissions;
+import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.service.IBytesmartDeptService;
 import com.bytesmart.apisystem.domain.BytesmartDept;
 import com.bytesmart.common.core.web.controller.BaseController;
 import com.bytesmart.common.core.web.domain.AjaxResult;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +28,8 @@ public class BytesmartDeptController extends BaseController {
     @Autowired
     private IBytesmartDeptService bytesmartDeptService;
 
-    //@RequiresPermissions("webadmin:dept:list")
+    //获取部门列表
+    //@RequiresPermissions("webadmin:dept:list ")
     @GetMapping("/list")
     public AjaxResult list(BytesmartDept dept)
     {
@@ -32,6 +37,17 @@ public class BytesmartDeptController extends BaseController {
         return success(list);
     }
 
+    //查询部门列表（排除节点）
+    @RequiresPermissions("system:dept:list")
+    @GetMapping("/list/exclude/{deptId}")
+    public AjaxResult excludeChild(@PathVariable(value = "deptId", required = false) Long deptId)
+    {
+        List<BytesmartDept> depts = bytesmartDeptService.selectDeptList(new BytesmartDept());
+        depts.removeIf(d -> d.getDeptId().intValue() == deptId || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""));
+        return success(depts);
+    }
+
+    //根据部门编号获取详细信息
     @GetMapping(value = "/{deptId}")
     public AjaxResult getInfo(@PathVariable Long deptId)
     {
@@ -43,6 +59,22 @@ public class BytesmartDeptController extends BaseController {
 //        return toAjax(bytesmartDeptService.updateDept(dept));
 //    }
 
+    //新增
+    //@RequiresPermissions("system:dept:add")
+    @Log(title = "部门管理", businessType = BusinessType.INSERT)
+    @PostMapping
+    public AjaxResult add(@Validated @RequestBody BytesmartDept dept)
+    {
+        if (!bytesmartDeptService.checkDeptNameUnique(dept))
+        {
+            return error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
+        }
+        dept.setCreateBy(SecurityUtils.getUsername());
+        return toAjax(bytesmartDeptService.insertDept(dept));
+    }
+
+
+    //修改部门
     //@RequiresPermissions("webadmin:dept:edit")
     @Log(title = "部门管理", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -68,15 +100,7 @@ public class BytesmartDeptController extends BaseController {
 
 
 
-
-
-
-
-    @PostMapping
-    public AjaxResult add(@Validated @RequestBody BytesmartDept dept){
-        return toAjax(bytesmartDeptService.insertDept(dept));
-    }
-
+    //删除部门
     //    @RequiresPermissions("webadmin:dept:remove")
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{deptId}")
@@ -92,7 +116,11 @@ public class BytesmartDeptController extends BaseController {
         }
         bytesmartDeptService.checkDeptDataScope(deptId);
         return toAjax(bytesmartDeptService.deleteDeptById(deptId));
+
     }
+
+
+
 
 
 }

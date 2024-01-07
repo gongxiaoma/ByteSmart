@@ -4,6 +4,7 @@ import com.bytesmart.apisystem.domain.*;
 import com.bytesmart.common.core.constant.UserConstants;
 import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.text.Convert;
+import com.bytesmart.common.datascope.annotation.DataScope;
 import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.domain.vo.TreeSelect;
@@ -31,11 +32,14 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
     @Autowired
     private BytesmartRoleMapper bytesmartRoleMapper;
 
+    //全部查询
     @Override
+    @DataScope(deptAlias = "d")
     public List<BytesmartDept> selectDeptList(BytesmartDept dept){
         return bytesmartDeptMapper.selectDeptList(dept);
     }
 
+    //根据id查询
     @Override
     public BytesmartDept selectDeptById(Long deptId){
         return bytesmartDeptMapper.selectDeptById(deptId);
@@ -48,14 +52,121 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
 
     @Override
     public int insertDept(BytesmartDept dept){
+//        return bytesmartDeptMapper.insertDept(dept);
+        BytesmartDept info = bytesmartDeptMapper.selectDeptById(dept.getParentId());
+        // 如果父节点不为正常状态,则不允许新增子节点
+        if (!UserConstants.DEPT_NORMAL.equals(info.getDeptStatus()))
+        {
+            throw new ServiceException("部门停用，不允许新增");
+        }
+        dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
         return bytesmartDeptMapper.insertDept(dept);
     }
 
+
+
+    //查询部门树结构信息
     @Override
-    public int deleteDeptById(Long deptId)
+    public List<TreeSelect> selectDeptTreeList(BytesmartDept dept)
     {
-        return bytesmartDeptMapper.deleteDeptById(deptId);
+        List<BytesmartDept> depts = SpringUtils.getAopProxy(this).selectDeptList(dept);
+        return buildDeptTreeSelect(depts);
+
     }
+
+    /**
+     * 构建前端所需要树结构
+     *
+     * @param depts 部门列表
+     * @return 树结构列表
+     */
+    @Override
+    public List<BytesmartDept> buildDeptTree(List<BytesmartDept> depts)
+    {
+        List<BytesmartDept> returnList = new ArrayList<BytesmartDept>();
+        List<Long> tempList = depts.stream().map(BytesmartDept::getDeptId).collect(Collectors.toList());
+        for (BytesmartDept dept : depts)
+        {
+            // 如果是顶级节点, 遍历该父节点的所有子节点
+            if (!tempList.contains(dept.getParentId()))
+            {
+                recursionFn(depts, dept);
+                returnList.add(dept);
+            }
+        }
+        if (returnList.isEmpty())
+        {
+            returnList = depts;
+        }
+        return returnList;
+    }
+
+    /**
+     * 构建前端所需要下拉树结构
+     *
+     * @param depts 部门列表
+     * @return 下拉树结构列表
+     */
+    @Override
+    public List<TreeSelect> buildDeptTreeSelect(List<BytesmartDept> depts)
+    {
+        List<BytesmartDept> deptTrees = buildDeptTree(depts);
+        return deptTrees.stream().map(TreeSelect::new).collect(Collectors.toList());
+    }
+
+
+    /**
+     * 根据角色ID查询部门树信息
+     *
+     * @param roleId 角色ID
+     * @return 选中部门列表
+     */
+    @Override
+    public List<Long> selectDeptListByRoleId(Long roleId)
+    {
+        BytesmartRole role = bytesmartRoleMapper.selectRoleById(roleId);
+        return bytesmartDeptMapper.selectDeptListByRoleId(roleId, role.isDeptCheckStrictly());
+    }
+
+    /**
+     * 根据ID查询所有子部门（正常状态）
+     *
+     * @param deptId 部门ID
+     * @return 子部门数
+     */
+    @Override
+    public int selectNormalChildrenDeptById(Long deptId)
+    {
+        return bytesmartDeptMapper.selectNormalChildrenDeptById(deptId);
+    }
+
+    /**
+     * 是否存在子节点
+     *
+     * @param deptId 部门ID
+     * @return 结果
+     */
+    @Override
+    public boolean hasChildByDeptId(Long deptId)
+    {
+        int result = bytesmartDeptMapper.hasChildByDeptId(deptId);
+        return result > 0;
+    }
+
+
+    /**
+     * 查询部门是否存在用户
+     *
+     * @param deptId 部门ID
+     * @return 结果 true 存在 false 不存在
+     */
+    @Override
+    public boolean checkDeptExistEmployee(Long deptId)
+    {
+        int result = bytesmartDeptMapper.checkDeptExistEmployee(deptId);
+        return result > 0;
+    }
+
 
 
     /**
@@ -85,6 +196,13 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
         }
         return result;
     }
+
+    @Override
+    public int deleteDeptById(Long deptId)
+    {
+        return bytesmartDeptMapper.deleteDeptById(deptId);
+    }
+
 
     /**
      * 修改该部门的父级部门状态
@@ -119,74 +237,6 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
     }
 
 
-    /**
-     * 根据角色ID查询部门树信息
-     *
-     * @param roleId 角色ID
-     * @return 选中部门列表
-     */
-    @Override
-    public List<Long> selectDeptListByRoleId(Long roleId)
-    {
-        BytesmartRole role = bytesmartRoleMapper.selectRoleById(roleId);
-        return bytesmartDeptMapper.selectDeptListByRoleId(roleId, role.isDeptCheckStrictly());
-    }
-
-
-    /**
-     * 构建前端所需要下拉树结构
-     *
-     * @param depts 部门列表
-     * @return 下拉树结构列表
-     */
-    @Override
-    public List<TreeSelect> buildDeptTreeSelect(List<BytesmartDept> depts)
-    {
-        List<BytesmartDept> deptTrees = buildDeptTree(depts);
-        return deptTrees.stream().map(TreeSelect::new).collect(Collectors.toList());
-    }
-
-
-
-    /**
-     * 查询部门树结构信息
-     *
-     * @param dept 部门信息
-     * @return 部门树信息集合
-     */
-    @Override
-    public List<TreeSelect> selectDeptTreeList(BytesmartDept dept)
-    {
-        List<BytesmartDept> depts = SpringUtils.getAopProxy(this).selectDeptList(dept);
-        return buildDeptTreeSelect(depts);
-    }
-
-    /**
-     * 构建前端所需要树结构
-     *
-     * @param depts 部门列表
-     * @return 树结构列表
-     */
-    @Override
-    public List<BytesmartDept> buildDeptTree(List<BytesmartDept> depts)
-    {
-        List<BytesmartDept> returnList = new ArrayList<BytesmartDept>();
-        List<Long> tempList = depts.stream().map(BytesmartDept::getDeptId).collect(Collectors.toList());
-        for (BytesmartDept dept : depts)
-        {
-            // 如果是顶级节点, 遍历该父节点的所有子节点
-            if (!tempList.contains(dept.getParentId()))
-            {
-                recursionFn(depts, dept);
-                returnList.add(dept);
-            }
-        }
-        if (returnList.isEmpty())
-        {
-            returnList = depts;
-        }
-        return returnList;
-    }
 
     /**
      * 递归列表
@@ -231,33 +281,6 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
         return getChildList(list, t).size() > 0 ? true : false;
     }
 
-    /**
-     * 是否存在子节点
-     *
-     * @param deptId 部门ID
-     * @return 结果
-     */
-    @Override
-    public boolean hasChildByDeptId(Long deptId)
-    {
-        int result = bytesmartDeptMapper.hasChildByDeptId(deptId);
-        return result > 0;
-    }
-
-
-    /**
-     * 查询部门是否存在用户
-     *
-     * @param deptId 部门ID
-     * @return 结果 true 存在 false 不存在
-     */
-    @Override
-    public boolean checkDeptExistEmployee(Long deptId)
-    {
-        int result = bytesmartDeptMapper.checkDeptExistEmployee(deptId);
-        return result > 0;
-    }
-
 
 
     /**
@@ -298,17 +321,11 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
         return UserConstants.UNIQUE;
     }
 
-    /**
-     * 根据ID查询所有子部门（正常状态）
-     *
-     * @param deptId 部门ID
-     * @return 子部门数
-     */
-    @Override
-    public int selectNormalChildrenDeptById(Long deptId)
-    {
-        return bytesmartDeptMapper.selectNormalChildrenDeptById(deptId);
-    }
+
+
+
+
+
 
 
     /**

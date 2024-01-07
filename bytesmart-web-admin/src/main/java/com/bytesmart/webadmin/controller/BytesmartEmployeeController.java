@@ -3,9 +3,9 @@ package com.bytesmart.webadmin.controller;
 import com.bytesmart.apisystem.domain.*;
 import com.bytesmart.common.core.domain.R;
 import com.bytesmart.apisystem.model.LoginEmployee;
-import com.bytesmart.apisystem.model.LoginUser;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.security.annotation.InnerAuth;
+import com.bytesmart.common.security.annotation.RequiresPermissions;
 import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.service.*;
@@ -14,6 +14,7 @@ import com.bytesmart.common.core.web.domain.AjaxResult;
 import com.bytesmart.common.core.web.page.TableDataInfo;
 import com.bytesmart.common.log.annotation.Log;
 import com.bytesmart.common.log.enums.BusinessType;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -47,6 +48,7 @@ public class BytesmartEmployeeController extends BaseController {
     private IBytesmartConfigService bytesmartConfigService;
 
 
+//    @RequiresPermissions("webadmin:emloyee:list ")
     @GetMapping("/list")
     public TableDataInfo list(BytesmartEmployee employee)
     {
@@ -76,8 +78,6 @@ public class BytesmartEmployeeController extends BaseController {
 
 //        return success(bytesmartEmployeeService.selectEmployeeById(employeeId));
     }
-
-
 
     @PostMapping
     public AjaxResult add(@Validated @RequestBody BytesmartEmployee employee){
@@ -119,10 +119,12 @@ public class BytesmartEmployeeController extends BaseController {
         return R.ok(bytesmartEmployeeVo);
     }
 
-     // 通过用户id获取用户信息
+//      通过用户id获取用户信息
     @GetMapping("getInfo")
     public AjaxResult getInfo()
     {
+//        Long employeeId = 1L;
+//        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(employeeId);
         BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(WebSecurityUtils.getEmployeeId());
         // 角色集合
         Set<String> roles = bytesmartPermissionService.getRolePermission(bytesmartEmployee);
@@ -143,7 +145,6 @@ public class BytesmartEmployeeController extends BaseController {
     {
         return success(bytesmartDeptService.selectDeptTreeList(dept));
     }
-
 
 
     /**

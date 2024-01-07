@@ -5,7 +5,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 // 查询用户列表
 export function listEmployee(query) {
   return request({
-    url: '/webadmin/employee',
+    url: '/webadmin/employee/list',
     method: 'get',
     params: query
   })
@@ -15,7 +15,7 @@ export function listEmployee(query) {
 export function getEmployee(employeeId) {
   return request({
     url: '/webadmin/employee/' + parseStrEmpty(employeeId),
-    method: 'get'
+    method: 'get',
   })
 }
 
@@ -46,9 +46,9 @@ export function delEmployee(employeeId) {
 }
 
 // 用户密码重置
-export function resetUserPwd(employeeId, password) {
+export function resetEmployeePwd(employeeId, password) {
   const data = {
-    userId,
+    employeeId,
     password
   }
   return request({
@@ -59,10 +59,10 @@ export function resetUserPwd(employeeId, password) {
 }
 
 // 用户状态修改
-export function changeUserStatus(employeeId, status) {
+export function changeEmployeeStatus(employeeId, employeeStatus) {
   const data = {
-    userId,
-    status
+    employeeId,
+    employeeStatus
   }
   return request({
     url: '/webadmin/employee/changeStatus',
@@ -72,7 +72,7 @@ export function changeUserStatus(employeeId, status) {
 }
 
 // 查询用户个人信息
-export function getUserProfile() {
+export function getEmployeeProfile() {
   return request({
     url: '/webadmin/employee/profile',
     method: 'get'
@@ -80,7 +80,7 @@ export function getUserProfile() {
 }
 
 // 修改用户个人信息
-export function updateUserProfile(data) {
+export function updateEmployeeProfile(data) {
   return request({
     url: '/webadmin/employee/profile',
     method: 'put',
@@ -89,7 +89,7 @@ export function updateUserProfile(data) {
 }
 
 // 用户密码重置
-export function updateUserPwd(oldPassword, newPassword) {
+export function updateEmployeePwd(oldPassword, newPassword) {
   const data = {
     oldPassword,
     newPassword
@@ -111,9 +111,9 @@ export function uploadAvatar(data) {
 }
 
 // 查询授权角色
-export function getAuthRole(userId) {
+export function getAuthRole(employeeId) {
   return request({
-    url: '/webadmin/employee/authRole/' + userId,
+    url: '/webadmin/employee/authRole/' + employeeId,
     method: 'get'
   })
 }

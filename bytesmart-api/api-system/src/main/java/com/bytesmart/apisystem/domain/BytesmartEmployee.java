@@ -24,15 +24,15 @@ public class BytesmartEmployee extends BaseEntity {
 
     /** 用户权重 */
     @Excel(name = "用户权重", type = Type.IMPORT)
-    private Long demployeeWeight;
+    private Long employeeWeight;
 
     /** 用户工号 */
     @Excel(name = "用户工号", type = Type.IMPORT)
-    private Long demployeeNo;
+    private Long employeeNo;
 
     /** 用户年龄 */
     @Excel(name = "用户年龄", type = Type.IMPORT)
-    private Long demployeeAge;
+    private Long employeeAge;
 
     /** 用户账号 */
     @Excel(name = "登录名称")
@@ -153,28 +153,28 @@ public class BytesmartEmployee extends BaseEntity {
         this.deptId = deptId;
     }
 
-    public Long getDemployeeWeight() {
-        return demployeeWeight;
+    public Long getEmployeeWeight() {
+        return employeeWeight;
     }
 
-    public void setDemployeeWeight(Long demployeeWeight) {
-        this.demployeeWeight = demployeeWeight;
+    public void setEmployeeWeight(Long employeeWeight) {
+        this.employeeWeight = employeeWeight;
     }
 
-    public Long getDemployeeNo() {
-        return demployeeNo;
+    public Long getEmployeeNo() {
+        return employeeNo;
     }
 
-    public void setDemployeeNo(Long demployeeNo) {
-        this.demployeeNo = demployeeNo;
+    public void setEmployeeNo(Long employeeNo) {
+        this.employeeNo = employeeNo;
     }
 
-    public Long getDemployeeAge() {
-        return demployeeAge;
+    public Long getEmployeeAge() {
+        return employeeAge;
     }
 
-    public void setDemployeeAge(Long demployeeAge) {
-        this.demployeeAge = demployeeAge;
+    public void setEmployeeAge(Long employeeAge) {
+        this.employeeAge = employeeAge;
     }
 
     public String getUserName() {
@@ -382,9 +382,9 @@ public class BytesmartEmployee extends BaseEntity {
                 .append("employeeMobile", getEmployeeMobile())
                 .append("officePhone", getOfficePhone())
                 .append("employeeGender", getEmployeeGender())
-                .append("demployeeWeight", getDemployeeWeight())
-                .append("demployeeNo", getDemployeeNo())
-                .append("demployeeAge", getDemployeeAge())
+                .append("employeeWeight", getEmployeeWeight())
+                .append("employeeNo", getEmployeeNo())
+                .append("employeeAge", getEmployeeAge())
                 .append("employeeType", getEmployeeType())
                 .append("employeeAddress", getEmployeeAddress())
                 .append("employeeType", getEmployeeType())

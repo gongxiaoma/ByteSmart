@@ -96,7 +96,7 @@
       <el-table-column prop="deptWeight" label="部门权重" width="200"></el-table-column>
       <el-table-column prop="deptStatus" label="状态" width="100">
         <template slot-scope="scope">
-          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.status"/>
+          <dict-tag :options="dict.type.sys_normal_disable" :value="scope.row.deptStatus"/>
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="200">
@@ -111,7 +111,7 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:dept:edit']"
+            v-hasPermi="['webadmin:dept:edit']"
           >修改</el-button>
           <el-button
             size="mini"
@@ -235,7 +235,7 @@ export default {
         deptName: [
           { required: true, message: "部门名称不能为空", trigger: "blur" }
         ],
-        orderNum: [
+        deptWeight: [
           { required: true, message: "显示排序不能为空", trigger: "blur" }
         ],
         deptEmail: [
