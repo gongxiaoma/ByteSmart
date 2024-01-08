@@ -213,19 +213,6 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
     }
 
 
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public int deleteRoleById(Long roleId)
-//    {
-//        // 删除角色与菜单关联
-//        bytesmartRoleMenuMapper.deleteRoleMenuByRoleId(roleId);
-//        // 删除角色与部门关联
-//        bytesmartRoleDeptMapper.deleteRoleDeptByRoleId(roleId);
-//        return bytesmartRoleMapper.deleteRoleById(roleId);
-//    }
-
-
-
 
     /**
      * 批量删除角色信息

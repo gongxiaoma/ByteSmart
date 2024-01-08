@@ -24,6 +24,8 @@ public interface BytesmartEmployeeMapper {
     //删除
     public int deleteEmployeeByIds(Long[] employeeIds);
 
+    public int deleteRoleById(Long roleId);
+
     /**
      * 根据条件分页查询已分配用户角色列表
      *

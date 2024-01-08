@@ -140,7 +140,7 @@ public class BytesmartMenuController extends BaseController {
     @GetMapping("getRouters")
     public AjaxResult getRouters()
     {
-        Long employeeId = 1L;
+        Long employeeId = 10L;
 //        Long employeeId = WebSecurityUtils.getEmployeeId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuTreeByEmployeeId(employeeId);
         return success(bytesmartMenuService.buildMenus(menus));

@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach> 
  	</delete>
 
-	<select id="countEmployeeRoleByRoleId" resultType="Long">
+	<select id="countEmployeeRoleByRoleId" resultType="Integer">
 	    select count(1) from bytesmart_employee_role where role_id=#{roleId}
 	</select>
 

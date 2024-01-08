@@ -215,6 +215,12 @@
     <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
+          
+          <el-col :span="12">
+            <el-form-item label="姓名" prop="employeeName">
+              <el-input v-model="form.employeeName" placeholder="请输入姓名" maxlength="30" />
+            </el-form-item>
+          </el-col>
           <el-col :span="12">
             <el-form-item label="英文名" prop="employeeenglishName">
               <el-input v-model="form.employeeenglishName" placeholder="请输入英文名" maxlength="30" />
@@ -239,11 +245,13 @@
           </el-col>
         </el-row>
         <el-row>
+
           <el-col :span="12">
-            <el-form-item v-if="form.employeeId == undefined" label="用户登录名" prop="userName">
-              <el-input v-model="form.userName" placeholder="请输入用户登录名" maxlength="30" />
+            <el-form-item v-if="form.employeeId == undefined" label="登录名" prop="userName">
+              <el-input v-model="form.userName" placeholder="请输入登录名" maxlength="30" />
             </el-form-item>
           </el-col>
+
           <el-col :span="12">
             <el-form-item v-if="form.employeeId == undefined" label="用户密码" prop="password">
               <el-input v-model="form.password" placeholder="请输入用户密码" type="password" maxlength="20" show-password/>
@@ -418,6 +426,7 @@ export default {
         pageSize: 10,
         userName: undefined,
         employeeName: undefined,
+        employeeenglishName: undefined,
         employeeMobile: undefined,
         employeeStatus: undefined,
         phonenumber: undefined,
