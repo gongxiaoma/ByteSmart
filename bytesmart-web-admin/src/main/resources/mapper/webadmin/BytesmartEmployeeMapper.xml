@@ -227,6 +227,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</delete>
 
+
+	<delete id="deleteEmployeeById" parameterType="Long">
+ 		update bytesmart_employee set del_flag = '2' where employee_id = #{employeeId}
+ 	</delete>
+
 	<select id="selectAllocatedList" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee" resultMap="BytesmartEmployeeResult">
 		select distinct e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_mobile, e.employee_no, e.employee_age, e.employee_type, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time,
 		from bytesmart_employee e
@@ -266,7 +271,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select employee_id, username from bytesmart_employee where username = #{userName} and del_flag = '0' limit 1
 	</select>
 
+	<select id="checkPhoneUnique" parameterType="String" resultMap="BytesmartEmployeeResult">
+		select employee_id, employeeMobile from bytesmart_employee where employeeMobile = #{employeeMobile} and del_flag = '0' limit 1
+	</select>
 
+	<select id="checkEmailUnique" parameterType="String" resultMap="BytesmartEmployeeResult">
+		select employee_id, employeeEmail from bytesmart_employee where employeeEmail = #{employeeEmail} and del_flag = '0' limit 1
+	</select>
 
 
 

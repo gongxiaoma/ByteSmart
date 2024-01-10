@@ -24,7 +24,7 @@ public interface BytesmartEmployeeMapper {
     //删除
     public int deleteEmployeeByIds(Long[] employeeIds);
 
-    public int deleteRoleById(Long roleId);
+    public int deleteEmployeeById(Long employeeId);
 
     /**
      * 根据条件分页查询已分配用户角色列表
@@ -49,6 +49,27 @@ public interface BytesmartEmployeeMapper {
      * @return 结果
      */
     public BytesmartEmployee checkUserNameUnique(String userName);
+
+
+    /**
+     * 校验手机号码是否唯一
+     *
+     * @param employeeMobile 手机号码
+     * @return 结果
+     */
+    public BytesmartEmployee checkPhoneUnique(String employeeMobile);
+
+
+    /**
+     * 校验email是否唯一
+     *
+     * @param employeeEmail 用户邮箱
+     * @return 结果
+     */
+    public BytesmartEmployee checkEmailUnique(String employeeEmail);
+
+
+
 
 
 

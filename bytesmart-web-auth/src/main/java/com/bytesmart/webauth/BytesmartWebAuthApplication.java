@@ -15,7 +15,7 @@ public class BytesmartWebAuthApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BytesmartWebAuthApplication.class, args);
-        System.out.println("byteSmart认证模块启动成功" );
+        System.out.println("byteSmart web认证模块启动成功" );
     }
 
 }

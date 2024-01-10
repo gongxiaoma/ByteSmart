@@ -65,8 +65,6 @@ public class WebLoginUser implements UserDetails
      * 权限列表
      */
 
-    //12.30注释
-//    private Set<String> permissions;
 
     //12.30新增
     private List<String> permissions;
@@ -110,12 +108,7 @@ public class WebLoginUser implements UserDetails
     /**
      * 有参构造
      */
-    //12.30注释
-//    public WebLoginUser(BytesmartEmployee employee, Set<String> permissions)
-//    {
-//        this.employee = employee;
-//        this.permissions = permissions;
-//    }
+
 
     /**
      * 获取自己用户模型的用户id
@@ -161,7 +154,6 @@ public class WebLoginUser implements UserDetails
     {
         return employee.getUserName();
     }
-
 
     /**
      * 账户是否未过期,过期无法验证

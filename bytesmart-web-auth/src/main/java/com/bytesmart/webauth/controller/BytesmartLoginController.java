@@ -20,7 +20,7 @@ public class BytesmartLoginController {
      * @param loginBody 登录信息
      * @return 结果
      */
-    @PostMapping("login")
+    @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginBody loginBody)
     {
         AjaxResult ajax = AjaxResult.success();
@@ -28,7 +28,6 @@ public class BytesmartLoginController {
         String token = bytesmartLoginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
                 loginBody.getUuid());
         ajax.put(Constants.TOKEN, token);
-        ajax.put("我是key", "我是值");
         return ajax;
     }
 
@@ -52,14 +51,14 @@ public class BytesmartLoginController {
      * @return 结果
      */
 
-    @GetMapping("test")
-    @PreAuthorize("hasAuthority('system:employee:list')")
-//    @PreAuthorize("hasAuthority('test')")
-    public AjaxResult test()
-    {
-        AjaxResult ajax = AjaxResult.success();
-        ajax.put("test", "9999");
-        return ajax;
-    }
+//    @GetMapping("test")
+//    @PreAuthorize("hasAuthority('system:employee:list')")
+////    @PreAuthorize("hasAuthority('test')")
+//    public AjaxResult test()
+//    {
+//        AjaxResult ajax = AjaxResult.success();
+//        ajax.put("test", "9999");
+//        return ajax;
+//    }
 
 }

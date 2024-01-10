@@ -16,7 +16,7 @@ public interface IBytesmartPermissionService {
     /**
      * 获取菜单数据权限
      *
-     * @param uemployeeId 用户Id
+     * @param employeeId 用户Id
      * @return 菜单权限信息
      */
     public Set<String> getMenuPermission(BytesmartEmployee employee);

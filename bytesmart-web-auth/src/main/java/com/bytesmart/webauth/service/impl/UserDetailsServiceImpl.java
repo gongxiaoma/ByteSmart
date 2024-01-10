@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -52,8 +54,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         // 查询对应权限信息12.20新增
-//        List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
-        List<String> list = menuMapper.selectMenuPermsByEmployeeId(employee.getEmployeeId());
+        List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
+
+        // 这里有问题，会返回A granted authority textual representation is required
+//        List<String> list = menuMapper.selectMenuPermsByEmployeeId(employee.getEmployeeId());
         return new WebLoginUser(employee, list);
 
     }

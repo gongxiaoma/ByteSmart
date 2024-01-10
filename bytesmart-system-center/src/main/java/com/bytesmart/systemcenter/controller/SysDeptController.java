@@ -61,7 +61,7 @@ public class SysDeptController extends BaseController
     /**
      * 根据部门编号获取详细信息
      */
-//    @RequiresPermissions("system:dept:query")
+//    @RequiresPermissions("webadmin:dept:query")
     @GetMapping(value = "/{deptId}")
     public AjaxResult getInfo(@PathVariable Long deptId)
     {
@@ -72,7 +72,7 @@ public class SysDeptController extends BaseController
     /**
      * 新增部门
      */
-//    @RequiresPermissions("system:dept:add")
+//    @RequiresPermissions("webadmin:dept:add")
     @Log(title = "部门管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDept dept)

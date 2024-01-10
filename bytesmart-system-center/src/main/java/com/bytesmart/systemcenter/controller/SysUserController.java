@@ -147,6 +147,8 @@ public class SysUserController extends BaseController
     @GetMapping("getInfo")
     public AjaxResult getInfo()
     {
+//        Long useId = 1L;
+//        SysUser user = userService.selectUserById(1L);
         SysUser user = userService.selectUserById(SecurityUtils.getUserId());
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);

@@ -81,7 +81,7 @@ public class TokenUtils {
             }
             catch (Exception e)
             {
-                log.error("获取用户信息异常'{}'", e.getMessage());
+                log.error("获取web用户信息异常'{}'", e.getMessage());
             }
         }
         //如果令牌为空，返回null
@@ -137,11 +137,11 @@ public class TokenUtils {
      */
     private String getToken(HttpServletRequest request)
     {
-        String token = request.getHeader("token");
-//        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
-//        {
-//            token = token.replace(Constants.TOKEN_PREFIX, "");
-//        }
+        String token = request.getHeader("Authorization");
+        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
+        {
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
         return token;
     }
 

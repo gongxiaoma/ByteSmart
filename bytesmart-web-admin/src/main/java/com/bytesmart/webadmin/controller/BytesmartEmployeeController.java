@@ -123,7 +123,7 @@ public class BytesmartEmployeeController extends BaseController {
     @GetMapping("getInfo")
     public AjaxResult getInfo()
     {
-//        Long employeeId = 1L;
+        Long employeeId = 1L;
 //        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(employeeId);
         BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(WebSecurityUtils.getEmployeeId());
         // 角色集合

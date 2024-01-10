@@ -48,6 +48,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         }
 
         //校验出入的请求和返回的数据，放行
+        System.out.println(request);
+        System.out.println(response);
         chain.doFilter(request, response);
     }
 

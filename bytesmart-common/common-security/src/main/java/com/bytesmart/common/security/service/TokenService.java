@@ -104,6 +104,7 @@ public class TokenService
         LoginUser user = null;
         try
         {
+            System.out.println(token);
             if (StringUtils.isNotEmpty(token))
             {
                 String userkey = JwtUtils.getUserKey(token);

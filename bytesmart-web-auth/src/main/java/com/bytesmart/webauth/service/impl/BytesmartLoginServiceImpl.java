@@ -1,5 +1,10 @@
 package com.bytesmart.webauth.service.impl;
 
+import com.bytesmart.common.core.constant.CacheConstants;
+import com.bytesmart.common.core.constant.Constants;
+import com.bytesmart.common.core.exception.CaptchaException;
+import com.bytesmart.common.core.exception.user.CaptchaExpireException;
+import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.webauth.Utils.TokenUtils;
 import com.bytesmart.webauth.context.AuthenticationContextHolder;
 import com.bytesmart.webauth.domain.WebLoginUser;
@@ -15,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import sun.misc.MessageUtils;
 
 
 @Service
@@ -30,8 +36,8 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
     @Autowired
     private RedisService redisService;
 
-//    @Autowired
-//    private RedisService redisCache;
+    @Autowired
+    private RedisService redisCache;
 
     @Autowired
     private IBytesmartEmployeeService employeeService;
@@ -53,9 +59,9 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
      */
     public String login(String username, String password, String code, String uuid)
     {
-//        // 验证码校验
-//        validateCaptcha(username, code, uuid);
-//        // 登录前置校验
+        // 验证码校验
+        validateCaptcha(username, code, uuid);
+        // 登录前置校验
 //        loginPreCheck(username, password);
         // 用户验证
         Authentication authentication = null;
@@ -85,10 +91,10 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
             AuthenticationContextHolder.clearContext();
         }
 //        recordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功");
-        WebLoginUser loginUser = (WebLoginUser) authentication.getPrincipal();
+        WebLoginUser webloginUser = (WebLoginUser) authentication.getPrincipal();
 //        recordLoginInfo(loginUser.getUserId());
         // 生成token
-        return tokenUtils.createToken(loginUser);
+        return tokenUtils.createToken(webloginUser);
     }
 
 
@@ -115,24 +121,22 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
      * @param uuid 唯一标识
      * @return 结果
      */
-//    public void validateCaptcha(String username, String code, String uuid)
-//    {
-//        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
-//        String captcha = redisCache.getCacheObject(verifyKey);
-//        redisCache.deleteObject(verifyKey);
-//        if (captcha == null)
-//        {
+    public void validateCaptcha(String username, String code, String uuid)
+    {
+        String verifyKey = CacheConstants.WEB_CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
+        String captcha = redisCache.getCacheObject(verifyKey);
+        redisCache.deleteObject(verifyKey);
+        if (captcha == null)
+        {
 //            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
-//            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
-//            throw new CaptchaExpireException();
-//        }
-//        if (!code.equalsIgnoreCase(captcha))
-//        {
+            throw new CaptchaExpireException();
+        }
+        if (!code.equalsIgnoreCase(captcha))
+        {
 //            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
-//            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
-//            throw new CaptchaException();
-//        }
-//    }
+            throw new CaptchaExpireException();
+        }
+    }
 
 //    /**
 //     * 登录前置校验

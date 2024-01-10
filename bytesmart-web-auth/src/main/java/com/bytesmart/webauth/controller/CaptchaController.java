@@ -53,9 +53,7 @@ public class CaptchaController {
         BufferedImage image = null;
 
         // 生成验证码
-//        String captchaType = RuoYiConfig.getCaptchaType();
-//        if ("math".equals(captchaType))
-//        {
+
         // 调用谷歌公司创建验证码的类和方法
         String capText = captchaProducerMath.createText();
 
@@ -86,13 +84,6 @@ public class CaptchaController {
         ajax.put("img", Base64.encode(os.toByteArray()));
         return ajax;
 
-
-//        }
-//        else if ("char".equals(captchaType))
-//        {
-//            capStr = code = captchaProducer.createText();
-//            image = captchaProducer.createImage(capStr);
-//        }
 
     }
 
