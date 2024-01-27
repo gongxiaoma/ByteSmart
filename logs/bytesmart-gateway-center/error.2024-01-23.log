@@ -1,0 +1,5 @@
+16:36:18.678 [reactor-http-nio-2] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/getInfo
+16:39:11.817 [reactor-http-nio-4] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo
+16:41:33.105 [reactor-http-nio-7] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo
+17:25:01.747 [boundedElastic-60] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/post/list,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"
+17:25:08.290 [boundedElastic-59] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/post/list,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"

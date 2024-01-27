@@ -1,0 +1,18 @@
+09:37:54.531 [reactor-http-nio-8] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/system/user/test,异常信息:JWT strings must contain exactly 2 period characters. Found: 0
+09:38:06.303 [reactor-http-nio-8] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/system/user/test,异常信息:JWT strings must contain exactly 2 period characters. Found: 0
+09:38:16.654 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/test
+11:50:46.691 [reactor-http-nio-6] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/test
+11:51:01.682 [reactor-http-nio-6] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/test
+11:51:48.821 [reactor-http-nio-6] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/test
+15:18:08.555 [reactor-http-nio-8] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/system/user/test,异常信息:Unable to read JSON value: �쉅����!L��ȉ
+16:08:59.949 [reactor-http-nio-12] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo
+16:12:56.600 [reactor-http-nio-8] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/system/user/test,异常信息:Unable to read JSON value: �쉅����!L��ȉ
+16:14:54.667 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/test
+16:14:56.257 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/test
+16:14:57.257 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/test
+16:14:58.459 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/test
+16:15:41.945 [reactor-http-nio-6] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/test
+16:16:28.842 [reactor-http-nio-6] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/test,异常信息:JWT strings must contain exactly 2 period characters. Found: 0
+16:22:57.057 [reactor-http-nio-12] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/getInfo
+17:34:46.895 [boundedElastic-5] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/system/user/getInfo,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-system-center"
+17:34:46.895 [boundedElastic-3] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/system/user/getInfo,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-system-center"

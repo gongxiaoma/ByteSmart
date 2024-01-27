@@ -1,0 +1,1 @@
+11:19:57.942 [http-nio-9301-exec-2] ERROR c.b.c.s.h.GlobalExceptionHandler - [handleHttpRequestMethodNotSupported,62] - 请求地址'/post/2',不支持'GET'请求

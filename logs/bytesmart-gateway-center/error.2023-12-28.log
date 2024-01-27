@@ -1,0 +1,1 @@
+16:02:08.128 [boundedElastic-1856] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/menu,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"

@@ -1,0 +1,144 @@
+23:18:15.393 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:23:05.120 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:25:01.733 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:26:43.473 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:27:26.626 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:28:52.487 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:38:18.328 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+
+23:40:13.453 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - [report,40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field tokenService in com.bytesmart.webauth.service.impl.BytesmartLoginServiceImpl required a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.bytesmart.springsecurity.service.WebTokenService' in your configuration.
+

@@ -1,0 +1,2 @@
+23:42:32.221 [reactor-http-nio-2] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/getInfo
+23:42:35.197 [boundedElastic-2] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/logout,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
