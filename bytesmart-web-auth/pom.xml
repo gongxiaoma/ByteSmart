@@ -17,14 +17,27 @@
     <dependencies>
 
 
-        <dependency>
-            <groupId>com.bytesmart</groupId>
-            <artifactId>api-system</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.bytesmart</groupId>-->
+<!--            <artifactId>api-system</artifactId>-->
+<!--        </dependency>-->
+
 
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>bytesmart-web-admin</artifactId>
+            <version>3.6.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.bytesmart</groupId>
+                    <artifactId>common-datascope</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bytesmart</groupId>
+            <artifactId>common-spring-security</artifactId>
             <version>3.6.3</version>
         </dependency>
 
@@ -71,29 +84,29 @@
             <artifactId>common-datasource</artifactId>
         </dependency>
 
-        <!--  Common DataScope -->
-        <dependency>
-            <groupId>com.bytesmart</groupId>
-            <artifactId>common-datascope</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;  Common DataScope &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.bytesmart</groupId>-->
+<!--            <artifactId>common-datascope</artifactId>-->
+<!--        </dependency>-->
 
-        <!--  Common Log -->
-        <dependency>
-            <groupId>com.bytesmart</groupId>
-            <artifactId>common-log</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;  Common Log &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.bytesmart</groupId>-->
+<!--            <artifactId>common-log</artifactId>-->
+<!--        </dependency>-->
 
-        <!--  Common Swagger -->
-        <dependency>
-            <groupId>com.bytesmart</groupId>
-            <artifactId>common-swagger</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;  Common Swagger &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.bytesmart</groupId>-->
+<!--            <artifactId>common-swagger</artifactId>-->
+<!--        </dependency>-->
 
-        <!-- spring security 安全认证 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; spring security 安全认证 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
 
         <!-- 测试 -->
         <dependency>

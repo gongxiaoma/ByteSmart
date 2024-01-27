@@ -1,13 +1,16 @@
 package com.bytesmart.common.core.utils;
 
+import com.bytesmart.common.core.constant.Constants;
 import com.bytesmart.common.core.constant.SecurityConstants;
 import com.bytesmart.common.core.constant.TokenConstants;
 import com.bytesmart.common.core.text.Convert;
+import com.bytesmart.common.core.utils.uuid.IdUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**

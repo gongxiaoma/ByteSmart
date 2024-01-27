@@ -13,6 +13,11 @@ public class SecurityConstants
     public static final String DETAILS_USER_ID = "user_id";
 
     /**
+     * webadmin用户ID字段
+     */
+    public static final String DETAILS_EMLOYEE_ID = "employee_id";
+
+    /**
      * 用户名字段
      */
     public static final String DETAILS_USERNAME = "username";
@@ -41,6 +46,11 @@ public class SecurityConstants
      * 登录用户
      */
     public static final String LOGIN_USER = "login_user";
+
+    /**
+     * webadmin登录用户
+     */
+    public static final String LOGIN_EMPLOYEE = "login_emplyee";
 
     /**
      * 角色权限

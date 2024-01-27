@@ -4,6 +4,7 @@ import com.bytesmart.webadmin.domain.BytesmartMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BytesmartMenuMapper {
 
@@ -20,7 +21,7 @@ public interface BytesmartMenuMapper {
     public List<String> selectMenuPermsByRoleId(Long roleId);
 
 
-    public List<String> selectMenuPermsByEmployeeId(Long employeeId);
+    public Set<String> selectMenuPermsByEmployeeId(Long employeeId);
 
     public List<BytesmartMenu> selectMenuTreeAll();
 
@@ -30,6 +31,12 @@ public interface BytesmartMenuMapper {
 
     public BytesmartMenu selectMenuById(Long menuId);
 
+    /**
+     * 是否存在菜单子节点
+     *
+     * @param menuId 菜单ID
+     * @return 结果
+     */
     public int hasChildByMenuId(Long menuId);
 
     public int insertMenu(BytesmartMenu menu);
@@ -40,6 +47,13 @@ public interface BytesmartMenuMapper {
 
     public int deleteMenuById(Long menuId);
 
+    /**
+     * 校验菜单名称是否唯一
+     *
+     * @param menuName 菜单名称
+     * @param parentId 父菜单ID
+     * @return 结果
+     */
     public BytesmartMenu checkMenuNameUnique(@Param("menuName") String menuName, @Param("parentId") Long parentId);
 
 

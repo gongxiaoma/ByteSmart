@@ -7,7 +7,6 @@ import com.bytesmart.common.core.web.page.TableDataInfo;
 import com.bytesmart.common.log.annotation.Log;
 import com.bytesmart.common.log.enums.BusinessType;
 import com.bytesmart.common.security.utils.SecurityUtils;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.domain.BytesmartConfig;
 import com.bytesmart.webadmin.service.IBytesmartConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +80,7 @@ public class BytesmartConfigController extends BaseController
         {
             return error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
-        config.setCreateBy(WebSecurityUtils.getUsername());
+        config.setCreateBy(SecurityUtils.getUsername());
         return toAjax(configService.insertConfig(config));
     }
 
@@ -97,7 +96,7 @@ public class BytesmartConfigController extends BaseController
         {
             return error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
-        config.setUpdateBy(WebSecurityUtils.getUsername());
+        config.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(configService.updateConfig(config));
     }
 

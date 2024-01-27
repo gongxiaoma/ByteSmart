@@ -185,15 +185,15 @@ public class SysRoleController extends BaseController
     }
 
     /**
-     * 取消授权用户
-     */
+ * 取消授权用户
+ */
 //    @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
-    @PutMapping("/authUser/cancel")
-    public AjaxResult cancelAuthUser(@RequestBody SysUserRole userRole)
-    {
-        return toAjax(roleService.deleteAuthUser(userRole));
-    }
+@Log(title = "角色管理", businessType = BusinessType.GRANT)
+@PutMapping("/authUser/cancel")
+public AjaxResult cancelAuthUser(@RequestBody SysUserRole userRole)
+{
+    return toAjax(roleService.deleteAuthUser(userRole));
+}
 
     /**
      * 批量取消授权用户

@@ -3,7 +3,7 @@ package com.bytesmart.webauth.controller;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
 import com.bytesmart.common.core.web.controller.BaseController;
 import com.bytesmart.common.core.web.domain.AjaxResult;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
+import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.webadmin.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,10 +27,9 @@ public class BytesmartGetinforController extends BaseController {
     @GetMapping("/getInfo")
     public AjaxResult getInfo()
     {
-        Long employeeId = 1L;
-        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(employeeId);
-
-//        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(WebSecurityUtils.getEmployeeId());
+//        Long employeeId = 1L;
+//        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(employeeId);
+        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(SecurityUtils.getUserId());
         // 角色集合
         Set<String> roles = bytesmartPermissionService.getRolePermission(bytesmartEmployee);
         // 权限集合

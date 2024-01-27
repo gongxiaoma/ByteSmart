@@ -1,7 +1,7 @@
 package com.bytesmart.webadmin.controller;
 
 import com.bytesmart.common.security.annotation.RequiresPermissions;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
+import com.bytesmart.webadmin.domain.BytesmartEmployeeRole;
 import com.bytesmart.webadmin.service.IBytesmartDeptService;
 import com.bytesmart.webadmin.service.IBytesmartEmployeeService;
 import com.bytesmart.webadmin.service.IBytesmartRoleService;
@@ -60,7 +60,7 @@ public class BytesmartRoleController extends BaseController {
     @GetMapping(value = "/{roleId}")
     public AjaxResult getInfo(@PathVariable Long roleId)
     {
-//        bytesmartRoleService.checkRoleDataScope(roleId);
+        bytesmartRoleService.checkRoleDataScope(roleId);
         return success(bytesmartRoleService.selectRoleById(roleId));
     }
 
@@ -107,7 +107,7 @@ public class BytesmartRoleController extends BaseController {
     {
         bytesmartRoleService.checkRoleAllowed(role);
         bytesmartRoleService.checkRoleDataScope(role.getRoleId());
-        role.setUpdateBy(WebSecurityUtils.getUsername());
+        role.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(bytesmartRoleService.updateRoleStatus(role));
     }
 
@@ -131,6 +131,7 @@ public class BytesmartRoleController extends BaseController {
         return toAjax(bytesmartRoleService.insertRole(role));
     }
 
+//    删除
     @DeleteMapping("/{roleIds}")
     public AjaxResult remove(@PathVariable Long[] roleIds){
         return toAjax(bytesmartRoleService.deleteRoleByIds(roleIds));
@@ -155,6 +156,52 @@ public class BytesmartRoleController extends BaseController {
         return getDataTable(list);
     }
 
+    /**
+     * 查询未分配用户角色列表
+     */
+//    @RequiresPermissions("webadmin:role:list")
+    @GetMapping("/authUser/unallocatedList")
+    public TableDataInfo unallocatedList(BytesmartEmployee employee)
+    {
+        startPage();
+        List<BytesmartEmployee> list = bytesmartEmployeeService.selectUnallocatedList(employee);
+        return getDataTable(list);
+    }
+
+    /**
+     * 取消授权用户
+     */
+//    @RequiresPermissions("webadmin:role:edit")
+    @Log(title = "角色管理", businessType = BusinessType.GRANT)
+    @PutMapping("/authUser/cancel")
+    public AjaxResult cancelAuthUser(@RequestBody BytesmartEmployeeRole employeeRole)
+    {
+        return toAjax(bytesmartRoleService.deleteAuthEmployee(employeeRole));
+    }
+
+
+    /**
+     * 批量取消授权用户
+     */
+//    @RequiresPermissions("webadmin:role:edit")
+    @Log(title = "角色管理", businessType = BusinessType.GRANT)
+    @PutMapping("/authUser/cancelAll")
+    public AjaxResult cancelAuthUserAll(Long roleId, Long[] employeeIds)
+    {
+        return toAjax(bytesmartRoleService.deleteAuthEmployees(roleId, employeeIds));
+    }
+
+    /**
+     * 批量选择用户授权
+     */
+//    @RequiresPermissions("webadmin:role:edit")
+    @Log(title = "角色管理", businessType = BusinessType.GRANT)
+    @PutMapping("/authUser/selectAll")
+    public AjaxResult selectAuthUserAll(Long roleId, Long[] employeeIds)
+    {
+        bytesmartRoleService.checkRoleDataScope(roleId);
+        return toAjax(bytesmartRoleService.insertAuthEmployees(roleId, employeeIds));
+    }
 
     /**
      * 获取对应角色部门树列表

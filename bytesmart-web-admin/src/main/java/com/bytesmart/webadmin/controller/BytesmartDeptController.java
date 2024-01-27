@@ -1,15 +1,11 @@
 package com.bytesmart.webadmin.controller;
 
-
-
-
 import com.bytesmart.common.core.constant.UserConstants;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.log.annotation.Log;
 import com.bytesmart.common.log.enums.BusinessType;
 import com.bytesmart.common.security.annotation.RequiresPermissions;
 import com.bytesmart.common.security.utils.SecurityUtils;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.service.IBytesmartDeptService;
 import com.bytesmart.apisystem.domain.BytesmartDept;
 import com.bytesmart.common.core.web.controller.BaseController;
@@ -51,6 +47,7 @@ public class BytesmartDeptController extends BaseController {
     @GetMapping(value = "/{deptId}")
     public AjaxResult getInfo(@PathVariable Long deptId)
     {
+        bytesmartDeptService.checkDeptDataScope(deptId);
         return success(bytesmartDeptService.selectDeptById(deptId));
     }
 
@@ -94,7 +91,7 @@ public class BytesmartDeptController extends BaseController {
         {
             return error("该部门包含未停用的子部门！");
         }
-        dept.setUpdateBy(WebSecurityUtils.getUsername());
+        dept.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(bytesmartDeptService.updateDept(dept));
     }
 

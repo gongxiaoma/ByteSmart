@@ -24,6 +24,7 @@ public class SecurityUtils
         return SecurityContextHolder.getUserId();
     }
 
+
     /**
      * 获取用户名称
      */
@@ -47,6 +48,7 @@ public class SecurityUtils
     {
         return SecurityContextHolder.get(SecurityConstants.LOGIN_USER, LoginUser.class);
     }
+
 
     /**
      * 获取请求token

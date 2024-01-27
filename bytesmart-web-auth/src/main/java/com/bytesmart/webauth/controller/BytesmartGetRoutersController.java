@@ -2,7 +2,7 @@ package com.bytesmart.webauth.controller;
 
 import com.bytesmart.common.core.web.controller.BaseController;
 import com.bytesmart.common.core.web.domain.AjaxResult;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
+import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.webadmin.domain.BytesmartMenu;
 import com.bytesmart.webadmin.service.IBytesmartMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class BytesmartGetRoutersController extends BaseController {
     @GetMapping("getRouters")
     public AjaxResult getRouters()
     {
-        Long employeeId = 1L;
-//        Long employeeId = WebSecurityUtils.getEmployeeId();
+//        Long employeeId = 1L;
+        Long employeeId = SecurityUtils.getUserId();
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuTreeByEmployeeId(employeeId);
         return success(bytesmartMenuService.buildMenus(menus));
     }

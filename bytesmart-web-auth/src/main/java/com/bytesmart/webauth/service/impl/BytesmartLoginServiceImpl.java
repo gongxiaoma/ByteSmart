@@ -1,26 +1,22 @@
 package com.bytesmart.webauth.service.impl;
 
 import com.bytesmart.common.core.constant.CacheConstants;
-import com.bytesmart.common.core.constant.Constants;
-import com.bytesmart.common.core.exception.CaptchaException;
 import com.bytesmart.common.core.exception.user.CaptchaExpireException;
 import com.bytesmart.common.core.utils.StringUtils;
-import com.bytesmart.webauth.Utils.TokenUtils;
-import com.bytesmart.webauth.context.AuthenticationContextHolder;
-import com.bytesmart.webauth.domain.WebLoginUser;
+import com.bytesmart.springsecurity.context.AuthenticationContextHolder;
+import com.bytesmart.springsecurity.domain.WebLoginUser;
 import com.bytesmart.webadmin.service.IBytesmartEmployeeService;
 import com.bytesmart.webauth.service.IBytesmartLoginService;
 import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.exception.user.UserPasswordNotMatchException;
 import com.bytesmart.common.redis.service.RedisService;
+import com.bytesmart.springsecurity.service.WebTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import sun.misc.MessageUtils;
 
 
 @Service
@@ -28,7 +24,10 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
 {
 
     @Autowired
-    private TokenUtils tokenUtils;
+    private WebTokenService tokenService;
+
+//    @Autowired
+//    private TokenUtils tokenUtils;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -41,7 +40,7 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
 
     @Autowired
     private IBytesmartEmployeeService employeeService;
-//
+
 //    @Autowired
 //    private ISysConfigService configService;
 
@@ -57,6 +56,8 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
      * @param uuid 唯一标识
      * @return 结果
      */
+
+    @Override
     public String login(String username, String password, String code, String uuid)
     {
         // 验证码校验
@@ -94,7 +95,7 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
         WebLoginUser webloginUser = (WebLoginUser) authentication.getPrincipal();
 //        recordLoginInfo(loginUser.getUserId());
         // 生成token
-        return tokenUtils.createToken(webloginUser);
+        return tokenService.createWebToken(webloginUser);
     }
 
 
@@ -102,7 +103,7 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
 //    public int loginout(){
 //        //获取SecurityContextHolder的key值
 //        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-//        WebLoginUser webLoginUser =  (WebLoginUser) authentication.getPrincipal();
+//        LoginEmployee webLoginUser =  (LoginEmployee) authentication.getPrincipal();
 //        String userkey = "login_uuids-" + webLoginUser.getUserkey();
 //        //删除redis里的值
 //        redisService.deleteObject(userkey);
@@ -125,14 +126,18 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
     {
         String verifyKey = CacheConstants.WEB_CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
         String captcha = redisCache.getCacheObject(verifyKey);
+        System.out.println(captcha);
         redisCache.deleteObject(verifyKey);
+        System.out.println("50");
         if (captcha == null)
         {
+            System.out.println("51");
 //            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
             throw new CaptchaExpireException();
         }
         if (!code.equalsIgnoreCase(captcha))
         {
+            System.out.println("52");
 //            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
             throw new CaptchaExpireException();
         }

@@ -6,7 +6,6 @@ import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.text.Convert;
 import com.bytesmart.common.datascope.annotation.DataScope;
 import com.bytesmart.common.security.utils.SecurityUtils;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.domain.vo.TreeSelect;
 import com.bytesmart.webadmin.mapper.BytesmartDeptMapper;
 import com.bytesmart.webadmin.mapper.BytesmartRoleMapper;
@@ -237,7 +236,6 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
     }
 
 
-
     /**
      * 递归列表
      */
@@ -291,7 +289,7 @@ public class BytesmartDeptServiceImpl implements IBytesmartDeptService {
     @Override
     public void checkDeptDataScope(Long deptId)
     {
-        if (!BytesmartEmployee.isAdmin(WebSecurityUtils.getEmployeeId()))
+        if (!BytesmartEmployee.isAdmin(SecurityUtils.getUserId()))
         {
             BytesmartDept dept = new BytesmartDept();
             dept.setDeptId(deptId);

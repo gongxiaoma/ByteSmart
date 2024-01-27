@@ -102,17 +102,12 @@
 	</select>
 
     <select id="selectMenuPermsByEmployeeId" parameterType="long" resultType="String">
-		select
-		     distinct m.menu_perms
-		from
-            bytesmart_employee_role er
-            LEFT JOIN bytesmart_role r ON er.role_id = r.role_id
-            LEFT JOIN bytesmart_role_menu rm ON er.role_id = rm.role_id
-            LEFT JOIN bytesmart_menu m ON m.menu_id = rm.menu_id
-		where
-		     employee_id =  #{employeeId}
-		     and m.menu_status = '0'
-		     and r.role_status = '0'
+        SELECT DISTINCT m.menu_perms
+        FROM bytesmart_menu m
+          LEFT JOIN bytesmart_role_menu rm ON m.menu_id = rm.menu_id
+          LEFT JOIN bytesmart_employee_role er ON rm.role_id = er.role_id
+          LEFT JOIN bytesmart_role r ON r.role_id = er.role_id
+        WHERE m.menu_status = '0' AND r.role_status = '0' AND er.employee_id = #{employeeId}
 	</select>
 
 

@@ -2,6 +2,7 @@ package com.bytesmart.webadmin.mapper;
 
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
 import com.bytesmart.apisystem.domain.SysUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -68,6 +69,25 @@ public interface BytesmartEmployeeMapper {
      */
     public BytesmartEmployee checkEmailUnique(String employeeEmail);
 
+
+    /**
+     * 重置用户密码
+     *
+     * @param userName 用户名
+     * @param password 密码
+     * @return 结果
+     */
+    public int resetEmployeerPwd(@Param("userName") String userName, @Param("password") String password);
+
+
+    /**
+     * 修改用户头像
+     *
+     * @param userName 用户名
+     * @param employeeAvatar 头像地址
+     * @return 结果
+     */
+    public int updateEmployeeAvatar(@Param("userName") String userName, @Param("employeeAvatar") String employeeAvatar);
 
 
 

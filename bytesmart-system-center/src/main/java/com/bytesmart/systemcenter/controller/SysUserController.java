@@ -161,6 +161,16 @@ public class SysUserController extends BaseController
         return ajax;
     }
 
+//    @RequiresPermissions("system:user:query")
+    @GetMapping("test")
+    public AjaxResult test(){
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("user", "A");
+        ajax.put("roles", "B");
+        ajax.put("permissions", "C");
+        return ajax;
+    }
+
     /**
      * 根据用户编号获取详细信息
      */

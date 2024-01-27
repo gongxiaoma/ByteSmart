@@ -15,6 +15,7 @@
         <module>common-seata</module>
         <module>common-swagger</module>
         <module>common-security</module>
+        <module>common-spring-security</module>
         <module>common-datascope</module>
         <module>common-datasource</module>
     </modules>

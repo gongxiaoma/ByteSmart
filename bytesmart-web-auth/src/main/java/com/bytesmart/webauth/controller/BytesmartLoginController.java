@@ -43,6 +43,15 @@ public class BytesmartLoginController {
 //        return ajax;
 //    }
 
+    @GetMapping("test")
+    public AjaxResult test(){
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("user", "A");
+        ajax.put("roles", "B");
+        ajax.put("permissions", "C");
+        return ajax;
+    }
+
 
     /**
      * 测试方法

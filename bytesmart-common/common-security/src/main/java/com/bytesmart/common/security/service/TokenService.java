@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-//import com.bytesmart.system.api.model.LoginUser;
 
 /**
  * token验证处理
@@ -59,6 +58,7 @@ public class TokenService
         loginUser.setIpaddr(IpUtils.getIpAddr());
         refreshToken(loginUser);
 
+
         // Jwt存储信息
         Map<String, Object> claimsMap = new HashMap<String, Object>();
         claimsMap.put(SecurityConstants.USER_KEY, token);
@@ -71,6 +71,7 @@ public class TokenService
         rspMap.put("expires_in", expireTime);
         return rspMap;
     }
+
 
     /**
      * 获取用户身份信息
@@ -130,6 +131,7 @@ public class TokenService
         }
     }
 
+
     /**
      * 删除用户缓存信息
      */
@@ -141,6 +143,7 @@ public class TokenService
             redisService.deleteObject(getTokenKey(userkey));
         }
     }
+
 
     /**
      * 验证令牌有效期，相差不足120分钟，自动刷新缓存
@@ -171,8 +174,9 @@ public class TokenService
         redisService.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
     }
 
-    private String getTokenKey(String token)
+    // 入参由token改查了uuid
+    private String getTokenKey(String uuid)
     {
-        return ACCESS_TOKEN + token;
+        return ACCESS_TOKEN + uuid;
     }
 }

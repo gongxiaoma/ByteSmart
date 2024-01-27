@@ -5,7 +5,6 @@ import com.bytesmart.common.log.annotation.Log;
 import com.bytesmart.common.log.enums.BusinessType;
 import com.bytesmart.common.security.annotation.RequiresPermissions;
 import com.bytesmart.common.security.utils.SecurityUtils;
-import com.bytesmart.common.security.utils.WebSecurityUtils;
 import com.bytesmart.webadmin.domain.BytesmartPost;
 import com.bytesmart.webadmin.service.IBytesmartPostService;
 import com.bytesmart.common.core.web.controller.BaseController;
@@ -35,6 +34,7 @@ public class BytesmartPostController extends BaseController {
         List<BytesmartPost> list = postService.selectPostList(post);
         return getDataTable(list);
     }
+
 
     //根据id查询
     //@RequiresPermissions("webadmin:post:query")
@@ -74,11 +74,11 @@ public class BytesmartPostController extends BaseController {
         {
             return error("新增岗位'" + post.getPostName() + "'失败，岗位类型已存在");
         }
-        post.setCreateBy(WebSecurityUtils.getUsername());
+        post.setCreateBy(SecurityUtils.getUsername());
         return toAjax(postService.insertPost(post));
     }
 
-    //新增
+    //删除
     //@RequiresPermissions("webadmin:post:remove")
     @Log(title = "岗位管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{postIds}")
@@ -104,6 +104,5 @@ public class BytesmartPostController extends BaseController {
         ExcelUtil<BytesmartPost> util = new ExcelUtil<BytesmartPost>(BytesmartPost.class);
         util.exportExcel(response, list, "岗位数据");
     }
-
 
 }

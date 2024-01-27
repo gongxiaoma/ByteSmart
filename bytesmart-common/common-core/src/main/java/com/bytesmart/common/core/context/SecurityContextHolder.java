@@ -96,4 +96,14 @@ public class SecurityContextHolder
     {
         THREAD_LOCAL.remove();
     }
+    //新增，测试
+    public static Long getEmployeeId()
+    {
+        return Convert.toLong(get(SecurityConstants.DETAILS_USER_ID), 0L);
+    }
+
+    public static void setEmployeeId(String account)
+    {
+        set(SecurityConstants.DETAILS_USER_ID, account);
+    }
 }

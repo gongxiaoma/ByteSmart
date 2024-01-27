@@ -9,6 +9,8 @@ public interface BytesmartPostMapper {
     //查询所有
     public List<BytesmartPost> selectPostList(BytesmartPost post);
 
+    public List<BytesmartPost> selectPostAll();
+
     //根据id查询
     public BytesmartPost selectPostById(Long postId);
 
@@ -21,8 +23,6 @@ public interface BytesmartPostMapper {
     //删除
     public int deletePostById(Long postId);
     public int deletePostByIds(Long[] postIds);
-
-    public List<BytesmartPost> selectPostAll();
 
     //通过用户id获取岗位选择框列表
     public List<Long> selectPostListByEmployeeId(Long employeeId);

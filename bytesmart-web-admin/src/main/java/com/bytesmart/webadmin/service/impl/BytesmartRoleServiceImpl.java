@@ -166,6 +166,33 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
     }
 
     /**
+     * 根据用户ID查询角色
+     *
+     * @param employeeId 用户ID
+     * @return 角色列表
+     */
+    @Override
+    public List<BytesmartRole> selectRolesByEmployeeId(Long employeeId)
+    {
+        List<BytesmartRole> userRoles = bytesmartRoleMapper.selectRolePermissionByEmployeeId(employeeId);
+        List<BytesmartRole> roles = selectRoleAll();
+        for (BytesmartRole role : roles)
+        {
+            for (BytesmartRole bytesmartRole : userRoles)
+            {
+                if (role.getRoleId().longValue() == bytesmartRole.getRoleId().longValue())
+                {
+                    role.setFlag(true);
+                    break;
+                }
+            }
+        }
+        return roles;
+    }
+
+
+
+    /**
      * 校验角色是否允许操作
      *
      * @param role 角色信息
@@ -247,11 +274,11 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
      * @param employeeRole 用户和角色关联信息
      * @return 结果
      */
-//    @Override
-//    public int deleteAuthEmployee(BytesmartEmployeeRole employeeRole)
-//    {
-//        return bytesmartEmployeeRoleMapper.deleteEmployeeRoleListInfo(employeeRole);
-//    }
+    @Override
+    public int deleteAuthEmployee(BytesmartEmployeeRole employeeRole)
+    {
+        return bytesmartEmployeeRoleMapper.deleteEmployeeRoleListInfo(employeeRole);
+    }
 
 
     @Override
@@ -307,6 +334,31 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
     }
 
     /**
+     * 查询所有角色
+     *
+     * @return 角色列表
+     */
+    @Override
+    public List<BytesmartRole> selectRoleAll(){
+        return SpringUtils.getAopProxy(this).selectRoleList(new BytesmartRole());
+
+    }
+
+
+    /**
+     * 批量取消授权用户角色
+     *
+     * @param roleId 角色ID
+     * @param employeeIds 需要取消授权的用户数据ID
+     * @return 结果
+     */
+    @Override
+    public int deleteAuthEmployees(Long roleId, Long[] employeeIds)
+    {
+        return bytesmartEmployeeRoleMapper.deleteEmployeeRoleInfos(roleId,employeeIds);
+    }
+
+    /**
      * 批量选择授权用户角色
      *
      * @param roleId 角色ID
@@ -314,7 +366,7 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
      * @return 结果
      */
     @Override
-    public int insertAuthEmployee(Long roleId, Long[] employeeIds)
+    public int insertAuthEmployees(Long roleId, Long[] employeeIds)
     {
         // 新增用户与角色管理
         List<BytesmartEmployeeRole> list = new ArrayList<BytesmartEmployeeRole>();
@@ -326,16 +378,6 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
             list.add(ur);
         }
         return bytesmartEmployeeRoleMapper.batchEmployeeRole(list);
-    }
-
-
-
-
-
-    @Override
-    public List<BytesmartRole> selectRoleAll(){
-        return SpringUtils.getAopProxy(this).selectRoleList(new BytesmartRole());
-
     }
 
 

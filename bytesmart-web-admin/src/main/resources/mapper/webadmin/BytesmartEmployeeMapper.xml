@@ -192,7 +192,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<set>
 			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
 			<if test="userName != null and userName != ''">username = #{userName},</if>
-			<if test="employeeName != null and employeeName != ''">employee_english_name = #{employeeName},</if>
+			<if test="employeeName != null and employeeName != ''">employee_name = #{employeeName},</if>
 			<if test="employeeenglishName != null and employeeenglishName != ''">employee_english_name = #{employeeName},</if>
 			<if test="employeeWeight != null and employeeWeight != ''">employee_weight = #{employeeWeight},</if>
 			<if test="employeeGender != null and employeeGender != ''">employee_gender = #{employeeGender},</if>
@@ -242,7 +242,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="userName != null and userName != ''">
 			AND e.username like concat('%', #{userName}, '%')
 		</if>
-		<if test="phonenumber != null and phonenumber != ''">
+		<if test="employeeMobile != null and employeeMobile != ''">
 			AND e.employee_mobile like concat('%', #{e.employeeMobile}, '%')
 		</if>
 		<!-- 数据范围过滤 -->
@@ -260,7 +260,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="userName != null and userName != ''">
 			AND e.username like concat('%', #{userName}, '%')
 		</if>
-		<if test="phonenumber != null and phonenumber != ''">
+		<if test="employeeMobile != null and employeeMobile != ''">
 			AND e.employee_mobile like concat('%', #{employeeMobile}, '%')
 		</if>
 		<!-- 数据范围过滤 -->
@@ -272,13 +272,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="checkPhoneUnique" parameterType="String" resultMap="BytesmartEmployeeResult">
-		select employee_id, employeeMobile from bytesmart_employee where employeeMobile = #{employeeMobile} and del_flag = '0' limit 1
+		select employee_id, employee_mobile from bytesmart_employee where employee_mobile = #{employeeMobile} and del_flag = '0' limit 1
 	</select>
 
 	<select id="checkEmailUnique" parameterType="String" resultMap="BytesmartEmployeeResult">
-		select employee_id, employeeEmail from bytesmart_employee where employeeEmail = #{employeeEmail} and del_flag = '0' limit 1
+		select employee_id, employee_email from bytesmart_employee where employee_email = #{employeeEmail} and del_flag = '0' limit 1
 	</select>
 
+	<update id="resetEmployeerPwd" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee">
+ 		update bytesmart_employee set password = #{password} where username = #{userName}
+	</update>
 
+	<update id="updateEmployeeAvatar" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee">
+ 		update bytesmart_employee set employee_avatar = #{employeeAvatar} where username = #{userName}
+	</update>
 
 </mapper> 
