@@ -1,7 +1,7 @@
 package com.bytesmart.webauth;
 
-//import com.bytesmart.springsecurity.annotation.EnableRyFeignClients;
 import com.bytesmart.common.swagger.annotation.EnableCustomSwagger2;
+import com.bytesmart.springsecurity.annotation.EnableRyFeignClients;
 import com.bytesmart.springsecurity.annotation.EnableCustomConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableCustomConfig
 @EnableCustomSwagger2
-//@EnableRyFeignClients
-@SpringBootApplication(scanBasePackages = {"com.bytesmart.web*"})
+@EnableRyFeignClients
+@SpringBootApplication(scanBasePackages = {"com.bytesmart.*"})
 public class BytesmartWebAuthApplication {
 
     public static void main(String[] args) {

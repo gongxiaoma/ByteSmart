@@ -1,6 +1,8 @@
 package com.bytesmart.springsecurity.config;
 
 import com.bytesmart.springsecurity.filter.TokenAuthenticationFilter;
+import com.bytesmart.springsecurity.handler.AccessDeniedHandlerImpl;
+import com.bytesmart.springsecurity.handler.AuthenticationEntrypointImpl;
 import com.bytesmart.springsecurity.handler.LogoutSuccessHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private TokenAuthenticationFilter tokenAuthenticationFilter;
+
+    @Autowired
+    private AuthenticationEntrypointImpl authenticationEntrypoint;
+
+    @Autowired
+    private AccessDeniedHandlerImpl accessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,6 +77,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 添加Logout filter
         httpSecurity.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         httpSecurity.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        // 配置异常处理器
+        httpSecurity.exceptionHandling()
+                // 配置认证失败处理器
+                .authenticationEntryPoint(authenticationEntrypoint)
+                .accessDeniedHandler(accessDeniedHandler);
     }
 
     @Bean

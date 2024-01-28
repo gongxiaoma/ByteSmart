@@ -1,6 +1,2 @@
-18:54:20.794 [http-nio-9700-exec-10] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-18:54:30.617 [http-nio-9700-exec-8] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-18:54:47.240 [http-nio-9700-exec-9] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-18:54:52.195 [http-nio-9700-exec-7] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-18:55:16.484 [http-nio-9700-exec-2] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-19:24:17.807 [http-nio-9700-exec-5] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'
+22:11:36.276 [http-nio-9700-exec-1] ERROR c.b.c.s.s.TokenService - [getLoginUser,117] - 获取用户信息异常'com.bytesmart.common.security.service.TokenService.getLoginUser(TokenService.java:111)'
+22:11:36.280 [http-nio-9700-exec-1] ERROR c.b.c.s.s.TokenService - [getLoginUser,118] - 获取用户信息异常'com.alibaba.fastjson2.JSONObject cannot be cast to com.bytesmart.apisystem.model.LoginUser'

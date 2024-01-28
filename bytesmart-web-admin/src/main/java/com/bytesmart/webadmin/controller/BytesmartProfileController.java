@@ -109,9 +109,9 @@ public class BytesmartProfileController extends BaseController {
         String username = SecurityUtils.getUsername();
         BytesmartEmployee employee = employeeService.selectEmployeeByUsername(username);
         String password = employee.getPassword();
-        System.out.println(password);
-        System.out.println(oldPassword);
-        System.out.println(newPassword);
+//        System.out.println(password);
+//        System.out.println(oldPassword);
+//        System.out.println(newPassword);
 //        String username = SecurityUtils.getUsername();
 //        BytesmartEmployee employee = employeeService.selectEmployeeByUsername(username);
 //        String password = employee.getPassword();

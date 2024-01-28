@@ -4,6 +4,7 @@ import com.bytesmart.webauth.service.IBytesmartLoginService;
 import com.bytesmart.common.core.constant.Constants;
 import com.bytesmart.common.core.domain.LoginBody;
 import com.bytesmart.common.core.web.domain.AjaxResult;
+import com.bytesmart.springsecurity.expression.BSExpressionRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -31,19 +32,9 @@ public class BytesmartLoginController {
         return ajax;
     }
 
-    //登出
-//    @RequestMapping("logout")
-//    public AjaxResult loginout()
-//    {
-//        System.out.println("111111");
-//        AjaxResult ajax = AjaxResult.success();
-//        int loginout = bytesmartLoginService.loginout();
-//        System.out.println(loginout);
-//        ajax.put("返回值", loginout);
-//        return ajax;
-//    }
 
     @GetMapping("test")
+    @PreAuthorize("@bs.hasAuthority('web:mail:send')")
     public AjaxResult test(){
         AjaxResult ajax = AjaxResult.success();
         ajax.put("user", "A");
@@ -51,23 +42,5 @@ public class BytesmartLoginController {
         ajax.put("permissions", "C");
         return ajax;
     }
-
-
-    /**
-     * 测试方法
-     *
-     * @param loginBody 登录信息
-     * @return 结果
-     */
-
-//    @GetMapping("test")
-//    @PreAuthorize("hasAuthority('system:employee:list')")
-////    @PreAuthorize("hasAuthority('test')")
-//    public AjaxResult test()
-//    {
-//        AjaxResult ajax = AjaxResult.success();
-//        ajax.put("test", "9999");
-//        return ajax;
-//    }
 
 }

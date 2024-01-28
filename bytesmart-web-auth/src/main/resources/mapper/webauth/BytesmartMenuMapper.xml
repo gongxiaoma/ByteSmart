@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bytesmart.webauth.mapper.BytesmartMenuMapper">
+
+    <resultMap type="BytesmartMenu" id="BytesmartMenuResult">
+        <id     property="menuId"          column="menu_id"        />
+        <result property="menuName"        column="menu_name"      />
+        <result property="parentId"        column="parent_id"      />
+        <result property="menuWeight"      column="menu_weight"    />
+        <result property="routeAddress"    column="route_address"   />
+        <result property="componentPath"   column="component_path"  />
+        <result property="routeParameter"  column="route_parameter"   />
+        <result property="isFrame"         column="is_frame"       />
+        <result property="isCache"         column="is_cache"       />
+        <result property="menuType"        column="menu_type"      />
+        <result property="menuDisplay"     column="menu_display"     />
+        <result property="menuStatus"      column="menu_status"      />
+        <result property="menuPerms"       column="menu_perms"       />
+        <result property="menuIcon"        column="menu_icon"        />
+        <result property="createBy"        column="create_by"      />
+        <result property="createTime"      column="create_time"    />
+        <result property="updateTime"      column="update_time"    />
+        <result property="updateBy"        column="update_by"      />
+        <result property="remark"          column="remark"         />
+    </resultMap>
+
+    <sql id="selectMenuVo">
+        select menu_id, menu_name, parent_id, menu_weight, route_address, component_path, route_parameter, is_frame, is_cache, menu_type, menu_display, menu_status, ifnull(menu_perms,'') as menu_perms, menu_icon, create_time
+		from bytesmart_menu
+    </sql>
+
+    <select id="selectMenuList" parameterType="BytesmartMenu" resultMap="BytesmartMenuResult">
+        <include refid="selectMenuVo"/>
+        <where>
+            <if test="menuName != null and menuName != ''">
+                AND menu_name like concat('%', #{menuName}, '%')
+            </if>
+            <if test="menuDisplay != null and menuDisplay != ''">
+                AND menu_display = #{menuDisplay}
+            </if>
+            <if test="menuStatus != null and menuStatus != ''">
+                AND menu_status = #{menuStatus}
+            </if>
+        </where>
+        order by parent_id, menu_weight
+    </select>
+
+    <select id="selectMenuTreeAll" resultMap="BytesmartMenuResult">
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.route_address, m.component_path, m.route_parameter, m.menu_display, m.menu_status, ifnull(m.menu_perms,'') as perms, m.is_frame, m.is_cache, m.menu_type, m.menu_icon, m.menu_weight, m.create_time
+		from bytesmart_menu m where m.menu_type in ('M', 'C') and m.menu_status = 0
+		order by m.parent_id, m.menu_weight
+	</select>
+
+    <select id="selectMenuTreeByEmployeeId" parameterType="long" resultMap="BytesmartMenuResult">
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.route_address, m.component_path, m.route_parameter, m.menu_display, m.menu_status, ifnull(m.menu_perms,'') as perms, m.is_frame, m.is_cache, m.menu_type, m.menu_icon, m.menu_weight, m.create_time
+		from bytesmart_menu m
+			 left join bytesmart_role_menu rm on m.menu_id = rm.menu_id
+			 left join bytesmart_employee_role er on rm.role_id = er.role_id
+			 left join bytesmart_role r on er.role_id = r.role_id
+			 left join bytesmart_employee e on er.employee_id = e.employee_id
+		where e.employee_id = #{employeeId} and m.menu_type in ('M', 'C') and m.menu_status = 0  AND r.role_status = 0
+		order by m.parent_id, m.menu_weight
+	</select>
+
+
+
+    <select id="selectMenuPermsByEmployeeId" parameterType="long" resultType="String">
+        SELECT DISTINCT m.menu_perms
+        FROM bytesmart_menu m
+          LEFT JOIN bytesmart_role_menu rm ON m.menu_id = rm.menu_id
+          LEFT JOIN bytesmart_employee_role er ON rm.role_id = er.role_id
+          LEFT JOIN bytesmart_role r ON r.role_id = er.role_id
+        WHERE m.menu_status = '0' AND r.role_status = '0' AND er.employee_id = #{employeeId}
+	</select>
+
+
+    <select id="selectMenuPermsByRoleId" parameterType="long" resultType="String">
+		select distinct m.menu_perms
+		from bytesmart_menu m
+			 left join bytesmart_role_menu rm on m.menu_id = rm.menu_id
+		where m.menu_status = '0' and rm.role_id = #{roleId}
+	</select>
+
+    <select id="selectMenuById" parameterType="long" resultMap="BytesmartMenuResult">
+        <include refid="selectMenuVo"/>
+        where menu_id = #{menuId}
+    </select>
+
+
+
+</mapper>

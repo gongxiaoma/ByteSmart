@@ -64,7 +64,6 @@ public class AuthLogic
             throw new NotLoginException("未提供token");
         }
         WebLoginUser webLoginUser = WebSecurityUtils.getWebLoginUser();
-        System.out.println(webLoginUser);
         if (webLoginUser == null)
         {
             throw new NotLoginException("无效的token");

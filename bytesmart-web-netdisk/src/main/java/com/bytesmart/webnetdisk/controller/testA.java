@@ -13,7 +13,6 @@ public class testA {
         ajax.put("user", "A");
         ajax.put("roles", "B");
         ajax.put("permissions", "C");
-        System.out.println("123456");
         return ajax;
     }
 }

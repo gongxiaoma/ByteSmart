@@ -1,6 +1,7 @@
 package com.bytesmart.springsecurity.config;
 
 import com.bytesmart.springsecurity.interceptor.WebHeaderInterceptor;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @author hd
  */
+@Configuration
 public class WebMvcConfig implements WebMvcConfigurer
 {
     /** 不需要拦截地址 */

@@ -5,7 +5,7 @@ import com.bytesmart.common.core.exception.user.CaptchaExpireException;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.springsecurity.context.AuthenticationContextHolder;
 import com.bytesmart.springsecurity.domain.WebLoginUser;
-import com.bytesmart.webadmin.service.IBytesmartEmployeeService;
+import com.bytesmart.webauth.service.IBytesmartEmployeeService;
 import com.bytesmart.webauth.service.IBytesmartLoginService;
 import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.exception.user.UserPasswordNotMatchException;
@@ -99,21 +99,6 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
     }
 
 
-//    @Override
-//    public int loginout(){
-//        //获取SecurityContextHolder的key值
-//        UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-//        LoginEmployee webLoginUser =  (LoginEmployee) authentication.getPrincipal();
-//        String userkey = "login_uuids-" + webLoginUser.getUserkey();
-//        //删除redis里的值
-//        redisService.deleteObject(userkey);
-//        return 1;
-//    }
-
-
-
-
-
     /**
      * 校验验证码
      *
@@ -126,18 +111,14 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
     {
         String verifyKey = CacheConstants.WEB_CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
         String captcha = redisCache.getCacheObject(verifyKey);
-        System.out.println(captcha);
         redisCache.deleteObject(verifyKey);
-        System.out.println("50");
         if (captcha == null)
         {
-            System.out.println("51");
 //            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
             throw new CaptchaExpireException();
         }
         if (!code.equalsIgnoreCase(captcha))
         {
-            System.out.println("52");
 //            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
             throw new CaptchaExpireException();
         }

@@ -105,7 +105,6 @@ public class TokenService
         LoginUser user = null;
         try
         {
-            System.out.println(token);
             if (StringUtils.isNotEmpty(token))
             {
                 String userkey = JwtUtils.getUserKey(token);
@@ -115,6 +114,7 @@ public class TokenService
         }
         catch (Exception e)
         {
+            log.error("获取用户信息异常'{}'", e.getStackTrace());
             log.error("获取用户信息异常'{}'", e.getMessage());
         }
         return user;

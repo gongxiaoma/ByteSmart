@@ -57,8 +57,6 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
         return permsSet;
     }
 
-
-
     @Override
     @DataScope(deptAlias = "d")
     public List<BytesmartRole> selectRoleList(BytesmartRole role){

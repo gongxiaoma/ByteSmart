@@ -34,6 +34,10 @@ public class WebHeaderInterceptor implements AsyncHandlerInterceptor
         WebSecurityContextHolder.setUserName(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USERNAME));
         WebSecurityContextHolder.setUserKey(ServletUtils.getHeader(request, SecurityConstants.USER_KEY));
 
+        System.out.println(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USER_ID));
+        System.out.println(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USERNAME));
+        System.out.println(ServletUtils.getHeader(request, SecurityConstants.USER_KEY));
+
         String token = WebSecurityUtils.getToken();
         if (StringUtils.isNotEmpty(token))
         {

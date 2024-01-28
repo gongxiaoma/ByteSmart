@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bytesmart.webauth.mapper.BytesmartEmployeeMapper">
+	<resultMap type="com.bytesmart.apisystem.domain.BytesmartEmployee" id="BytesmartEmployeeResult">
+		<id     property="employeeId"            column="employee_id"      />
+		<result property="deptId"                column="dept_id"      />
+		<result property="userName"              column="username"    />
+		<result property="employeeName"          column="employee_name"    />
+		<result property="employeeenglishName"   column="employee_english_name"    />
+		<result property="employeeEmail"         column="employee_email"        />
+		<result property="employeeWeight"       column="employee_weight"  />
+		<result property="employeeGender"        column="employee_gender"  />
+		<result property="employeeIsmarital"     column="employee_ismarital"  />
+		<result property="employeeNo"           column="employee_no"  />
+		<result property="employeeAge"          column="employee_age"  />
+		<result property="password"              column="password"  />
+		<result property="employeeType"          column="employee_type"  />
+		<result property="employeeMobile"        column="employee_mobile"    />
+		<result property="officePhone"           column="office_phone"     />
+		<result property="employeeBirthdate"     column="employee_birthdate"   />
+		<result property="employmentDate"        column="employment_date"    />
+		<result property="employeeAddress"       column="employee_address"    />
+		<result property="employeeAvatar"        column="employee_avatar"    />
+		<result property="employeeStatus"        column="employee_status"     />
+		<result property="delFlag"               column="del_flag"     />
+		<result property="loginIp"               column="login_ip"     />
+		<result property="loginDate"             column="login_date"   />
+		<result property="createBy"              column="create_by"    />
+		<result property="createTime"            column="create_time"  />
+		<result property="updateBy"              column="update_by"    />
+		<result property="updateTime"            column="update_time"  />
+		<result property="remark"                column="remark"       />
+		<association property="dept"    javaType="com.bytesmart.apisystem.domain.BytesmartDept"         resultMap="deptResult" />
+		<collection  property="roles"   javaType="java.util.List"  resultMap="RoleResult" />
+	</resultMap>
+
+	<resultMap id="deptResult" type="com.bytesmart.apisystem.domain.BytesmartDept">
+		<id     property="deptId"    column="dept_id"     />
+		<result property="parentId"  column="parent_id"   />
+		<result property="deptName"  column="dept_name"   />
+		<result property="ancestors" column="ancestors"   />
+		<result property="deptWeight"  column="dept_weight"   />
+		<result property="deptLeader"    column="dept_leader"      />
+		<result property="deptMobile"    column="dept_mobile"      />
+		<result property="deptEmail"    column="dept_email"      />
+		<result property="deptStatus"    column="dept_status" />
+	</resultMap>
+
+	<resultMap id="RoleResult" type="com.bytesmart.apisystem.domain.BytesmartRole">
+		<id     property="roleId"             column="role_id"               />
+		<result property="roleName"           column="role_name"             />
+		<result property="roleKey"            column="role_key"              />
+		<result property="roleWeight"         column="role_weight"           />
+		<result property="dataScope"          column="data_scope"            />
+		<result property="menuCheckStrictly"  column="menu_check_strictly"   />
+		<result property="deptCheckStrictly"  column="dept_check_strictly"   />
+		<result property="roleStatus"         column="role_status"           />
+	</resultMap>
+
+	<sql id="selectEmployeeVo">
+        select e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_avatar, e.employee_mobile, e.employee_weight, e.employee_no, e.employee_age, e.employee_type, e.password, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time, e.remark,
+        d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.dept_weight, d.dept_leader, d.dept_mobile, d.dept_email, dept_status,
+        r.role_id, r.role_name, r.role_key, r.role_weight, r.data_scope, role_status
+        from bytesmart_employee e
+		    left join bytesmart_dept d on e.dept_id = d.dept_id
+		    left join bytesmart_employee_role er on e.employee_id = er.employee_id
+		    left join bytesmart_role r on r.role_id = er.role_id
+    </sql>
+
+
+	<select id="selectEmployeeById" parameterType="long" resultMap="BytesmartEmployeeResult">
+		<include refid="selectEmployeeVo"/>
+		where e.employee_id = #{employeeId}
+	</select>
+
+	<select id="selectEmployeeByUsername" parameterType="string" resultMap="BytesmartEmployeeResult">
+		<include refid="selectEmployeeVo"/>
+		where e.username = #{userName}
+	</select>
+
+</mapper> 

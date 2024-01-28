@@ -26,7 +26,7 @@ import java.util.List;
  * @author hd
  */
 @RestController
-//@RequestMapping("/online")
+@RequestMapping("/online")
 public class SysUserOnlineController extends BaseController
 {
     @Autowired

@@ -39,7 +39,7 @@ public class WebLoginUser extends LoginEmployee implements UserDetails
     @JSONField(serialize = false)
     private List<SimpleGrantedAuthority> authorities;
 
-    //12.30新增
+    //spring security框架获取权限实际是调用的getAuthorities方法，在里面加工permissions权限列表
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
         if(authorities!=null){

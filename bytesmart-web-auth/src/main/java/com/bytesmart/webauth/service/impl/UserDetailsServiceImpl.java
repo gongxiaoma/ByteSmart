@@ -3,11 +3,11 @@ package com.bytesmart.webauth.service.impl;
 
 import com.bytesmart.common.core.enums.EmployeeStatus;
 import com.bytesmart.springsecurity.domain.WebLoginUser;
-import com.bytesmart.webadmin.mapper.BytesmartEmployeeMapper;
-import com.bytesmart.webadmin.mapper.BytesmartMenuMapper;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
 import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.utils.StringUtils;
+import com.bytesmart.webauth.mapper.BytesmartEmployeeMapper;
+import com.bytesmart.webauth.mapper.BytesmartMenuMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +40,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (StringUtils.isNull(employee))
         {
             log.info("登录用户：{} 不存在.", username);
-
             throw new ServiceException("登录用户不存在.");
         }
         else if (EmployeeStatus.DELETED.getCode().equals(employee.getDelFlag()))
         {
             log.info("登录用户：{} 已被删除.", username);
-
             throw new ServiceException("登录用户已被删除");
 
         }
@@ -54,7 +52,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         {
 
             log.info("登录用户：{} 已被停用.", username);
-            System.out.println("我是7");
             throw new ServiceException("登录用户已被停用");
         }
 

@@ -77,7 +77,6 @@ public class AuthLogic
             throw new NotLoginException("未提供token");
         }
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        System.out.println(loginUser);
         if (loginUser == null)
         {
             throw new NotLoginException("无效的token");
