@@ -1,9 +1,7 @@
 package com.bytesmart.webauth.mapper;
 
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
 
 public interface BytesmartEmployeeMapper {
 

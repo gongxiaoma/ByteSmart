@@ -8,11 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Validator;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class BytesmartEmployeeServiceImpl implements IBytesmartEmployeeService {
     private static final Logger log = LoggerFactory.getLogger(BytesmartEmployeeServiceImpl.class);

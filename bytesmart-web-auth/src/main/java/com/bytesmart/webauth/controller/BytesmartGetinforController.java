@@ -27,8 +27,6 @@ public class BytesmartGetinforController extends BaseController {
     @GetMapping("/getInfo")
     public AjaxResult getInfo()
     {
-//        Long employeeId = 1L;
-//        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(employeeId);
         BytesmartEmployee bytesrtEmployee = bytesmartEmployeeService.selectEmployeeById(WebSecurityUtils.getUserId());
         // 角色集合
         Set<String> roles = bytesmartPermissionService.getRolePermission(bytesrtEmployee);

@@ -34,9 +34,14 @@ public class SysMenuController extends BaseController
 //    @RequiresPermissions("system:menu:list")
     @GetMapping("/list")
     public AjaxResult list(SysMenu menu)
+      //定义一个名字为list的方法，这个方法的返回数据类型为AjaxResult,且需要定义形参menu.
     {
+        //调用安全类的etUserId()方法，返回一个long类型的对象，用变量userId去接它。
         Long userId = SecurityUtils.getUserId();
+        //调用menuService类的selectMenuList方法，这个方法需要传递实参即menu,userId,接着返回一个list集合类型的对象，用变量menus去接它。
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
+
+        //最后返回调用success方法，这个方法的返回数据类型AjaxResult，也需要实参menus传递进去。
         return success(menus);
     }
 
@@ -67,11 +72,19 @@ public class SysMenuController extends BaseController
     @GetMapping(value = "/roleMenuTreeselect/{roleId}")
     public AjaxResult roleMenuTreeselect(@PathVariable("roleId") Long roleId)
     {
+        //定义一个方法roleMenuTreeselect，返回数据类型是AjaxResult，需要定义一个形参roleId，形参的数据类型是Long
+
+        //调用安全类的方法getUserId，该方法返回一个数据类型为long的对象，我们用变量userId去接它。
         Long userId = SecurityUtils.getUserId();
+        //调用类menuService的方法selectMenuList，该方法需要传递实参userId，然后返回一个数据类型为List<SysMenu>集合的对象，我们用变量menus去接它。
         List<SysMenu> menus = menuService.selectMenuList(userId);
+        //调用类AjaxResult的方法success，该方法一个返回数据类型为AjaxResult的对象，我们用变量ajax去接它。
         AjaxResult ajax = AjaxResult.success();
+        //调用对象ajax的put方法，传递实参：即调用类menuService的方法selectMenuListByRoleId，该方法需要传递实参(roleId)
         ajax.put("checkedKeys", menuService.selectMenuListByRoleId(roleId));
+        //调用对象ajax的put方法，传递实参：即调用类menuService的方法buildMenuTreeSelect，该方法需要传递实参(menus)
         ajax.put("menus", menuService.buildMenuTreeSelect(menus));
+        //最后返回对象ajax
         return ajax;
     }
 

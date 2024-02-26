@@ -26,9 +26,6 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
     @Autowired
     private WebTokenService tokenService;
 
-//    @Autowired
-//    private TokenUtils tokenUtils;
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -56,7 +53,6 @@ public class BytesmartLoginServiceImpl implements IBytesmartLoginService
      * @param uuid 唯一标识
      * @return 结果
      */
-
     @Override
     public String login(String username, String password, String code, String uuid)
     {

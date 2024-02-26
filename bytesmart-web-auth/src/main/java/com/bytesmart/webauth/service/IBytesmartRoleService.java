@@ -15,13 +15,6 @@ public interface IBytesmartRoleService {
      */
     public Set<String> selectRolePermissionByEmployeeId(Long employeeId);
 
-    /**
-     * 根据用户ID查询角色列表
-     *
-     * @param employeeId 用户ID
-     * @return 角色列表
-     */
-    public List<BytesmartRole> selectRolesByEmployeeId(Long employeeId);
 
     //所有角色列表
     public List<BytesmartRole> selectRoleAll();

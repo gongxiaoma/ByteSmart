@@ -24,42 +24,6 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
     @Autowired
     private BytesmartMenuMapper bytesmartMenuMapper;
 
-//    @Autowired
-//    private BytesmartRoleMapper bytesmartRoleMapper;
-//
-//    @Autowired
-//    private BytesmartRoleMenuMapper bytesmartRoleMenuMapper;
-
-//    /**
-//     * 根据用户查询系统菜单列表
-//     *
-//     * @param employeeId 用户ID
-//     * @return 菜单列表
-//     */
-//    @Override
-//    public List<BytesmartMenu> selectMenuList(Long employeeId)
-//    {
-//        return selectMenuList(new BytesmartMenu(), employeeId);
-//    }
-//
-//
-//    @Override
-//    public List<BytesmartMenu> selectMenuList(BytesmartMenu menu, Long employeeId)
-//    {
-//        List<BytesmartMenu> menuList = null;
-//        // 管理员显示所有菜单信息
-//        if (BytesmartEmployee.isAdmin(employeeId))
-//        {
-//            menuList = bytesmartMenuMapper.selectMenuList(menu);
-//        }
-//        else
-//        {
-//            menu.getParams().put("employeeId", employeeId);
-//            menuList = bytesmartMenuMapper.selectMenuListByEmployeeId(menu);
-//        }
-//        return menuList;
-//    }
-//
     /**
      * 根据用户ID查询权限
      *
@@ -112,7 +76,6 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
     public List<BytesmartMenu> selectMenuTreeByEmployeeId(Long employeeId)
     {
         List<BytesmartMenu> menus = null;
-//        if (SecurityUtils.isAdmin(employeeId))
         if (WebSecurityUtils.isAdmin(employeeId))
         {
             menus = bytesmartMenuMapper.selectMenuTreeAll();
@@ -123,14 +86,6 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
         }
         return getChildPerms(menus, 0);
     }
-//
-//
-//    @Override
-//    public List<Long> selectMenuListByRoleId(Long roleId)
-//    {
-//        BytesmartRole role = bytesmartRoleMapper.selectRoleById(roleId);
-//        return bytesmartMenuMapper.selectMenuListByRoleId(roleId,role.isMenuCheckStrictly());
-//    }
 
     /**
      * 构建前端路由所需要的菜单
@@ -189,140 +144,6 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
         }
         return routers;
     }
-//
-//    /**
-//     * 构建前端所需要树结构
-//     *
-//     * @param menus 菜单列表
-//     * @return 树结构列表
-//     */
-//    @Override
-//    public List<BytesmartMenu> buildMenuTree(List<BytesmartMenu> menus)
-//    {
-//        List<BytesmartMenu> returnList = new ArrayList<BytesmartMenu>();
-//        List<Long> tempList = menus.stream().map(BytesmartMenu::getMenuId).collect(Collectors.toList());
-//        for (Iterator<BytesmartMenu> iterator = menus.iterator(); iterator.hasNext();)
-//        {
-//            BytesmartMenu menu = (BytesmartMenu) iterator.next();
-//            // 如果是顶级节点, 遍历该父节点的所有子节点
-//            if (!tempList.contains(menu.getParentId()))
-//            {
-//                recursionFn(menus, menu);
-//                returnList.add(menu);
-//            }
-//        }
-//        if (returnList.isEmpty())
-//        {
-//            returnList = menus;
-//        }
-//        return returnList;
-//    }
-//
-//    /**
-//     * 构建前端所需要下拉树结构
-//     *
-//     * @param menus 菜单列表
-//     * @return 下拉树结构列表
-//     */
-//    @Override
-//    public List<TreeSelect> buildMenuTreeSelect(List<BytesmartMenu> menus)
-//    {
-//        List<BytesmartMenu> menuTrees = buildMenuTree(menus);
-//        return menuTrees.stream().map(TreeSelect::new).collect(Collectors.toList());
-//    }
-//
-//    /**
-//     * 根据菜单ID查询信息
-//     *
-//     * @param menuId 菜单ID
-//     * @return 菜单信息
-//     */
-//    @Override
-//    public BytesmartMenu selectMenuById(Long menuId)
-//    {
-//        return bytesmartMenuMapper.selectMenuById(menuId);
-//    }
-//
-//    /**
-//     * 是否存在菜单子节点
-//     *
-//     * @param menuId 菜单ID
-//     * @return 结果
-//     */
-//    @Override
-//    public boolean hasChildByMenuId(Long menuId)
-//    {
-//        int result = bytesmartMenuMapper.hasChildByMenuId(menuId);
-//        return result > 0;
-//    }
-//
-//    /**
-//     * 查询菜单使用数量
-//     *
-//     * @param menuId 菜单ID
-//     * @return 结果
-//     */
-//    @Override
-//    public boolean checkMenuExistRole(Long menuId)
-//    {
-//        int result = bytesmartRoleMenuMapper.checkMenuExistRole(menuId);
-//        return result > 0;
-//    }
-//
-//    /**
-//     * 新增保存菜单信息
-//     *
-//     * @param menu 菜单信息
-//     * @return 结果
-//     */
-//    @Override
-//    public int insertMenu(BytesmartMenu menu)
-//    {
-//        return bytesmartMenuMapper.insertMenu(menu);
-//    }
-//
-//    /**
-//     * 修改保存菜单信息
-//     *
-//     * @param menu 菜单信息
-//     * @return 结果
-//     */
-//    @Override
-//    public int updateMenu(BytesmartMenu menu)
-//    {
-//        return bytesmartMenuMapper.updateMenu(menu);
-//    }
-//
-//    /**
-//     * 删除菜单管理信息
-//     *
-//     * @param menuId 菜单ID
-//     * @return 结果
-//     */
-//    @Override
-//    public int deleteMenuById(Long menuId)
-//    {
-//        return bytesmartMenuMapper.deleteMenuById(menuId);
-//    }
-//
-//    /**
-//     * 校验菜单名称是否唯一
-//     *
-//     * @param menu 菜单信息
-//     * @return 结果
-//     */
-//    @Override
-//    public boolean checkMenuNameUnique(BytesmartMenu menu)
-//    {
-//        Long menuId = StringUtils.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
-//        BytesmartMenu info = bytesmartMenuMapper.checkMenuNameUnique(menu.getMenuName(),menu.getParentId());
-//        if (StringUtils.isNotNull(info) && info.getMenuId().longValue() != menuId.longValue())
-//        {
-//            return UserConstants.NOT_UNIQUE;
-//        }
-//        return UserConstants.UNIQUE;
-//    }
-//
 
     /**
      * 获取路由名称

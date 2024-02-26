@@ -26,6 +26,7 @@ import java.util.List;
 @RequestMapping("/config")
 public class SysConfigController extends BaseController
 {
+
     @Autowired
     private ISysConfigService configService;
 
