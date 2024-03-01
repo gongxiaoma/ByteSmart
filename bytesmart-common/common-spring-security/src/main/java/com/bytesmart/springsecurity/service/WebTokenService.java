@@ -1,5 +1,6 @@
 package com.bytesmart.springsecurity.service;
 
+import com.bytesmart.apisystem.model.LoginUser;
 import com.bytesmart.common.core.constant.CacheConstants;
 import com.bytesmart.common.core.constant.SecurityConstants;
 import com.bytesmart.common.core.utils.JwtUtils;
@@ -117,6 +118,18 @@ public class WebTokenService
         }
         return webuser;
     }
+
+    /**
+     * 设置用户身份信息
+     */
+    public void setWebLoginUser(WebLoginUser webLoginUser)
+    {
+        if (StringUtils.isNotNull(webLoginUser) && StringUtils.isNotEmpty(webLoginUser.getToken()))
+        {
+            refreshWebToken(webLoginUser);
+        }
+    }
+
 
     /**
      * 删除用户缓存信息

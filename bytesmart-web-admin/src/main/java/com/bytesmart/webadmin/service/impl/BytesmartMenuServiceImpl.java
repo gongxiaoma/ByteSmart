@@ -154,7 +154,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
             router.setPath(getRouterPath(menu));
             router.setComponent(getComponent(menu));
             router.setQuery(menu.getRouteParameter());
-            router.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
+            router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
             List<BytesmartMenu> cMenus = menu.getChildren();
             if (!cMenus.isEmpty() && cMenus.size() > 0 && UserConstants.TYPE_DIR.equals(menu.getMenuType()))
             {
@@ -170,14 +170,14 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
                 children.setPath(menu.getRouteAddress());
                 children.setComponent(menu.getComponentPath());
                 children.setName(StringUtils.capitalize(menu.getRouteAddress()));
-                children.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
+                children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
                 children.setQuery(menu.getRouteParameter());
                 childrenList.add(children);
                 router.setChildren(childrenList);
             }
             else if (menu.getParentId().intValue() == 0 && isInnerLink(menu))
             {
-                router.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon()));
+                router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon()));
                 router.setPath("/");
                 List<RouterVo> childrenList = new ArrayList<RouterVo>();
                 RouterVo children = new RouterVo();
@@ -185,7 +185,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
                 children.setPath(routerPath);
                 children.setComponent(UserConstants.INNER_LINK);
                 children.setName(StringUtils.capitalize(routerPath));
-                children.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon(), menu.getRouteAddress()));
+                children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), menu.getRouteAddress()));
                 childrenList.add(children);
                 router.setChildren(childrenList);
             }

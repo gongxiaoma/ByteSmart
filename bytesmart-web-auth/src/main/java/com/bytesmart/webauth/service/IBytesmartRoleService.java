@@ -23,5 +23,14 @@ public interface IBytesmartRoleService {
     public List<BytesmartRole> selectRoleList(BytesmartRole role);
 
 
+    /**
+     * 根据用户ID查询角色
+     *
+     * @param userName 用户名
+     * @return 角色列表
+     */
+//    public List<BytesmartRole> selectRolesByUserName(String userName);
+
+
 
 }

@@ -19,10 +19,18 @@ public class LoginEmployee
 {
     private static final long serialVersionUID = 1L;
 
+
+    /**
+     * 用户唯一标识
+     */
+    private String token;
+
     /**
      * 封装自己用户模型
      */
     public BytesmartEmployee employee;
+
+
 
     /**
      * 用户唯一标识
@@ -234,6 +242,16 @@ public class LoginEmployee
     public void setEmployee(BytesmartEmployee employee)
     {
         this.employee = employee;
+    }
+
+    public String getToken()
+    {
+        return token;
+    }
+
+    public void setToken(String token)
+    {
+        this.token = token;
     }
 
 

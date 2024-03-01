@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
@@ -54,5 +55,7 @@ public class BytesmartRoleServiceImpl implements IBytesmartRoleService {
         return SpringUtils.getAopProxy(this).selectRoleList(new BytesmartRole());
 
     }
+
+
 
 }

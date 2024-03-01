@@ -65,4 +65,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by r.role_weight
 	</select>
 
+	<select id="selectRolesByUserName" parameterType="String" resultMap="BytesmartRoleResult">
+		<include refid="selectRoleVo"/>
+		WHERE r.del_flag = '0' and e.username = #{userName}
+	</select>
+
 </mapper> 

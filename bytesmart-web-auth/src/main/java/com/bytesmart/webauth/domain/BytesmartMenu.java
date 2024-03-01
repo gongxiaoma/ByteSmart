@@ -62,7 +62,7 @@ public class BytesmartMenu extends BaseEntity
     private String menuPerms;
 
     /** 菜单图标 */
-    private String menuIcon;
+    private String icon;
 
     /** 子菜单 */
     private List<BytesmartMenu> children = new ArrayList<BytesmartMenu>();
@@ -179,12 +179,12 @@ public class BytesmartMenu extends BaseEntity
         this.menuPerms = menuPerms;
     }
 
-    public String getMenuIcon() {
-        return menuIcon;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setMenuIcon(String menuIcon) {
-        this.menuIcon = menuIcon;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public List<BytesmartMenu> getChildren() {
@@ -210,7 +210,7 @@ public class BytesmartMenu extends BaseEntity
             .append("menuDisplay", getMenuDisplay())
             .append("menuStatus ", getMenuStatus())
             .append("menuPerms", getMenuPerms())
-            .append("menuIcon", getMenuIcon())
+            .append("icon", getIcon())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())

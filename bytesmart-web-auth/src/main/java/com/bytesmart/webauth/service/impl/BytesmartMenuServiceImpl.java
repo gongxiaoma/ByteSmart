@@ -78,12 +78,14 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
         List<BytesmartMenu> menus = null;
         if (WebSecurityUtils.isAdmin(employeeId))
         {
+            System.out.println("我是管理员");
             menus = bytesmartMenuMapper.selectMenuTreeAll();
         }
         else
         {
             menus = bytesmartMenuMapper.selectMenuTreeByEmployeeId(employeeId);
         }
+        System.out.println(menus);
         return getChildPerms(menus, 0);
     }
 
@@ -105,7 +107,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
             router.setPath(getRouterPath(menu));
             router.setComponent(getComponent(menu));
             router.setQuery(menu.getRouteParameter());
-            router.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
+            router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
             List<BytesmartMenu> cMenus = menu.getChildren();
             if (!cMenus.isEmpty() && cMenus.size() > 0 && UserConstants.TYPE_DIR.equals(menu.getMenuType()))
             {
@@ -121,14 +123,14 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
                 children.setPath(menu.getRouteAddress());
                 children.setComponent(menu.getComponentPath());
                 children.setName(StringUtils.capitalize(menu.getRouteAddress()));
-                children.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
+                children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getRouteAddress()));
                 children.setQuery(menu.getRouteParameter());
                 childrenList.add(children);
                 router.setChildren(childrenList);
             }
             else if (menu.getParentId().intValue() == 0 && isInnerLink(menu))
             {
-                router.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon()));
+                router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon()));
                 router.setPath("/");
                 List<RouterVo> childrenList = new ArrayList<RouterVo>();
                 RouterVo children = new RouterVo();
@@ -136,7 +138,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
                 children.setPath(routerPath);
                 children.setComponent(UserConstants.INNER_LINK);
                 children.setName(StringUtils.capitalize(routerPath));
-                children.setMeta(new MetaVo(menu.getMenuName(), menu.getMenuIcon(), menu.getRouteAddress()));
+                children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), menu.getRouteAddress()));
                 childrenList.add(children);
                 router.setChildren(childrenList);
             }
@@ -153,7 +155,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
      */
     public String getRouteName(BytesmartMenu menu)
     {
-        String routerName = StringUtils.capitalize(menu.getComponentPath());
+        String routerName = StringUtils.capitalize(menu.getRouteAddress());
         // 非外链并且是一级目录（类型为目录）
         if (isMenuFrame(menu))
         {
@@ -180,7 +182,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
         if (0 == menu.getParentId().intValue() && UserConstants.TYPE_DIR.equals(menu.getMenuType())
                 && UserConstants.NO_FRAME.equals(menu.getIsFrame()))
         {
-            routerPath = "/" + menu.getComponentPath();
+            routerPath = "/" + menu.getRouteAddress();
         }
         // 非外链并且是一级目录（类型为菜单）
         else if (isMenuFrame(menu))

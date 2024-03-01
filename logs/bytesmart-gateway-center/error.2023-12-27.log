@@ -1,8 +1,0 @@
-10:21:26.840 [boundedElastic-571] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/code,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-admin-center"
-10:21:28.701 [boundedElastic-571] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/code,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-admin-center"
-14:09:30.206 [reactor-http-nio-3] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/,异常信息:404 NOT_FOUND
-14:09:30.565 [reactor-http-nio-3] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/favicon.ico,异常信息:404 NOT_FOUND
-16:44:14.903 [reactor-http-nio-6] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/admin/posts/list,异常信息:404 NOT_FOUND
-16:49:10.033 [reactor-http-nio-11] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/admin/posts/list,异常信息:404 NOT_FOUND
-16:53:25.720 [reactor-http-nio-4] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/admin/posts/list,异常信息:404 NOT_FOUND
-23:54:33.751 [boundedElastic-1177] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/post/list,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"

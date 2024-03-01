@@ -6,6 +6,7 @@ import com.bytesmart.common.core.web.domain.AjaxResult;
 import com.bytesmart.common.core.web.page.TableDataInfo;
 import com.bytesmart.common.log.annotation.Log;
 import com.bytesmart.common.log.enums.BusinessType;
+import com.bytesmart.common.security.annotation.RequiresPermissions;
 import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.webadmin.domain.BytesmartConfig;
 import com.bytesmart.webadmin.service.IBytesmartConfigService;
@@ -31,7 +32,7 @@ public class BytesmartConfigController extends BaseController
     /**
      * 获取参数配置列表
      */
-//    @RequiresPermissions("system:config:list")
+    @RequiresPermissions("webadmin:config:list")
     @GetMapping("/list")
     public TableDataInfo list(BytesmartConfig config)
     {
@@ -41,7 +42,7 @@ public class BytesmartConfigController extends BaseController
     }
 
     @Log(title = "参数管理", businessType = BusinessType.EXPORT)
-//    @RequiresPermissions("system:config:export")
+    @RequiresPermissions("webadmin:config:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, BytesmartConfig config)
     {
@@ -71,7 +72,7 @@ public class BytesmartConfigController extends BaseController
     /**
      * 新增参数配置
      */
-//    @RequiresPermissions("system:config:add")
+    @RequiresPermissions("webadmin:config:add")
     @Log(title = "参数管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@Validated @RequestBody BytesmartConfig config)
@@ -87,7 +88,7 @@ public class BytesmartConfigController extends BaseController
     /**
      * 修改参数配置
      */
-//    @RequiresPermissions("system:config:edit")
+    @RequiresPermissions("webadmin:config:edit")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody BytesmartConfig config)
@@ -103,7 +104,7 @@ public class BytesmartConfigController extends BaseController
     /**
      * 删除参数配置
      */
-//    @RequiresPermissions("system:config:remove")
+    @RequiresPermissions("webadmin:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{configIds}")
     public AjaxResult remove(@PathVariable Long[] configIds)
@@ -115,7 +116,7 @@ public class BytesmartConfigController extends BaseController
     /**
      * 刷新参数缓存
      */
-//    @RequiresPermissions("system:config:remove")
+    @RequiresPermissions("webadmin:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.CLEAN)
     @DeleteMapping("/refreshCache")
     public AjaxResult refreshCache()

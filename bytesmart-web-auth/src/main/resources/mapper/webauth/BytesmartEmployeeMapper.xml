@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bytesmart.webauth.mapper.BytesmartEmployeeMapper">
 	<resultMap type="com.bytesmart.apisystem.domain.BytesmartEmployee" id="BytesmartEmployeeResult">
 		<id     property="employeeId"            column="employee_id"      />
@@ -80,4 +80,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where e.username = #{userName}
 	</select>
 
-</mapper> 
+	<update id="resetEmployeerPwd" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee">
+ 		update bytesmart_employee set password = #{password} where username = #{userName}
+	</update>
+
+	<select id="checkPhoneUnique" parameterType="String" resultMap="BytesmartEmployeeResult">
+		select employee_id, employee_mobile from bytesmart_employee where employee_mobile = #{employeeMobile} and del_flag = '0' limit 1
+	</select>
+
+	<select id="checkEmailUnique" parameterType="String" resultMap="BytesmartEmployeeResult">
+		select employee_id, employee_email from bytesmart_employee where employee_email = #{employeeEmail} and del_flag = '0' limit 1
+	</select>
+
+	<update id="updateEmployee" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee">
+		update bytesmart_employee
+		<set>
+			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
+			<if test="userName != null and userName != ''">username = #{userName},</if>
+			<if test="employeeName != null and employeeName != ''">employee_name = #{employeeName},</if>
+			<if test="employeeenglishName != null and employeeenglishName != ''">employee_english_name = #{employeeName},</if>
+			<if test="employeeWeight != null and employeeWeight != ''">employee_weight = #{employeeWeight},</if>
+			<if test="employeeGender != null and employeeGender != ''">employee_gender = #{employeeGender},</if>
+			<if test="employeeIsmarital != null and employeeIsmarital != ''">employee_ismarital = #{employeeIsmarital},</if>
+			<if test="employeeType != null and employeeType != ''">employee_type = #{employeeType},</if>
+			<if test="employeeMobile != null and employeeMobile != ''">employee_mobile = #{employeeMobile},</if>
+			<if test="officePhone != null and officePhone != ''">office_phone = #{officePhone},</if>
+			<if test="employeeAddress != null and employeeAddress != ''">employee_address = #{employeeAddress},</if>
+			<if test="employeeEmail != null ">employee_email = #{employeeEmail},</if>
+			<if test="employeeBirthdate != null">employee_birthdate = #{employeeBirthdate},</if>
+			<if test="employmentDate != null">employment_date = #{employmentDate},</if>
+			<if test="employeeNo != null">employee_no = #{employeeNo},</if>
+			<if test="employeeAge != null">employee_age = #{employeeAge},</if>
+			<if test="employmentDate != null">employment_date = #{employmentDate},</if>
+			<if test="employeeAvatar != null and employeeAvatar != ''">employee_avatar = #{employeeAvatar},</if>
+			<if test="password != null and password != ''">password = #{password},</if>
+			<if test="employeeStatus != null and employeeStatus != ''">employee_status = #{employeeStatus},</if>
+			<if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
+			<if test="loginDate != null">login_date = #{loginDate},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			<if test="remark != null and remark != ''">remark = #{remark},</if>
+
+			update_time = sysdate()
+		</set>
+		where employee_id = #{employeeId}
+	</update>
+
+
+
+</mapper>
