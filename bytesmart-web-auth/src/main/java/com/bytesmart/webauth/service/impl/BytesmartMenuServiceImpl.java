@@ -33,7 +33,7 @@ public class BytesmartMenuServiceImpl implements IBytesmartMenuService {
     @Override
     public Set<String> selectMenuPermsByEmployeeId(Long employeeId)
     {
-        Set<String> perms = bytesmartMenuMapper.selectMenuPermsByEmployeeId(employeeId);
+        List<String> perms = bytesmartMenuMapper.selectMenuPermsByEmployeeId(employeeId);
         Set<String> permsSet = new HashSet<>();
         for (String perm : perms)
         {

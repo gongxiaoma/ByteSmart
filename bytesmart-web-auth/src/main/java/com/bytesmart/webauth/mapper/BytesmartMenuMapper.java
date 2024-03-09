@@ -8,7 +8,7 @@ public interface BytesmartMenuMapper {
 
     public List<String> selectMenuPermsByRoleId(Long roleId);
 
-    public Set<String> selectMenuPermsByEmployeeId(Long employeeId);
+    public List<String> selectMenuPermsByEmployeeId(Long employeeId);
 
     public List<BytesmartMenu> selectMenuTreeByEmployeeId(Long employeeId);
 

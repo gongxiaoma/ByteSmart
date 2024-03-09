@@ -6,6 +6,7 @@ import com.bytesmart.common.core.domain.R;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.core.utils.poi.ExcelUtil;
 import com.bytesmart.common.security.annotation.InnerAuth;
+import com.bytesmart.common.security.annotation.RequiresPermissions;
 import com.bytesmart.common.security.utils.SecurityUtils;
 import com.bytesmart.webadmin.service.*;
 import com.bytesmart.common.core.web.controller.BaseController;
@@ -49,7 +50,7 @@ public class BytesmartEmployeeController extends BaseController {
     private IBytesmartConfigService bytesmartConfigService;
 
 
-    //    @RequiresPermissions("webadmin:emloyee:list ")
+    @RequiresPermissions("webadmin:emloyee:list ")
     @GetMapping("/list")
     public TableDataInfo list(BytesmartEmployee employee)
     {
@@ -59,7 +60,7 @@ public class BytesmartEmployeeController extends BaseController {
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
-//    @RequiresPermissions("webadmin:emloyee:export")
+    @RequiresPermissions("webadmin:emloyee:export")
     @PostMapping("/export")
     public void export(HttpServletResponse response, BytesmartEmployee employee)
     {
@@ -68,7 +69,7 @@ public class BytesmartEmployeeController extends BaseController {
         util.exportExcel(response, list, "用户数据");
     }
 
-    //    @RequiresPermissions("webadmin:emloyee:import")
+    @RequiresPermissions("webadmin:emloyee:import")
     @PostMapping("/importData")
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
     {
@@ -144,6 +145,7 @@ public class BytesmartEmployeeController extends BaseController {
 //    }
 
     //    修改
+    @RequiresPermissions("webadmin:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody BytesmartEmployee employee)
@@ -167,7 +169,7 @@ public class BytesmartEmployeeController extends BaseController {
         return toAjax(bytesmartEmployeeService.updateEmployee(employee));
     }
 
-    //    @RequiresPermissions("webadmin:emloyee:remove")
+    @RequiresPermissions("webadmin:emloyee:remove")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{employeeIds}")
     public AjaxResult remove(@PathVariable Long[] employeeIds)
@@ -182,7 +184,7 @@ public class BytesmartEmployeeController extends BaseController {
     /**
      * 重置密码
      */
-//    @RequiresPermissions("webadmin:emloyee:edit")
+    @RequiresPermissions("webadmin:emloyee:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/resetPwd")
     public AjaxResult resetPwd(@RequestBody BytesmartEmployee employee)
@@ -195,7 +197,7 @@ public class BytesmartEmployeeController extends BaseController {
     }
 
 
-    //    获取当前用户信息（通过用户名）
+    // 获取当前用户信息（通过用户名）
     @InnerAuth
     @GetMapping("/info/{userName}")
     public R<LoginEmployee> info(@PathVariable("userName") String userName)
@@ -226,8 +228,6 @@ public class BytesmartEmployeeController extends BaseController {
 
         //之前正常使用的
         BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(SecurityUtils.getUserId());
-
-
         // 角色集合
         Set<String> roles = bytesmartPermissionService.getRolePermission(bytesmartEmployee);
         // 权限集合
@@ -261,7 +261,7 @@ public class BytesmartEmployeeController extends BaseController {
     /**
      * 状态修改
      */
-//    @RequiresPermissions("webadmin:employee:edit")
+    @RequiresPermissions("webadmin:employee:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody BytesmartEmployee employee)
@@ -275,7 +275,7 @@ public class BytesmartEmployeeController extends BaseController {
     /**
      * 根据用户编号获取授权角色
      */
-//    @RequiresPermissions("webadmin:employee:query")
+    @RequiresPermissions("webadmin:employee:query")
     @GetMapping("/authRole/{employeeId}")
     public AjaxResult authRole(@PathVariable("employeeId") Long employeeId)
     {
@@ -290,7 +290,7 @@ public class BytesmartEmployeeController extends BaseController {
     /**
      * 用户授权角色
      */
-//    @RequiresPermissions("webadmin:employeeedit")
+    @RequiresPermissions("webadmin:employee:edit")
     @Log(title = "用户管理", businessType = BusinessType.GRANT)
     @PutMapping("/authRole")
     public AjaxResult insertAuthRole(Long employeeId, Long[] roleIds)
@@ -301,6 +301,7 @@ public class BytesmartEmployeeController extends BaseController {
     }
 
     //获取部门树列表
+    @RequiresPermissions("webadmin:employee:list")
     @GetMapping("/deptTree")
     public AjaxResult deptTree(BytesmartDept dept)
     {

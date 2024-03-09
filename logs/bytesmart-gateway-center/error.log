@@ -1,3 +1,2 @@
-10:08:47.276 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/getInfo
-11:31:27.285 [reactor-http-nio-3] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/menu/list
-11:31:27.297 [reactor-http-nio-4] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/dict/data/type/sys_show_hide
+13:05:32.255 [reactor-http-nio-3] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/getInfo
+13:52:45.698 [reactor-http-nio-5] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo

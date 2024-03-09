@@ -16,7 +16,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -54,11 +58,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new ServiceException("登录用户已被停用");
         }
 
-
-        Set<String> list = menuMapper.selectMenuPermsByEmployeeId(employee.getEmployeeId());
-
-        return new WebLoginUser(employee, list);
-
+        List<String> perms = menuMapper.selectMenuPermsByEmployeeId(employee.getEmployeeId());
+        Set<String> permsSet = new HashSet<>();
+        for (String perm : perms)
+        {
+            if (StringUtils.isNotEmpty(perm))
+            {
+                permsSet.addAll(Arrays.asList(perm.trim().split(",")));
+            }
+        }
+        return new WebLoginUser(employee, permsSet);
 
     }
 }

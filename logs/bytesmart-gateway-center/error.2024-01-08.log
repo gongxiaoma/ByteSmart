@@ -1,3 +1,0 @@
-23:42:13.207 [reactor-http-nio-2] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo
-23:42:24.597 [boundedElastic-9] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/employee/list,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"
-23:42:24.600 [boundedElastic-7] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/employee/deptTree,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"

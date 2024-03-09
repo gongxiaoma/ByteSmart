@@ -1,4 +1,0 @@
-00:58:52.116 [boundedElastic-9756] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/dept/101,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"
-00:58:52.130 [boundedElastic-9756] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/dept/list/exclude/101,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"
-08:34:34.193 [reactor-http-nio-10] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/webadmin/employee/changeStatus
-15:34:35.464 [boundedElastic-10390] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/dept/list,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"
