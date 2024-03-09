@@ -1,2 +1,5 @@
 13:05:32.255 [reactor-http-nio-3] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/web/getInfo
 13:52:45.698 [reactor-http-nio-5] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo
+14:39:41.555 [boundedElastic-1844] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/code,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
+14:52:40.264 [boundedElastic-1860] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/login,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
+14:52:40.530 [boundedElastic-1860] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/code,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
