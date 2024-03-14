@@ -1,6 +1,5 @@
 package com.bytesmart.webadmin.service.impl;
 
-import com.bytesmart.apisystem.domain.SysRole;
 import com.bytesmart.webadmin.domain.BytesmartEmployeeRole;
 import com.bytesmart.webadmin.domain.BytesmartRoleDept;
 import com.bytesmart.webadmin.domain.BytesmartRoleMenu;
