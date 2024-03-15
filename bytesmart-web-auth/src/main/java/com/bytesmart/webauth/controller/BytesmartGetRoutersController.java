@@ -30,6 +30,7 @@ public class BytesmartGetRoutersController extends BaseController {
         Long employeeId = WebSecurityUtils.getUserId();
 //        Long employeeId = 1L;
         List<BytesmartMenu> menus = bytesmartMenuService.selectMenuTreeByEmployeeId(employeeId);
+        System.out.println(employeeId);
         return success(bytesmartMenuService.buildMenus(menus));
     }
 }

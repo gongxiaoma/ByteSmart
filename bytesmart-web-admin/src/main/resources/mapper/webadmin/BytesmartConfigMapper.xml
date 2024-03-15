@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bytesmart.webadmin.mapper.BytesmartConfigMapper">
 
-    <resultMap type="BytesmartConfig" id="BytesmartConfigResult">
+    <resultMap type="com.bytesmart.webadmin.domain.BytesmartConfig" id="BytesmartConfigResult">
         <id     property="configId"      column="config_id"      />
         <result property="configName"    column="config_name"    />
         <result property="configKey"     column="config_key"     />
@@ -33,12 +33,12 @@
         </where>
     </sql>
 
-    <select id="selectConfig" parameterType="BytesmartConfig" resultMap="BytesmartConfigResult">
+    <select id="selectConfig" parameterType="com.bytesmart.webadmin.domain.BytesmartConfig" resultMap="BytesmartConfigResult">
         <include refid="selectConfigVo"/>
         <include refid="sqlwhereSearch"/>
     </select>
 
-    <select id="selectConfigList" parameterType="BytesmartConfig" resultMap="BytesmartConfigResult">
+    <select id="selectConfigList" parameterType="com.bytesmart.webadmin.domain.BytesmartConfig" resultMap="BytesmartConfigResult">
         <include refid="selectConfigVo"/>
         <where>
             <if test="configName != null and configName != ''">
@@ -69,7 +69,7 @@
         where config_key = #{configKey} limit 1
     </select>
 
-    <insert id="insertConfig" parameterType="BytesmartConfig">
+    <insert id="insertConfig" parameterType="com.bytesmart.webadmin.domain.BytesmartConfig">
         insert into bytesmart_config (
         <if test="configName != null and configName != '' ">config_name,</if>
         <if test="configKey != null and configKey != '' ">config_key,</if>
@@ -89,7 +89,7 @@
         )
     </insert>
 
-    <update id="updateConfig" parameterType="BytesmartConfig">
+    <update id="updateConfig" parameterType="com.bytesmart.webadmin.domain.BytesmartConfig">
         update bytesmart_config
         <set>
             <if test="configName != null and configName != ''">config_name = #{configName},</if>

@@ -14,6 +14,7 @@ public class BytesmartWebTaskApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BytesmartWebTaskApplication.class, args);
+        System.out.println("byteSmart 任务认证模块启动成功");
     }
 
 }

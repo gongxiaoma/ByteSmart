@@ -48,41 +48,41 @@
         where post_id = #{postId}
     </select>
 
-    <update id="updatePost" parameterType="BytesmartPost">
-        update bytesmart_post
-        <set>
-            <if test="postName != null and postName != ''">post_name = #{postName},</if>
-            <if test="postType != null and postType != ''">post_type = #{postType},</if>
-            <if test="postWeight != null">post_weight = #{postWeight},</if>
-            <if test="postStatus != null and postStatus != ''">post_status = #{postStatus},</if>
-            <if test="remark != null">remark = #{remark},</if>
-            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
-            update_time = sysdate()
-        </set>
-        where post_id = #{postId}
-    </update>
+<!--    <update id="updatePost" parameterType="BytesmartPost">-->
+<!--        update bytesmart_post-->
+<!--        <set>-->
+<!--            <if test="postName != null and postName != ''">post_name = #{postName},</if>-->
+<!--            <if test="postType != null and postType != ''">post_type = #{postType},</if>-->
+<!--            <if test="postWeight != null">post_weight = #{postWeight},</if>-->
+<!--            <if test="postStatus != null and postStatus != ''">post_status = #{postStatus},</if>-->
+<!--            <if test="remark != null">remark = #{remark},</if>-->
+<!--            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>-->
+<!--            update_time = sysdate()-->
+<!--        </set>-->
+<!--        where post_id = #{postId}-->
+<!--    </update>-->
 
-    <insert id="insertPost" parameterType="BytesmartPost" useGeneratedKeys="true" keyProperty="postId">
-        insert into bytesmart_post(
-        <if test="postId != null and postId != 0">post_id,</if>
-        <if test="postType != null and postType != ''">post_type,</if>
-        <if test="postName != null and postName != ''">post_name,</if>
-        <if test="postWeight != null">post_weight,</if>
-        <if test="postStatus != null and postStatus != ''">post_status,</if>
-        <if test="remark != null and remark != ''">remark,</if>
-        <if test="createBy != null and createBy != ''">create_by,</if>
-        create_time
-        )values(
-        <if test="postId != null and postId != 0">#{postId},</if>
-        <if test="postType != null and postType != ''">#{postType},</if>
-        <if test="postName != null and postName != ''">#{postName},</if>
-        <if test="postWeight != null">#{postWeight},</if>
-        <if test="postStatus != null and postStatus != ''">#{postStatus},</if>
-        <if test="remark != null and remark != ''">#{remark},</if>
-        <if test="createBy != null and createBy != ''">#{createBy},</if>
-        sysdate()
-        )
-    </insert>
+<!--    <insert id="insertPost" parameterType="BytesmartPost" useGeneratedKeys="true" keyProperty="postId">-->
+<!--        insert into bytesmart_post(-->
+<!--        <if test="postId != null and postId != 0">post_id,</if>-->
+<!--        <if test="postType != null and postType != ''">post_type,</if>-->
+<!--        <if test="postName != null and postName != ''">post_name,</if>-->
+<!--        <if test="postWeight != null">post_weight,</if>-->
+<!--        <if test="postStatus != null and postStatus != ''">post_status,</if>-->
+<!--        <if test="remark != null and remark != ''">remark,</if>-->
+<!--        <if test="createBy != null and createBy != ''">create_by,</if>-->
+<!--        create_time-->
+<!--        )values(-->
+<!--        <if test="postId != null and postId != 0">#{postId},</if>-->
+<!--        <if test="postType != null and postType != ''">#{postType},</if>-->
+<!--        <if test="postName != null and postName != ''">#{postName},</if>-->
+<!--        <if test="postWeight != null">#{postWeight},</if>-->
+<!--        <if test="postStatus != null and postStatus != ''">#{postStatus},</if>-->
+<!--        <if test="remark != null and remark != ''">#{remark},</if>-->
+<!--        <if test="createBy != null and createBy != ''">#{createBy},</if>-->
+<!--        sysdate()-->
+<!--        )-->
+<!--    </insert>-->
 
 
 
