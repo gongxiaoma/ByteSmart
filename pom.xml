@@ -222,7 +222,6 @@
 		<module>bytesmart-common</module>
 		<module>bytesmart-web-admin</module>
 		<module>bytesmart-web-auth</module>
-		<module>bytesmart-web-netdisk</module>
 		<module>bytesmart-web-task</module>
 
 
