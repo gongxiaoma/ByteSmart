@@ -1,7 +1,6 @@
 package com.bytesmart.webadmin.service;
 
 import com.bytesmart.apisystem.domain.BytesmartRole;
-import com.bytesmart.apisystem.domain.SysRole;
 import com.bytesmart.webadmin.domain.BytesmartEmployeeRole;
 
 import java.util.List;

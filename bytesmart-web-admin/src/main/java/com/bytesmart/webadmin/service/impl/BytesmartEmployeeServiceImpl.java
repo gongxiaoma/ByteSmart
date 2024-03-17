@@ -1,8 +1,6 @@
 package com.bytesmart.webadmin.service.impl;
 
 import com.bytesmart.apisystem.domain.BytesmartRole;
-import com.bytesmart.apisystem.domain.SysRole;
-import com.bytesmart.apisystem.domain.SysUser;
 import com.bytesmart.common.core.constant.UserConstants;
 import com.bytesmart.common.core.exception.ServiceException;
 import com.bytesmart.common.core.utils.SpringUtils;

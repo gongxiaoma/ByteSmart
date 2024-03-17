@@ -18,6 +18,11 @@ public class ServiceNameConstants
     public static final String SYSTEM_SERVICE = "bytesmart-system-center";
 
     /**
+     * 系统模块的serviceid
+     */
+    public static final String WEBADMIN_SERVICE = "bytesmart-web-admin";
+
+    /**
      * 文件服务的serviceid
      */
     public static final String FILE_SERVICE = "bytesmart-file-center";

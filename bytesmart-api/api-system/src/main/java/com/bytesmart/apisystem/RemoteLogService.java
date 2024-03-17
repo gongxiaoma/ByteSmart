@@ -1,9 +1,9 @@
 package com.bytesmart.apisystem;
 
+import com.bytesmart.apisystem.domain.SysLogininfor;
 import com.bytesmart.common.core.constant.SecurityConstants;
 import com.bytesmart.common.core.constant.ServiceNameConstants;
 import com.bytesmart.common.core.domain.R;
-import com.bytesmart.apisystem.domain.SysLogininfor;
 import com.bytesmart.apisystem.domain.SysOperLog;
 import com.bytesmart.apisystem.factory.RemoteLogFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;

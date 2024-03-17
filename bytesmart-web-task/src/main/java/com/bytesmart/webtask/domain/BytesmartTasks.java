@@ -17,37 +17,28 @@ public class BytesmartTasks{
     private String taskProgress;
     private String status;
     private Long initiatorId;
+    private String initiatorName;
+    private String assigenName;
     private LocalDate enddate;
     private LocalDate startdate;
     private LocalDate taskAf;
-
     private LocalDate updateTime;
     private LocalDate createTime;
     private String remark;
 
 
-    // 描述当前任务分配哪些员工
+    // 描述当前任务分配哪些员工，后面删除
     private List<BytesmartEmployee> employeeList;
 
-    // 员工组
-    private Long[] employeeIds;
+    private List<BytesmartTasksAssigned> bytesmartTasksAssignedList;
 
-    public List<BytesmartEmployee> getEmployeeList() {
-        return employeeList;
+    public List<BytesmartTasksAssigned> getBytesmartTasksAssignedList() {
+        return bytesmartTasksAssignedList;
     }
 
-    public void setEmployeeList(List<BytesmartEmployee> employeeList) {
-        this.employeeList = employeeList;
+    public void setBytesmartTasksAssignedList(List<BytesmartTasksAssigned> bytesmartTasksAssignedList) {
+        this.bytesmartTasksAssignedList = bytesmartTasksAssignedList;
     }
-
-    public Long[] getEmployeeIds() {
-        return employeeIds;
-    }
-
-    public void setEmployeeIds(Long[] employeeIds) {
-        this.employeeIds = employeeIds;
-    }
-
 
     public Long getTaskId() {
         return taskId;
@@ -95,6 +86,22 @@ public class BytesmartTasks{
 
     public void setInitiatorId(Long initiatorId) {
         this.initiatorId = initiatorId;
+    }
+
+    public String getInitiatorName() {
+        return initiatorName;
+    }
+
+    public void setInitiatorName(String initiatorName) {
+        this.initiatorName = initiatorName;
+    }
+
+    public String getAssigenName() {
+        return assigenName;
+    }
+
+    public void setAssigenName(String assigenName) {
+        this.assigenName = assigenName;
     }
 
     public LocalDate getEnddate() {
@@ -145,6 +152,8 @@ public class BytesmartTasks{
         this.remark = remark;
     }
 
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -153,6 +162,8 @@ public class BytesmartTasks{
                 .append("taskDescr", getTaskDescr())
                 .append("status", getStatus())
                 .append("initiatorId", getInitiatorId())
+                .append("initiatorName", getInitiatorName())
+                .append("assigenName", getAssigenName())
                 .append("enddate",getEnddate())
                 .append("startdate",getStartdate())
                 .append("taskAf",getTaskAf())
@@ -161,10 +172,8 @@ public class BytesmartTasks{
                 .append("updateTime", getUpdateTime())
                 .append("updateTime", getUpdateTime())
                 .append("remark", getRemark())
-                .append("employeeList", getEmployeeList())
-                .append("employeeIds", getEmployeeIds())
+                .append("bytesmartTasksAssignedList",getBytesmartTasksAssignedList())
                 .toString();
     }
-
 
 }

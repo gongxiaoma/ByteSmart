@@ -1,1 +1,0 @@
-11:47:55.088 [boundedElastic-2764] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/getInfo,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"

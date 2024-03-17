@@ -1,6 +1,6 @@
 package com.bytesmart.springsecurity.service;
 
-import com.bytesmart.apisystem.model.LoginUser;
+//import com.bytesmart.apisystem.model.LoginUser;
 import com.bytesmart.common.core.constant.CacheConstants;
 import com.bytesmart.common.core.constant.SecurityConstants;
 import com.bytesmart.common.core.utils.JwtUtils;

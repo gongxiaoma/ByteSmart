@@ -1,0 +1,3 @@
+com.bytesmart.apiwebadmin.factory.RemoteUserFallbackFactory
+com.bytesmart.apiwebadmin.factory.RemoteLogFallbackFactory
+com.bytesmart.apiwebadmin.factory.RemoteFileFallbackFactory

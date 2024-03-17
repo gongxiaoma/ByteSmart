@@ -20,6 +20,7 @@
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>api-system</artifactId>
+            <version>3.6.3</version>
         </dependency>
 
         <dependency>
@@ -71,17 +72,6 @@
             <artifactId>common-datasource</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash;  Common DataScope &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.bytesmart</groupId>-->
-<!--            <artifactId>common-datascope</artifactId>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash;  Common Log &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.bytesmart</groupId>-->
-<!--            <artifactId>common-log</artifactId>-->
-<!--        </dependency>-->
 
         <!--  Common Swagger -->
         <dependency>

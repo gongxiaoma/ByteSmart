@@ -1,6 +1,5 @@
 package com.bytesmart.webadmin.service;
 
-import com.bytesmart.apisystem.domain.SysDept;
 import com.bytesmart.webadmin.domain.vo.TreeSelect;
 import com.bytesmart.apisystem.domain.BytesmartDept;
 

@@ -1,1 +1,3 @@
-10:07:25.010 [reactor-http-nio-2] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/tasks/test,异常信息:404 NOT_FOUND
+15:54:33.336 [reactor-http-nio-9] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/config/configKey/sys.user.initPassword
+15:54:33.351 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/deptTree
+15:54:33.336 [reactor-http-nio-7] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/list

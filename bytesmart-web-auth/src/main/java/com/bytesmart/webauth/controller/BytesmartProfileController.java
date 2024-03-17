@@ -2,9 +2,6 @@ package com.bytesmart.webauth.controller;
 
 import com.bytesmart.apisystem.RemoteFileService;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import com.bytesmart.apisystem.domain.SysFile;
-import com.bytesmart.apisystem.domain.SysUser;
-import com.bytesmart.apisystem.model.LoginUser;
 import com.bytesmart.common.core.domain.R;
 import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.core.utils.file.FileTypeUtils;

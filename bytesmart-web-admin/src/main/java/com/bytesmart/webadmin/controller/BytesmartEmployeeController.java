@@ -107,14 +107,8 @@ public class BytesmartEmployeeController extends BaseController {
             ajax.put("roleIds", bytesmartEmployee.getRoles().stream().map(BytesmartRole::getRoleId).collect(Collectors.toList()));
         }
         return ajax;
-
-//        return success(bytesmartEmployeeService.selectEmployeeById(employeeId));
     }
 
-//    @PostMapping
-//    public AjaxResult add(@Validated @RequestBody BytesmartEmployee employee){
-//        return toAjax(bytesmartEmployeeService.insertEmployee(employee));
-//    }
 
     //    新增
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
@@ -138,11 +132,6 @@ public class BytesmartEmployeeController extends BaseController {
         return toAjax(bytesmartEmployeeService.insertEmployee(employee));
     }
 
-
-//    @PutMapping
-//    public AjaxResult edit(@Validated @RequestBody BytesmartEmployee employee){
-//        return toAjax(bytesmartEmployeeService.updateEmployee(employee));
-//    }
 
     //    修改
     @RequiresPermissions("webadmin:user:edit")
@@ -223,9 +212,6 @@ public class BytesmartEmployeeController extends BaseController {
     @GetMapping("getInfo")
     public AjaxResult getInfo()
     {
-//        Long employeeId = 1L;
-//        BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(employeeId);
-
         //之前正常使用的
         BytesmartEmployee bytesmartEmployee = bytesmartEmployeeService.selectEmployeeById(SecurityUtils.getUserId());
         // 角色集合
@@ -307,6 +293,5 @@ public class BytesmartEmployeeController extends BaseController {
     {
         return success(bytesmartDeptService.selectDeptTreeList(dept));
     }
-
 
 }

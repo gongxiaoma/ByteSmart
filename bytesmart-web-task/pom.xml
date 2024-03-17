@@ -20,6 +20,7 @@
         <dependency>
             <groupId>com.bytesmart</groupId>
             <artifactId>api-system</artifactId>
+            <version>3.6.3</version>
         </dependency>
 
         <dependency>

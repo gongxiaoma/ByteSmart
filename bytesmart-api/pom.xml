@@ -10,6 +10,7 @@
 
     <modules>
         <module>api-system</module>
+        <module>api-webadmin</module>
     </modules>
 
     <groupId>com.bytesmart</groupId>

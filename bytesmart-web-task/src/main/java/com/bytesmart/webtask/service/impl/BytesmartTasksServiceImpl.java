@@ -1,6 +1,8 @@
 package com.bytesmart.webtask.service.impl;
 
+import com.bytesmart.apisystem.model.LoginEmployee;
 import com.bytesmart.webtask.domain.BytesmartTasks;
+import com.bytesmart.webtask.domain.BytesmartTasksAssigned;
 import com.bytesmart.webtask.mapper.BytesmartTasksMapper;
 import com.bytesmart.webtask.service.IBytesmartTasksService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,22 +12,19 @@ import java.util.List;
 
 @Service
 public class BytesmartTasksServiceImpl implements IBytesmartTasksService {
+
     @Autowired
     private BytesmartTasksMapper tasksMapper;
 
-    @Override
-    public List<BytesmartTasks> selectTaskList(BytesmartTasks tasks){
-        return tasksMapper.selectTaskList(tasks);
-    }
+    @Autowired
+    private BytesmartGetEmployeeService bytesmartGetEmployeeService;
 
     @Override
-    public BytesmartTasks selectTaskBytaskId(Long taskId){
-        return tasksMapper.selectTaskBytaskId(taskId);
+    public BytesmartTasks selectTaskByInitiator(Long employeeId){
+        BytesmartTasks bytesmartTasks = tasksMapper.selectTaskByInitiator(employeeId);
+        String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
+        bytesmartTasks.setInitiatorName(employeeName);
+        return bytesmartTasks;
     }
-
-
-
-
-
 }
 

@@ -1,7 +1,6 @@
 package com.bytesmart.webadmin.mapper;
 
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import com.bytesmart.apisystem.domain.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

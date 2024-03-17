@@ -1,7 +1,6 @@
 package com.bytesmart.webadmin.service;
 
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
-import com.bytesmart.apisystem.domain.SysUser;
 
 import java.util.List;
 

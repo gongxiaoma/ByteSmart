@@ -1,8 +1,19 @@
 package com.bytesmart.webtask.controller;
 
+import com.bytesmart.apisystem.RemoteEmployee;
+import com.bytesmart.apisystem.domain.BytesmartEmployee;
+import com.bytesmart.apisystem.model.LoginEmployee;
+import com.bytesmart.apisystem.model.LoginUser;
+import com.bytesmart.common.core.constant.Constants;
+import com.bytesmart.common.core.constant.SecurityConstants;
+import com.bytesmart.common.core.domain.R;
+import com.bytesmart.common.core.enums.UserStatus;
+import com.bytesmart.common.core.exception.ServiceException;
+import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.common.core.web.controller.BaseController;
 import com.bytesmart.common.core.web.domain.AjaxResult;
 import com.bytesmart.common.core.web.page.TableDataInfo;
+import com.bytesmart.springsecurity.utils.WebSecurityUtils;
 import com.bytesmart.webtask.domain.BytesmartTasks;
 import com.bytesmart.webtask.service.IBytesmartTasksService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +33,29 @@ public class BytesmartTasksController extends BaseController {
     @Autowired
     private IBytesmartTasksService bytesmartTasksService;
 
-    @GetMapping("/list")
-    public TableDataInfo list(BytesmartTasks tasks)
-    {
-        startPage();
-        List<BytesmartTasks> list = bytesmartTasksService.selectTaskList(tasks);
-        System.out.println("ABCD");
-        return getDataTable(list);
-    }
+    @Autowired
+    RemoteEmployee remoteEmployee;
 
+    // （先做这个）这个方法是根据用户id查询自己发起的任务，用于用户在前端打开“发起的”页面获取自己被发起的任务，这个不设计到中间表
     //@RequiresPermissions("webtask:tasks:query")
-    @GetMapping(value = "/{taskId}")
-    public AjaxResult getInfo(@PathVariable Long taskId)
+    @GetMapping("/initiator")
+    public AjaxResult getTaskByInitiator()
     {
-        return success(bytesmartTasksService.selectTaskBytaskId(taskId));
+        Long employeeId = 25L;
+//        Long employeeId = WebSecurityUtils.getUserId();
+        return success(bytesmartTasksService.selectTaskByInitiator(employeeId));
     }
 
+    // 这个方法是根据用户id查询自己被指派的任务，用于用户在前端打开“被指派”页面获取自己被指派的任务，这个涉及到中间表
+    //@RequiresPermissions("webtask:tasks:query")
+//    @GetMapping("/assigned")
+//    public AjaxResult getTaskByAssigned()
+//    {
+//        Long employeeId = 24L;
+////        Long employeeId = WebSecurityUtils.getUserId();
+//        return success(bytesmartTasksService.selectTaskBytaskId(employeeId));
+//    }
 
-    // 测试接口：
-    // 1、用postman直接调用，不传token看下是否提示没权限，如果不可以是正常的。
-    // 2、然后用token请求看看
-    @GetMapping("test")
-    public AjaxResult test(){
-        AjaxResult ajax = AjaxResult.success();
-        ajax.put("user", "A");
-        ajax.put("roles", "B");
-        ajax.put("permissions", "C");
-        return ajax;
-    }
+
 
 }

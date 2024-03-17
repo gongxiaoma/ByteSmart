@@ -79,7 +79,7 @@ public class SysUserController extends BaseController
     }
 
     @Log(title = "用户管理", businessType = BusinessType.IMPORT)
-    @RequiresPermissions("system:user:import")
+//    @RequiresPermissions("system:user:import")
     @PostMapping("/importData")
     public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
     {
@@ -161,7 +161,7 @@ public class SysUserController extends BaseController
         return ajax;
     }
 
-    @RequiresPermissions("system:user:query")
+//    @RequiresPermissions("system:user:query")
     @GetMapping("test")
     public AjaxResult test(){
         AjaxResult ajax = AjaxResult.success();
@@ -221,7 +221,7 @@ public class SysUserController extends BaseController
     /**
      * 修改用户
      */
-    @RequiresPermissions("system:user:edit")
+//    @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysUser user)
@@ -306,7 +306,7 @@ public class SysUserController extends BaseController
     /**
      * 用户授权角色
      */
-    @RequiresPermissions("system:user:edit")
+//    @RequiresPermissions("system:user:edit")
     @Log(title = "用户管理", businessType = BusinessType.GRANT)
     @PutMapping("/authRole")
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
@@ -319,7 +319,7 @@ public class SysUserController extends BaseController
     /**
      * 获取部门树列表
      */
-    @RequiresPermissions("system:user:list")
+//    @RequiresPermissions("system:user:list")
     @GetMapping("/deptTree")
     public AjaxResult deptTree(SysDept dept)
     {
