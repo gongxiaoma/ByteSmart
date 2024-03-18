@@ -1,6 +1,0 @@
-11:32:08.647 [http-nio-9901-exec-3] ERROR c.b.c.s.s.TokenService - [getLoginUser,117] - 获取用户信息异常'com.bytesmart.webauth.domain.WebLoginUser cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-11:32:08.950 [http-nio-9901-exec-2] ERROR c.b.c.s.s.TokenService - [getLoginUser,117] - 获取用户信息异常'com.bytesmart.webauth.domain.WebLoginUser cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-11:32:23.720 [http-nio-9901-exec-7] ERROR c.b.c.s.s.TokenService - [getLoginUser,117] - 获取用户信息异常'com.bytesmart.webauth.domain.WebLoginUser cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-11:32:23.832 [http-nio-9901-exec-8] ERROR c.b.c.s.s.TokenService - [getLoginUser,117] - 获取用户信息异常'com.bytesmart.webauth.domain.WebLoginUser cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-11:48:11.394 [http-nio-9901-exec-4] ERROR c.b.c.s.s.TokenService - [getLoginUser,157] - 获取用户信息异常'com.bytesmart.webauth.domain.WebLoginUser cannot be cast to com.bytesmart.apisystem.model.LoginUser'
-11:48:11.442 [http-nio-9901-exec-5] ERROR c.b.c.s.s.TokenService - [getLoginUser,157] - 获取用户信息异常'com.bytesmart.webauth.domain.WebLoginUser cannot be cast to com.bytesmart.apisystem.model.LoginUser'

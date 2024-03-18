@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IBytesmartTasksService {
     // 单条查询
-    public BytesmartTasks selectTaskByInitiator(Long employeeId);
+    public List<BytesmartTasks> getTaskByInitiatorList(Long employeeId);
+
 
 }

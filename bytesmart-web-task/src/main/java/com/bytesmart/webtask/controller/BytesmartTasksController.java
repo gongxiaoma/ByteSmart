@@ -39,12 +39,15 @@ public class BytesmartTasksController extends BaseController {
     // （先做这个）这个方法是根据用户id查询自己发起的任务，用于用户在前端打开“发起的”页面获取自己被发起的任务，这个不设计到中间表
     //@RequiresPermissions("webtask:tasks:query")
     @GetMapping("/initiator")
-    public AjaxResult getTaskByInitiator()
+    public TableDataInfo getTaskByInitiatorList(BytesmartTasks bytesmartTasks)
     {
+        startPage();
         Long employeeId = 25L;
 //        Long employeeId = WebSecurityUtils.getUserId();
-        return success(bytesmartTasksService.selectTaskByInitiator(employeeId));
+        List<BytesmartTasks> list = bytesmartTasksService.getTaskByInitiatorList(employeeId);
+        return getDataTable(list);
     }
+
 
     // 这个方法是根据用户id查询自己被指派的任务，用于用户在前端打开“被指派”页面获取自己被指派的任务，这个涉及到中间表
     //@RequiresPermissions("webtask:tasks:query")

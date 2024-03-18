@@ -8,6 +8,7 @@ import com.bytesmart.webtask.service.IBytesmartTasksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,11 +21,15 @@ public class BytesmartTasksServiceImpl implements IBytesmartTasksService {
     private BytesmartGetEmployeeService bytesmartGetEmployeeService;
 
     @Override
-    public BytesmartTasks selectTaskByInitiator(Long employeeId){
-        BytesmartTasks bytesmartTasks = tasksMapper.selectTaskByInitiator(employeeId);
-        String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
-        bytesmartTasks.setInitiatorName(employeeName);
-        return bytesmartTasks;
-    }
+    public List<BytesmartTasks> getTaskByInitiatorList(Long employeeId) {
+        ArrayList<BytesmartTasks> list = new ArrayList<BytesmartTasks>();
+        List<BytesmartTasks> taskByInitiatorList = tasksMapper.getTaskByInitiatorList(employeeId);
+        for (BytesmartTasks task : taskByInitiatorList) {
+            String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
+            task.setInitiatorName(employeeName);
+            list.add(task);
+        }
+        return list;
+      }
 }
 

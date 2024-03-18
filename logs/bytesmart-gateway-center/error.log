@@ -1,3 +1,2 @@
-15:54:33.336 [reactor-http-nio-9] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/config/configKey/sys.user.initPassword
-15:54:33.351 [reactor-http-nio-8] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/deptTree
-15:54:33.336 [reactor-http-nio-7] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/list
+11:29:47.482 [reactor-http-nio-3] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/menu/list
+11:29:47.462 [reactor-http-nio-2] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/dict/data/type/sys_show_hide

@@ -30,7 +30,7 @@
         FROM bytesmart_tasks t, bytesmart_tasks_assigned ta
     </sql>
 
-    <select id="selectTaskByInitiator" parameterType="long" resultMap="BytesmartTasksResult">
+    <select id="getTaskByInitiatorList" parameterType="long" resultMap="BytesmartTasksResult">
         <include refid="selectTaskByInitiatorVo"/>
         where t.task_id = ta.task_id AND t.initiator_id = #{employeeId}
     </select>
