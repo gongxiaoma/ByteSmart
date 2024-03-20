@@ -1,8 +1,0 @@
-15:40:46.771 [reactor-http-nio-2] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/system/user/getInfo
-20:55:43.687 [boundedElastic-246] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/getInfo,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
-20:55:43.836 [boundedElastic-246] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/logout,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
-21:06:19.320 [boundedElastic-236] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/getInfo,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
-21:06:19.401 [boundedElastic-236] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/logout,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
-21:06:28.245 [boundedElastic-251] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/getInfo,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
-21:06:28.373 [boundedElastic-251] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/web/logout,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-auth"
-22:01:54.910 [boundedElastic-20] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webadmin/employee/profile,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-admin"

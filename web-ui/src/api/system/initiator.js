@@ -1,39 +1,48 @@
 import request from '@/utils/request'
 
 // 查询任务列表
-// export function listTask(query) {
+// export function listTaskByInitiator(query) {
 //   return request({
-//     url: '/web/task/list',
+//     url: '/webtask/task/list',
 //     method: 'get',
 //     params: query
 //   })
 // }
 
+// 查询岗位详细
+export function getPost(postId) {
+  return request({
+    url: '/system/post/' + postId,
+    method: 'get'
+  })
+}
+
 // 查询任务详细
-export function getTaskByInitiatorList() {
+export function getTaskByInitiatorList(query) {
   return request({
     url: '/webtask/task/initiator',
-    method: 'get'
+    method: 'get',
+    params: query
   })
 }
 
 // 新增任务
 // export function addTask(data) {
 //   return request({
-//     url: '/web/task',
+//     url: '/webtask/task',
 //     method: 'post',
 //     data: data
 //   })
 // }
 
 // // 修改任务
-// export function updateRole(data) {
-//   return request({
-//     url: '/web/task',
-//     method: 'put',
-//     data: data
-//   })
-// }
+export function updateTask(data) {
+  return request({
+    url: '/webtask/task',
+    method: 'put',
+    data: data
+  })
+}
 
 // // 角色数据权限
 // export function dataScope(data) {

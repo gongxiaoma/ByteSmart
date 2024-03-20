@@ -21,9 +21,9 @@ public class BytesmartTasksServiceImpl implements IBytesmartTasksService {
     private BytesmartGetEmployeeService bytesmartGetEmployeeService;
 
     @Override
-    public List<BytesmartTasks> getTaskByInitiatorList(Long employeeId) {
+    public List<BytesmartTasks> getTaskByInitiatorList(BytesmartTasks bytesmartTasks, Long employeeId) {
         ArrayList<BytesmartTasks> list = new ArrayList<BytesmartTasks>();
-        List<BytesmartTasks> taskByInitiatorList = tasksMapper.getTaskByInitiatorList(employeeId);
+        List<BytesmartTasks> taskByInitiatorList = tasksMapper.getTaskByInitiatorList(bytesmartTasks, employeeId);
         for (BytesmartTasks task : taskByInitiatorList) {
             String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
             task.setInitiatorName(employeeName);
@@ -31,5 +31,10 @@ public class BytesmartTasksServiceImpl implements IBytesmartTasksService {
         }
         return list;
       }
+
+    public BytesmartTasks selectInitiatorTaskByTitle(String taskTitle){
+        return tasksMapper.selectInitiatorTaskByTitle(taskTitle);
+    }
+
 }
 

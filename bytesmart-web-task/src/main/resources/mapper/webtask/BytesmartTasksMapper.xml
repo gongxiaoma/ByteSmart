@@ -23,15 +23,37 @@
         </collection>
     </resultMap>
 
-
-
     <sql id="selectTaskByInitiatorVo">
         SELECT t.task_id, t.task_title, t.task_descr, t.task_progress, t.status, t.initiator_id, t.enddate, t.startdate, t.task_af, t.create_time, t.update_time, t.remark,ta.assigned_id,ta.assigned_name
         FROM bytesmart_tasks t, bytesmart_tasks_assigned ta
     </sql>
 
-    <select id="getTaskByInitiatorList" parameterType="long" resultMap="BytesmartTasksResult">
+    <select id="getTaskByInitiatorList" resultMap="BytesmartTasksResult">
         <include refid="selectTaskByInitiatorVo"/>
         where t.task_id = ta.task_id AND t.initiator_id = #{employeeId}
+        <if test="bytesmartTasks.taskId != null and bytesmartTasks.taskId != 0">
+            AND t.task_id = #{bytesmartTasks.taskId}
+        </if>
+        <if test="bytesmartTasks.taskTitle != null and bytesmartTasks.taskTitle != ''">
+            AND t.task_title like concat('%', #{bytesmartTasks.taskTitle}, '%')
+        </if>
+        <if test="bytesmartTasks.taskDescr != null and bytesmartTasks.taskDescr != ''">
+            AND t.task_descr like concat('%', #{bytesmartTasks.taskDescr}, '%')
+        </if>
+        <if test="bytesmartTasks.status != null and bytesmartTasks.status != ''">
+            AND t.status = #{bytesmartTasks.status}
+        </if>
+<!--        <if test="bytesmartTasks.startdate != null and bytesmartTasks.startdate != ''">-->
+<!--            AND t.startdate like concat('%', #{bytesmartTasks.startdate}, '%')-->
+<!--        </if>-->
+<!--        <if test="bytesmartTasks.enddate != null and bytesmartTasks.enddate != ''">-->
+<!--            AND t.enddate like concat('%', #{bytesmartTasks.enddate}, '%')-->
+<!--        </if>-->
+    </select>
+
+    <select id="selectInitiatorTaskByTitle" parameterType="String" resultMap="BytesmartTasksResult">
+        <include refid="selectTaskByInitiatorVo"/>
+        where t.task_title = #{taskTitle}
+
     </select>
 </mapper>

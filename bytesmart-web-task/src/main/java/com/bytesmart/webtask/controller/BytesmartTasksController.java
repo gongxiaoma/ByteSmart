@@ -2,6 +2,7 @@ package com.bytesmart.webtask.controller;
 
 import com.bytesmart.apisystem.RemoteEmployee;
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
+import com.bytesmart.apisystem.domain.SysUser;
 import com.bytesmart.apisystem.model.LoginEmployee;
 import com.bytesmart.apisystem.model.LoginUser;
 import com.bytesmart.common.core.constant.Constants;
@@ -37,15 +38,26 @@ public class BytesmartTasksController extends BaseController {
     RemoteEmployee remoteEmployee;
 
     // （先做这个）这个方法是根据用户id查询自己发起的任务，用于用户在前端打开“发起的”页面获取自己被发起的任务，这个不设计到中间表
+
+
     //@RequiresPermissions("webtask:tasks:query")
     @GetMapping("/initiator")
     public TableDataInfo getTaskByInitiatorList(BytesmartTasks bytesmartTasks)
     {
         startPage();
-        Long employeeId = 25L;
-//        Long employeeId = WebSecurityUtils.getUserId();
-        List<BytesmartTasks> list = bytesmartTasksService.getTaskByInitiatorList(employeeId);
+//        Long employeeId = 25L;
+        Long employeeId = WebSecurityUtils.getUserId();
+        List<BytesmartTasks> list = bytesmartTasksService.getTaskByInitiatorList(bytesmartTasks, employeeId);
+        System.out.println(list);
+
         return getDataTable(list);
+    }
+
+    @GetMapping(value = "/{taskTitle}")
+    public AjaxResult getInfo(@PathVariable String taskTitle)
+    {
+        System.out.println(123);
+        return success(bytesmartTasksService.selectInitiatorTaskByTitle(taskTitle));
     }
 
 

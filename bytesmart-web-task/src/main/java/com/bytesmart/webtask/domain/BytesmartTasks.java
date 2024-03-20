@@ -14,8 +14,8 @@ public class BytesmartTasks{
     private Long taskId;
     private String taskTitle;
     private String taskDescr;
-    private String taskProgress;
-    private String status;
+    private Long taskProgress;
+    private Long status;
     private Long initiatorId;
     private String initiatorName;
     private String assigenName;
@@ -64,19 +64,19 @@ public class BytesmartTasks{
         this.taskDescr = taskDescr;
     }
 
-    public String getTaskProgress() {
+    public Long getTaskProgress() {
         return taskProgress;
     }
 
-    public void setTaskProgress(String taskProgress) {
+    public void setTaskProgress(Long taskProgress) {
         this.taskProgress = taskProgress;
     }
 
-    public String getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 
