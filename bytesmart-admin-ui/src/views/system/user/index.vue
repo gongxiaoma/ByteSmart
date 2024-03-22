@@ -420,6 +420,7 @@ export default {
         { key: 3, label: `部门`, visible: true },
         { key: 4, label: `手机号码`, visible: true },
         { key: 5, label: `状态`, visible: true },
+        { key: 7, label: `角色`, visible: true },
         { key: 6, label: `创建时间`, visible: true }
       ],
       // 表单校验

@@ -1,11 +1,14 @@
 package com.bytesmart.webtask.domain;
 
 import com.bytesmart.apisystem.domain.BytesmartEmployee;
+import com.bytesmart.common.core.annotation.Excel;
 import com.bytesmart.common.core.web.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class BytesmartTasks{
@@ -19,26 +22,33 @@ public class BytesmartTasks{
     private Long initiatorId;
     private String initiatorName;
     private String assigenName;
-    private LocalDate enddate;
-    private LocalDate startdate;
-    private LocalDate taskAf;
-    private LocalDate updateTime;
-    private LocalDate createTime;
-    private String remark;
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date enddate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date startdate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date taskAf;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+    private String remark;
 
     // 描述当前任务分配哪些员工，后面删除
     private List<BytesmartEmployee> employeeList;
 
     private List<BytesmartTasksAssigned> bytesmartTasksAssignedList;
 
-    public List<BytesmartTasksAssigned> getBytesmartTasksAssignedList() {
-        return bytesmartTasksAssignedList;
-    }
+    private Long assignedId;
 
-    public void setBytesmartTasksAssignedList(List<BytesmartTasksAssigned> bytesmartTasksAssignedList) {
-        this.bytesmartTasksAssignedList = bytesmartTasksAssignedList;
-    }
+    private Long[] assignedIds;
+
 
     public Long getTaskId() {
         return taskId;
@@ -104,43 +114,43 @@ public class BytesmartTasks{
         this.assigenName = assigenName;
     }
 
-    public LocalDate getEnddate() {
+    public Date getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(LocalDate enddate) {
+    public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
 
-    public LocalDate getStartdate() {
+    public Date getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(LocalDate startdate) {
+    public void setStartdate(Date startdate) {
         this.startdate = startdate;
     }
 
-    public LocalDate getTaskAf() {
+    public Date getTaskAf() {
         return taskAf;
     }
 
-    public void setTaskAf(LocalDate taskAf) {
+    public void setTaskAf(Date taskAf) {
         this.taskAf = taskAf;
     }
 
-    public LocalDate getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDate updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
-    public LocalDate getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDate createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -153,6 +163,30 @@ public class BytesmartTasks{
     }
 
 
+    public List<BytesmartTasksAssigned> getBytesmartTasksAssignedList() {
+        return bytesmartTasksAssignedList;
+    }
+
+    public void setBytesmartTasksAssignedList(List<BytesmartTasksAssigned> bytesmartTasksAssignedList) {
+        this.bytesmartTasksAssignedList = bytesmartTasksAssignedList;
+    }
+
+
+    public Long getAssignedId() {
+        return assignedId;
+    }
+
+    public void setAssignedId(Long assignedId) {
+        this.assignedId = assignedId;
+    }
+
+    public Long[] getAssignedIds() {
+        return assignedIds;
+    }
+
+    public void setAssignedIds(Long[] assignedIds) {
+        this.assignedIds = assignedIds;
+    }
 
     @Override
     public String toString() {

@@ -48,23 +48,14 @@ public class BytesmartTasksController extends BaseController {
 //        Long employeeId = 25L;
         Long employeeId = WebSecurityUtils.getUserId();
         List<BytesmartTasks> list = bytesmartTasksService.getTaskByInitiatorList(bytesmartTasks, employeeId);
-        System.out.println(list);
-
         return getDataTable(list);
-    }
-
-    @GetMapping(value = "/{taskTitle}")
-    public AjaxResult getInfo(@PathVariable String taskTitle)
-    {
-        System.out.println(123);
-        return success(bytesmartTasksService.selectInitiatorTaskByTitle(taskTitle));
     }
 
 
     // 这个方法是根据用户id查询自己被指派的任务，用于用户在前端打开“被指派”页面获取自己被指派的任务，这个涉及到中间表
     //@RequiresPermissions("webtask:tasks:query")
 //    @GetMapping("/assigned")
-//    public AjaxResult getTaskByAssigned()
+//    public AjaxResult getTaskByAssignedList()
 //    {
 //        Long employeeId = 24L;
 ////        Long employeeId = WebSecurityUtils.getUserId();

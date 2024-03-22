@@ -26,22 +26,13 @@
           />
         </el-form-item>
 
-        <el-form-item label="预计完成时间" prop="enddate">
-          <el-input
-            v-model="queryParams.enddate"
-            placeholder="请输入任务内容"
-            clearable
-            @keyup.enter.native="handleQuery"
-          />
-        </el-form-item>
-
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
           <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
         </el-form-item>
       </el-form>
  
-      <el-row :gutter="10" class="mb8">
+      <!-- <el-row :gutter="10" class="mb8">
         <el-col :span="1.5">
           <el-button
             type="primary"
@@ -85,9 +76,9 @@
           >导出</el-button>
         </el-col>
         <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
-      </el-row>
+      </el-row> -->
  
-      <el-table v-loading="loading" :data="taskByInitiatorList" @selection-change="handleSelectionChange">
+      <el-table v-loading="loading" :data="taskByInitiatorList" @selection-change="handleSelectionChange" @row-click="handleRowClick">
         <el-table-column type="selection" width="55" align="center" />
         <!-- <el-table-column label="任务ID" align="center" prop="taskId" /> -->
         <el-table-column label="任务主题" align="center" prop="taskTitle" />
@@ -97,16 +88,6 @@
             <el-progress :percentage="scope.row.taskProgress" :text-inside="true" :stroke-width="26"></el-progress> 
         </template>      
         </el-table-column>
-
-        <el-table-column label="发起人" align="center" prop="initiatorName" />
-
-        <!-- <el-table-column label="发起人" align="center" prop="initiatorName">
-        <template slot-scope="scope">
-            <el-tag>标签一</el-tag>
-            <el-tag type="success">标签二</el-tag>
-            <el-tag type="info">标签三</el-tag>
-        </template>
-        </el-table-column> -->
 
         <el-table-column label="任务状态" align="center" prop="status">
           <template slot-scope="scope">
@@ -128,11 +109,6 @@
             >{{dict.label}}</el-radio>
           </el-radio-group>
 
-        <!-- <el-table-column label="创建时间" align="center" prop="createTime" width="180">
-          <template slot-scope="scope">
-            <span>{{ parseTime(scope.row.createTime) }}</span>
-          </template>
-        </el-table-column> -->
         <el-table-column label="创建时间" align="center" prop="createTime" />
         <el-table-column label="预计完成时间" align="center" prop="enddate" />
         <el-table-column label="实际完成时间" align="center" prop="taskAf" />
@@ -143,23 +119,31 @@
               size="mini"
               type="text"
               icon="el-icon-edit"
-              @click="handleUpdate(scope.row)"
-              v-hasPermi="['webtask:task:edit']"
+              @click="dialogVisible = true"
             >查看指派人</el-button>
-            <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-edit"
-              @click="handleUpdate(scope.row)"
-              v-hasPermi="['webtask:task:edit']"
-            >修改</el-button>
-            <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-delete"
-              @click="handleDelete(scope.row)"
-              v-hasPermi="['webtask:task:remove']"
-            >删除</el-button>
+             <el-dialog
+                    title="被指派人" 
+                    :visible.sync="dialogVisible" 
+                    width="500px"
+                    append-to-body
+                    @close="handleDialogClose" 
+                >
+                  <el-table v-loading="loading" :data="selectedRow.bytesmartTasksAssignedList" @selection-change="handleSelectionChange">
+                    <el-table-column type="selection" width="55" align="center" />
+                    <!-- <el-table-column label="被分配人ID" prop="assignedId"  width="180" > </el-table-column> -->
+                    <el-table-column label="姓名" prop="assignedName"> </el-table-column>
+                    <el-table-column label="性别" prop="assignedGender"> </el-table-column>
+                    <el-table-column label="部门" prop="assigneDept"> </el-table-column>
+                    <el-table-column label="岗位" prop="assignedPost"> </el-table-column>
+                  </el-table>
+
+                  <span slot="footer" class="dialog-footer">  
+                    <el-button @click="dialogVisible = false">取消</el-button>  
+                    <el-button type="primary" @click="dialogVisible = false">确定</el-button>  
+                  </span>  
+
+             </el-dialog>
+
           </template>
         </el-table-column>
       </el-table>
@@ -171,8 +155,6 @@
         :limit.sync="queryParams.pageSize"
         @pagination="getList"
       />
- 
-      <!-- 添加或修改岗位对话框 -->
 
     </div>
   </template>
@@ -197,12 +179,13 @@
         showSearch: true,
         // 总条数
         total: 0,
-        // 岗位表格数据
+        // 发起人任务表数据
         taskByInitiatorList: [],
-        // 分配人名字
-        assignedName: undefined,
+        selectedRow: {},
         // 弹出层标题
-        title: "",
+        title:{},
+        //对话框可视性
+        dialogVisible: false,
         // 是否显示弹出层
         open: false,
         // 查询参数
@@ -211,6 +194,7 @@
           pageSize: 10,
           taskTitle: undefined,
           taskDescr: undefined,
+        //   enddate: undefined,
           status: undefined
         },
         // 表单参数
@@ -237,12 +221,21 @@
       getList() {
         this.loading = true;
         getTaskByInitiatorList(this.queryParams).then(response => {
-            console.log(response)  
+            // console.log(response)  
           this.taskByInitiatorList = response.rows;
           this.total = response.total;
           this.loading = false;
         });
       },
+      // 将选中的行数据赋值给selectedRow 
+      handleRowClick(row) {  
+        this.selectedRow = row; 
+        this.dialogVisible = true; 
+      },  
+      // 关闭对话框时触发，可以重置selectedRow或其他操作  
+      handleDialogClose() {  
+        this.dialogVisible = false; 
+      },  
 
 
       // 取消按钮
@@ -276,52 +269,9 @@
         this.single = selection.length!=1
         this.multiple = !selection.length
       },
-      /** 新增按钮操作 */
-      handleAdd() {
-        this.reset();
-        this.open = true;
-        this.title = "添加岗位";
-      },
-      /** 修改按钮操作 */
-      handleUpdate(row) {
-        this.reset();
-        const employeeId = row.employeeId || this.ids
-        getTaskByInitiator(employeeId).then(response => {
-          this.form = response.data;
-          this.open = true;
-          this.title = "修改岗位";
-        });
-      },
-      /** 提交按钮 */
-      submitForm: function() {
-        this.$refs["form"].validate(valid => {
-          if (valid) {
-            if (this.form.postId != undefined) {
-              updatePost(this.form).then(response => {
-                this.$modal.msgSuccess("修改成功");
-                this.open = false;
-                this.getList();
-              });
-            } else {
-              addPost(this.form).then(response => {
-                this.$modal.msgSuccess("新增成功");
-                this.open = false;
-                this.getList();
-              });
-            }
-          }
-        });
-      },
-      /** 删除按钮操作 */
-      handleDelete(row) {
-        const postIds = row.postId || this.ids;
-        this.$modal.confirm('是否确认删除岗位编号为"' + postIds + '"的数据项？').then(function() {
-          return delPost(postIds);
-        }).then(() => {
-          this.getList();
-          this.$modal.msgSuccess("删除成功");
-        }).catch(() => {});
-      },
+
+
+
       /** 导出按钮操作 */
       handleExport() {
         this.download('system/post/export', {

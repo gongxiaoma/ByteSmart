@@ -32,9 +32,18 @@ public class BytesmartTasksServiceImpl implements IBytesmartTasksService {
         return list;
       }
 
-    public BytesmartTasks selectInitiatorTaskByTitle(String taskTitle){
-        return tasksMapper.selectInitiatorTaskByTitle(taskTitle);
-    }
+//    public BytesmartTasks getTaskByAssignedList(BytesmartTasks bytesmartTasks, Long employeeId){
+//        ArrayList<BytesmartTasks> listing = new ArrayList<BytesmartTasks>();
+//        List<BytesmartTasks> taskByInitiatorList = tasksMapper.getTaskByInitiatorList(bytesmartTasks, employeeId);
+//        for (BytesmartTasks task : taskByInitiatorList) {
+//            String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
+//            task.setInitiatorName(employeeName);
+//            task.getAssigenName();
+//            list.add(task);
+//        }
+//        return list;
+//    }
+
 
 }
 
