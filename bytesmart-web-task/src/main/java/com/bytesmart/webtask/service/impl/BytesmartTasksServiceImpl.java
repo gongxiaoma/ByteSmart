@@ -1,6 +1,7 @@
 package com.bytesmart.webtask.service.impl;
 
 import com.bytesmart.apisystem.model.LoginEmployee;
+import com.bytesmart.common.core.utils.StringUtils;
 import com.bytesmart.webtask.domain.BytesmartTasks;
 import com.bytesmart.webtask.domain.BytesmartTasksAssigned;
 import com.bytesmart.webtask.mapper.BytesmartTasksMapper;
@@ -24,25 +25,31 @@ public class BytesmartTasksServiceImpl implements IBytesmartTasksService {
     public List<BytesmartTasks> getTaskByInitiatorList(BytesmartTasks bytesmartTasks, Long employeeId) {
         ArrayList<BytesmartTasks> list = new ArrayList<BytesmartTasks>();
         List<BytesmartTasks> taskByInitiatorList = tasksMapper.getTaskByInitiatorList(bytesmartTasks, employeeId);
+        System.out.println(taskByInitiatorList);
         for (BytesmartTasks task : taskByInitiatorList) {
+            List<BytesmartTasksAssigned> bytesmartTasksAssignedList = task.getBytesmartTasksAssignedList();
+            for (BytesmartTasksAssigned assigned : bytesmartTasksAssignedList){
+                Long assignedId = assigned.getAssignedId();
+                String assignedName = bytesmartGetEmployeeService.getEmployee(assignedId).getEmployee().getEmployeeName();
+                String assignedGender = bytesmartGetEmployeeService.getEmployee(assignedId).getEmployee().getEmployeeGender();
+                String assignedDept = bytesmartGetEmployeeService.getEmployee(assignedId).getEmployee().getDept().getDeptName();
+//                Long postId = bytesmartGetEmployeeService.getEmployee(assignedId).getEmployee().getPostId();
+                assigned.setAssignedName(assignedName);
+                assigned.setAssignedGender(assignedGender);
+                assigned.setAssigneDept(assignedDept);
+                System.out.println(assignedDept);
+            }
             String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
             task.setInitiatorName(employeeName);
             list.add(task);
+            System.out.println(task);
+
+
         }
+
         return list;
       }
 
-//    public BytesmartTasks getTaskByAssignedList(BytesmartTasks bytesmartTasks, Long employeeId){
-//        ArrayList<BytesmartTasks> listing = new ArrayList<BytesmartTasks>();
-//        List<BytesmartTasks> taskByInitiatorList = tasksMapper.getTaskByInitiatorList(bytesmartTasks, employeeId);
-//        for (BytesmartTasks task : taskByInitiatorList) {
-//            String employeeName = bytesmartGetEmployeeService.getEmployee(employeeId).getEmployee().getEmployeeName();
-//            task.setInitiatorName(employeeName);
-//            task.getAssigenName();
-//            list.add(task);
-//        }
-//        return list;
-//    }
 
 
 }

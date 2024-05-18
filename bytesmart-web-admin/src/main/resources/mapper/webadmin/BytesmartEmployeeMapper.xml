@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<sql id="selectEmployeeVo">
-        select e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_avatar, e.employee_mobile, e.employee_weight, e.employee_no, e.employee_age, e.employee_type, e.password, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time, e.remark,
+        select e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_avatar, e.employee_gender, e.employee_mobile, e.employee_weight, e.employee_no, e.employee_age, e.employee_type, e.password, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time, e.remark,
         d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.dept_weight, d.dept_leader, d.dept_mobile, d.dept_email, dept_status,
         r.role_id, r.role_name, r.role_key, r.role_weight, r.data_scope, role_status
         from bytesmart_employee e
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    left join bytesmart_role r on r.role_id = er.role_id
     </sql>
 	<select id="selectEmployeeList" parameterType="com.bytesmart.apisystem.domain.BytesmartEmployee" resultMap="BytesmartEmployeeResult">
-		select e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_avatar, e.employee_mobile, e.employee_weight, e.employee_no, e.employee_age, e.employee_type, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time, e.remark, d.dept_name, d.dept_leader from bytesmart_employee e
+		select e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_avatar, e.employee_mobile,e.employee_gender, e.employee_weight, e.employee_no, e.employee_age, e.employee_type, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time, e.remark, d.dept_name, d.dept_leader from bytesmart_employee e
 		left join bytesmart_dept d on e.dept_id = d.dept_id
 		where e.del_flag = '0'
 		<if test="employeeId != null and employeeId != 0">
@@ -80,6 +80,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="employeeName != null and employeeName != ''">
 			AND e.employee_name like concat('%', #{employeeName}, '%')
+		</if>
+		<if test="employeeGender != null and employeeGender != ''">
+			AND e.employee_gender like concat('%', #{employeeGender}, '%')
 		</if>
 		<if test="employeeStatus != null and employeeStatus != ''">
 			AND e.employee_status = #{employeeStatus}

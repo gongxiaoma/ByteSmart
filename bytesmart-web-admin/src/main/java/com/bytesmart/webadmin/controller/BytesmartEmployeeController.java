@@ -50,7 +50,7 @@ public class BytesmartEmployeeController extends BaseController {
     private IBytesmartConfigService bytesmartConfigService;
 
 
-    @RequiresPermissions("webadmin:emloyee:list ")
+//    @RequiresPermissions("webadmin:emloyee:list ")
     @GetMapping("/list")
     public TableDataInfo list(BytesmartEmployee employee)
     {

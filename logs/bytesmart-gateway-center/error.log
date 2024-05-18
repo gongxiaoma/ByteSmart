@@ -1,2 +1,2 @@
-12:08:39.902 [reactor-http-nio-5] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/webadmin/employee/23
-12:08:40.205 [reactor-http-nio-6] ERROR c.b.g.f.AuthFilter - [unauthorizedResponse,104] - [鉴权异常处理]请求路径:/webadmin/employee/23
+21:48:02.316 [boundedElastic-13] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webtask/task/initiator,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-task"
+21:50:19.182 [boundedElastic-12] ERROR c.b.g.h.GatewayExceptionHandler - [handle,52] - [网关异常处理]请求路径:/webtask/task/initiator,异常信息:503 SERVICE_UNAVAILABLE "Unable to find instance for bytesmart-web-task"

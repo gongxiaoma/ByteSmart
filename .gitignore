@@ -1,15 +1,18 @@
-######################################################################
-# Build Tools
+        select e.employee_id, e.dept_id, e.username, e.employee_name, e.employee_english_name, e.employee_email, e.employee_avatar, e.employee_mobile, e.employee_weight, e.employee_no, e.employee_age, e.employee_type, e.password, e.employee_address, e.employee_type, e.office_phone, e.employee_birthdate, e.employment_date, e.employee_ismarital, e.employee_status, e.del_flag, e.login_ip, e.login_date, e.create_by, e.create_time, e.remark,
+        d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.dept_weight, d.dept_leader, d.dept_mobile, d.dept_email, dept_status,
+        r.role_id, r.role_name, r.role_key, r.role_weight, r.data_scope, role_status
+        from bytesmart_employee e
+		    left join bytesmart_dept d on e.dept_id = d.dept_id
+		    left join bytesmart_employee_role er on e.employee_id = er.employee_id
+		    left join bytesmart_role r on r.role_id = er.role_id
 
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
 
+
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-
-######################################################################
-# IDE
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -18,30 +21,25 @@ target/
 .project
 .settings
 .springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-sql/*
 
-### JRebel ###
-rebel.xml
+logs/*
+
 ### NetBeans ###
-nbproject/private/
-build/*
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-######################################################################
-# Others
-*.log
-*.xml.versionsBackup
-*.swp
-
-!*/build/*.java
-!*/build/*.html
-!*/build/*.xml
+### VS Code ###
+.vscode/

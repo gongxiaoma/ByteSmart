@@ -1,0 +1,87 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: 1QAZ2wsx
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 认证中心
+        - id: bytesmart-auth-center
+          uri: lb://bytesmart-auth-center
+          predicates:
+            - Path=/auth/**
+          filters:
+            # 验证码处理
+            - CacheRequestFilter
+            - ValidateCodeFilter
+            - StripPrefix=1
+        # 定时任务
+        - id: bytesmart-job-center
+          uri: lb://bytesmart-job-center
+          predicates:
+            - Path=/schedule/**
+          filters:
+            - StripPrefix=1
+        # 系统模块
+        - id: bytesmart-system-center
+          uri: lb://bytesmart-system-center
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+        # 前台认证模块
+        - id: bytesmart-web-auth
+          uri: lb://bytesmart-web-auth
+          predicates:
+            - Path=/web/**
+          filters:
+            - StripPrefix=1
+         # 前台任务模块
+        - id: bytesmart-web-task
+          uri: lb://bytesmart-web-task
+          predicates:
+            - Path=/webtask/**
+          filters:
+            - StripPrefix=1           
+         # 前台管理模块
+        - id: bytesmart-web-admin
+          uri: lb://bytesmart-web-admin
+          predicates:
+            - Path=/webadmin/**
+          filters:
+            - StripPrefix=1
+        # 文件服务
+        - id: bytesmart-file-center
+          uri: lb://bytesmart-file-center
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1
+
+# 安全配置
+security:
+  # 验证码
+  captcha:
+    enabled: true
+    type: math
+  # 防止XSS攻击
+  xss:
+    enabled: true
+    excludeUrls:
+      - /system/notice
+  # 不校验白名单
+  ignore:
+    whites:
+      - /auth/logout
+      - /auth/login
+      - /web/code
+      - /web/login
+      - /web/logout
+      - /auth/register
+      - /*/v2/api-docs
+      - /csrf

@@ -20,6 +20,8 @@ public class BytesmartGetEmployeeService {
     RemoteEmployee remoteEmployee;
 
 
+
+
     public LoginEmployee getEmployee(@PathVariable Long employeeId)
     {
         //远程调用根据ID获取用户信息的接口（该接口在api-system中，有定义feign的接口，该接口会调用对应路径的webadmin控制器）

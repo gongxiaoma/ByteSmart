@@ -9,6 +9,8 @@ public interface IBytesmartTasksService {
     // 单条查询
     public List<BytesmartTasks> getTaskByInitiatorList(BytesmartTasks bytesmartTasks, Long employeeId);
 
+//    public int insertTask(BytesmartTasks bytesmartTasks);
+
 
 
 
